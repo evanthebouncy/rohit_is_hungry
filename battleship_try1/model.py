@@ -197,6 +197,7 @@ class Implynet:
     obs = []
 
     for i in range(OBS_SIZE):
+      print "on observation number ", i
       if np.random.random() < epi:
         rand_coord = sample_coord_new(obs)
         obs.append((rand_coord, query(rand_coord)))

@@ -157,14 +157,14 @@ def sat_infer(ships, observations, dimensions=(10,10)):
         if hit_possible in [sat, unknown] and miss_possible in [sat, unknown]:
             ambivalent.append((i,j))
 
-        elif((hit_possible == unsat and miss_possible == unknown)
-             or (hit_possible == unknown and miss_possible == unsat)
-        ):
-            ambivalent.append((i,j))
+#         elif((hit_possible == unsat and miss_possible == unknown)
+#              or (hit_possible == unknown and miss_possible == unsat)
+#         ):
+#             ambivalent.append((i,j))
 
-        elif hit_possible == sat and miss_possible == unsat:
+        elif hit_possible in [sat, unknown] and miss_possible == unsat:
             implicit.append(((i,j), True))
-        elif hit_possible == unsat and miss_possible == sat:
+        elif hit_possible == unsat and miss_possible in [sat, unknown]:
             implicit.append(((i,j), False))
 
         else:

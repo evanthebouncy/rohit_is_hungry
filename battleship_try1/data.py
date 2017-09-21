@@ -1,11 +1,5 @@
 import numpy as np
 import random
-from scipy.misc import imresize
-from scipy.ndimage.filters import gaussian_filter
-# from tensorflow.examples.tutorials.mnist import input_data
-# mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-
-from numpy.linalg import norm
 
 L = 10
 NOISE = 0.0
