@@ -1,7 +1,7 @@
 # ROHIT IS GOD!!!
 
-from z3 import Solver, Int, Bool, Or, And, If, Not, sat, is_true, is_false
-
+from z3 import Solver, Int, Bool, Or, And, If, Not, sat, is_true, is_false, unsat, unknown
+from data import boat_shapes
 
 def rect(x,y,w,h,i,j):
     return And(And(x <= i, i < (x + w)),And(y <= j, j < (y + h)))
@@ -67,6 +67,7 @@ def create_solver(ships, observations, dimensions=(10,10)):
     (M,N) = dimensions
     NS = len(ships)
     s = Solver()
+    s.set("timeout", 600)
     W = map(lambda (w,h): w, ships)
     H = map(lambda (w,h): h, ships)
     (xs,ys,ds) = ([],[],[])
@@ -122,19 +123,23 @@ def is_amb(query_location, ships, observations, dimensions=(10,10)):
   return ret
   
 
-def get_good_observations(ships, observations, dimensions=(10,10)):
+def sat_infer(ships, observations, dimensions=(10,10)):
     """
     Returns a list of observations that will yield new info
     """
     (M,N) = dimensions
+    if len(observations) > 0 and isinstance(observations[0][1], list):
+        observations = [
+            (ind, True) if val[0] == 1.0
+            else (ind, False)
+            for (ind, val) in observations
+        ]
     solver, occupied, observe = create_solver(ships, observations, dimensions)
     possible_obs = set([(i,j) for i in xrange(M) for j in xrange(N)])
-    observations = [a for (a, b) in observations]
-    possible_obs = list(possible_obs.difference(observations))
-    good_obs = []
+    observation_spaces = [a for (a, b) in observations]
+    possible_obs = list(possible_obs.difference(observation_spaces))
+    ambivalent = []
     implicit = []
-
-    print observations
 
     assert len(possible_obs) + len(observations) == M*N
 
@@ -149,30 +154,28 @@ def get_good_observations(ships, observations, dimensions=(10,10)):
         miss_possible = solver.check()
         solver.pop()
 
-        if hit_possible == sat and miss_possible == sat:
-            good_obs.append((i,j))
+        if hit_possible in [sat, unknown] and miss_possible in [sat, unknown]:
+            ambivalent.append((i,j))
+
+        elif((hit_possible == unsat and miss_possible == unknown)
+             or (hit_possible == unknown and miss_possible == unsat)
+        ):
+            ambivalent.append((i,j))
+
+        elif hit_possible == sat and miss_possible == unsat:
+            implicit.append(((i,j), True))
+        elif hit_possible == unsat and miss_possible == sat:
+            implicit.append(((i,j), False))
+
+        else:
+            print "something went wrong", hit_possible, miss_possible, (i,j)
+            ambivalent.append((i,j))  # mask error so that we can still infer
         # TODO maybe say what the implicit observation is?
-        elif hit_possible != sat and miss_possible != sat:
-            print hit_possible, miss_possible
-            print "something is wrong", i, j
 
-        elif hit_possible == sat:
-            print i,j, "is a hit"
+    obs = observations + implicit
+    assert len(ambivalent) + len(obs) == M*N
 
-    return good_obs
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return ambivalent, obs
 
 
 
@@ -203,10 +206,21 @@ def test4(): #sat
     print "ship sizes:",ships
     config = findConfig(ships,observations)
     print "ship placements:",config
-    
-    
+
+def test5():
+    print "trying to infer for past_obs1..."
+    past_obs1 = [((7, 6), False), ((3, 4), False), ((7, 8), False), ((2, 6), False), ((8, 8), False), ((1, 4), False), ((5, 7), False), ((2, 9), False), ((0, 0), False), ((6, 4), True), ((2, 7), False), ((8, 7), False), ((6, 5), True), ((1, 9), False), ((1, 0), False), ((6, 9), False), ((3, 1), False), ((2, 5), False), ((0, 6), False), ((3, 9), False), ((5, 9), True)]
+    amb, obs = sat_infer(boat_shapes, past_obs1)
+    assert len(amb) + len(obs) == 100
+    print "trying to infer for past_obs2..."
+    past_obs2 = [((1, 0), False), ((0, 8), True), ((9, 4), False), ((4, 0), False), ((6, 3), False), ((9, 8), False), ((0, 3), False), ((7, 8), False), ((8, 4), True), ((9, 0), False), ((4, 7), False), ((4, 1), False), ((8, 8), True), ((8,7), False)]
+    amb, obs = sat_infer(boat_shapes, past_obs2)
+    assert len(amb) + len(obs) == 100
+
+
 if __name__ == "__main__":
     test1()
     test2()
     test3()
     test4()
+    test5()
