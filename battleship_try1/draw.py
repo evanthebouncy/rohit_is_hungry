@@ -33,11 +33,13 @@ def draw(m, name, extra=None):
   plt.colorbar()
 
   if extra != None:
-    greens, reds = extra
+    greens, reds, blues = extra
     grn_x, grn_y, = greens
     red_x, red_y = reds
+    blu_x, blu_y = blues
     plt.scatter(x=grn_x, y=grn_y, c='g', s=40)
     plt.scatter(x=red_x, y=red_y, c='r', s=40)
+    plt.scatter(x=blu_x, y=blu_y, c='b', s=40)
 #  # put a blue dot at (10, 20)
 #  plt.scatter([10], [20])
 #  # put a red dot, size 40, at 2 locations:
@@ -51,6 +53,9 @@ def draw_orig(img, name):
   draw(ret, name)
 
 def draw_allob(img, name, ob_prefix):
+
+  blu_x = []
+  blu_y = []
   
   ret = np.zeros([L,L,1])
   for ii in range(L):
@@ -58,6 +63,10 @@ def draw_allob(img, name, ob_prefix):
       labb = img[ii][jj][0]
       # labb = img[ii][jj][0] - img[ii][jj][1]
       ret[ii][jj][0] = labb
+      # if an observation is absolutely certain, it is marked as implied
+      if labb == 0.0 or labb == 1.0:
+        blu_x.append(0.2 + ii)
+        blu_y.append(0.2 + jj)
 
   grn_x = []
   grn_y = []
@@ -73,7 +82,7 @@ def draw_allob(img, name, ob_prefix):
       red_x.append(ob_c[0])
       red_y.append(ob_c[1])
 
-  draw(ret, name, ((grn_y, grn_x), (red_y, red_x)))
+  draw(ret, name, ((grn_y, grn_x), (red_y, red_x), (blu_y, blu_x)))
 
 def draw_obs(obs, name):
   ret_shape = [L, L, 1]
