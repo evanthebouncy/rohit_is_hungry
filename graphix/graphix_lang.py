@@ -36,11 +36,15 @@ def mk_sq_xform(oxa,oxb,oxc,
 
   return mk_xform_sq
 
+# --------------------------- generators -------------------------- #
+def gen_w():
+  return random.choice([3,5,8])
+
 if __name__ == "__main__":
 
   from draw import *
 
-  oxa,oxb,oxc,oya,oyb,oyc,wwc = 10, 10, 10, 20, 20, 20, 10
+  oxa,oxb,oxc,oya,oyb,oyc,wwc = 20, 5, 10, 5, 20, 20, 5
   sq1_xform = mk_sq_xform(oxa,oxb,oxc,oya,oyb,oyc,wwc)
   
   shapes = []
@@ -57,7 +61,6 @@ if __name__ == "__main__":
   for x in range(100):
     for y in range(100):
       for s in shapes:
-        print s(x,y), x, y
         if s(x,y):
           canvas[y][x] = 1
 
