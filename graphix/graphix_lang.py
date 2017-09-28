@@ -75,6 +75,29 @@ def mk_sq_xform(oxa,oxb,oxc,
 
   return mk_xform_sq
 
+# takes in a set of parameters
+# returns a function that
+# when takes in i, j as arguments
+# produce a line constraint object
+# @ arguments: sxa, sxb, sxc = xform args for the sx prameter
+# -----------: sya, syb, syc = xform args for the sy prameter
+# ^ with these 2 xforms it will produce a start point
+# @ arguments: movex, movey
+# ^ with these 2 xforms it will creat the end-point based off of the start
+def mk_line_xform(sxa,sxb,sxc,
+                  sya,syb,syc,
+                  movex, movey):
+  sx_xform = mk_xform(sxa,sxb,sxc)
+  sy_xform = mk_xform(sya,syb,syc)
+  def mk_xform_line(i,j): 
+    xformed_sx = sx_xform(i,j)
+    xformed_sy = sy_xform(i,j)
+    t_x = xformed_sx + movex
+    t_y = xformed_sy + movey
+    return mk_line(xformed_sx, xformed_sy, t_x, t_y)
+
+  return mk_xform_line
+
 # --------------------------- generators -------------------------- #
 def gen_w():
   return random.choice([2,5,8])
@@ -83,24 +106,29 @@ if __name__ == "__main__":
 
   from draw import *
 
-  oxa,oxb,oxc,oya,oyb,oyc,wwc = 20, 5, 10, 5, 20, 20, 2
+  oxa,oxb,oxc,oya,oyb,oyc,wwc = 20, 5, 10, 5, 20, 20, 5
   sq1_xform = mk_sq_xform(oxa,oxb,oxc,oya,oyb,oyc,wwc)
   
+  sxa,sxb,sxc,sya,syb,syc = 20, 5, 10, 5, 20, 20
+  line1_xform = mk_line_xform(sxa, sxb, sxc, sya, syb, syc, 20, 20)
+
   shapes = []
 
-#   for i in range(4):
-#     for j in range(3):
-#       sq = sq1_xform(i,j)
-#       shapes.append(sq)
+  for i in range(4):
+    for j in range(3):
+      sq = sq1_xform(i,j)
+      line = line1_xform(i,j)
+      shapes.append(sq)
+      shapes.append(line)
 
   print shapes 
 
-  for i in range(10):
-    aa = random.choice(range(100))
-    bb = random.choice(range(100))
-    cc = random.choice(range(100))
-    dd = random.choice(range(100))
-    shapes.append(mk_line(aa,bb, cc, dd))
+#   for i in range(10):
+#     aa = random.choice(range(100))
+#     bb = random.choice(range(100))
+#     cc = random.choice(range(100))
+#     dd = random.choice(range(100))
+#     shapes.append(mk_line(aa,bb, cc, dd))
       
   canvas = np.zeros([100,100])
 
