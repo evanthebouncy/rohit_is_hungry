@@ -1,6 +1,12 @@
 import numpy as np
 import random
 
+# null shape
+def mk_null():
+  def null(x,y):
+    return False
+  return null
+
 # takes in parameters: center x, center y, width
 # returns a predicate function that draws the square
 def mk_square(s_x,s_y,w):
@@ -86,7 +92,7 @@ def mk_sq_xform(oxa,oxb,oxc,
 # ^ with these 2 xforms it will creat the end-point based off of the start
 def mk_line_xform(sxa,sxb,sxc,
                   sya,syb,syc,
-                  movex, movey):
+                  movex, movey, supress_i, supress_j):
   sx_xform = mk_xform(sxa,sxb,sxc)
   sy_xform = mk_xform(sya,syb,syc)
   def mk_xform_line(i,j): 
@@ -94,42 +100,16 @@ def mk_line_xform(sxa,sxb,sxc,
     xformed_sy = sy_xform(i,j)
     t_x = xformed_sx + movex
     t_y = xformed_sy + movey
+    if supress_i and i == 0:
+      return mk_null()
+    if supress_j and j == 0:
+      return mk_null()
     return mk_line(xformed_sx, xformed_sy, t_x, t_y)
 
   return mk_xform_line
 
-# --------------------------- generators -------------------------- #
-def gen_w():
-  return random.choice([2,5,8])
-
-if __name__ == "__main__":
-
-  from draw import *
-
-  oxa,oxb,oxc,oya,oyb,oyc,wwc = 20, 5, 10, 5, 20, 20, 5
-  sq1_xform = mk_sq_xform(oxa,oxb,oxc,oya,oyb,oyc,wwc)
-  
-  sxa,sxb,sxc,sya,syb,syc = 20, 5, 10, 5, 20, 20
-  line1_xform = mk_line_xform(sxa, sxb, sxc, sya, syb, syc, 20, 20)
-
-  shapes = []
-
-  for i in range(4):
-    for j in range(3):
-      sq = sq1_xform(i,j)
-      line = line1_xform(i,j)
-      shapes.append(sq)
-      shapes.append(line)
-
-  print shapes 
-
-#   for i in range(10):
-#     aa = random.choice(range(100))
-#     bb = random.choice(range(100))
-#     cc = random.choice(range(100))
-#     dd = random.choice(range(100))
-#     shapes.append(mk_line(aa,bb, cc, dd))
-      
+# render shapes onto a 100 by 100 canvas
+def render(shapes):
   canvas = np.zeros([100,100])
 
   for x in range(100):
@@ -138,6 +118,99 @@ if __name__ == "__main__":
         if s(x,y):
           canvas[y][x] = 1
 
-  draw_orig(canvas, "./drawings/test_canvas.png")
+  return canvas
+
+# --------------------------- generators -------------------------- #
+def sample_w():
+  return [ random.choice([2,5,8]) ]
+
+def sample_pos():
+  base_choice = [0, 5, 10, 20, 40]
+  x_a = random.choice(base_choice)
+  x_b = random.choice(base_choice)
+  x_c = random.choice(base_choice)
+  y_a = random.choice(base_choice)
+  y_b = random.choice(base_choice)
+  y_c = random.choice(base_choice)
+  return [x_a, x_b, x_c, y_a, y_b, y_c]
+
+def sample_line_wh():
+  w = random.choice(range(40))
+  h = random.choice(range(40))
+  return [w-20, h-20]
+
+def sample_supress_iter():
+  return [ random.choice([True, False]) ]
+
+def sample_iter():
+  return random.choice(range(1,4))
+
+def square_no_overlap(squares):
+  for i in range(100):
+    for j in range(100):
+      preds = [1 if s(i,j) else 0 for s in squares]
+      if sum(preds) > 1:
+        return False
+  return True 
+  
+def _sample_scene():
+  num_squares = 3
+  num_lines = 3
+  num_i_iter = sample_iter()
+  num_j_iter = sample_iter()
+
+  square_params = [sample_pos() + sample_w()\
+                   for _ in range(num_squares)]
+  line_params = [sample_pos() + sample_line_wh()\
+                 + sample_supress_iter() + sample_supress_iter()\
+                 for _ in range(num_lines)]
+
+  square_xforms = [mk_sq_xform(*s_par) for s_par in square_params]
+  line_xforms = [mk_line_xform(*l_par) for l_par in line_params]
+
+  squares = []
+  lines = []
+  for i in range(num_i_iter):
+    for j in range(num_j_iter):
+      for sq_xform in square_xforms:
+        squares.append(sq_xform(i,j))
+      for line_xform in line_xforms:
+        lines.append(line_xform(i,j))
+
+  return squares, lines
+
+def sample_scene():
+  squares, lines = _sample_scene()
+#  while not square_no_overlap(squares):
+#    squares, lines = _sample_scene()
+
+  return render(squares + lines)
+  
+
+if __name__ == "__main__":
+
+  from draw import *
+
+  def hand_example():
+    oxa,oxb,oxc,oya,oyb,oyc,wwc = 20, 5, 10, 5, 20, 20, 5
+    sq1_xform = mk_sq_xform(oxa,oxb,oxc,oya,oyb,oyc,wwc)
+    
+    sxa,sxb,sxc,sya,syb,syc = 20, 5, 10, 5, 20, 20
+    line1_xform = mk_line_xform(sxa, sxb, sxc, sya, syb, syc, 20, 20, True, True)
+
+    shapes = []
+
+    for i in range(4):
+      for j in range(3):
+        sq = sq1_xform(i,j)
+        line = line1_xform(i,j)
+        shapes.append(sq)
+        shapes.append(line)
+
+    print shapes 
+
+  scene = sample_scene()
+
+  draw_orig(scene, "./drawings/test_canvas.png")
 
   print "HOHO"
