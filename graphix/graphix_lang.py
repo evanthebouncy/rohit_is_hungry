@@ -63,50 +63,38 @@ def mk_xform(a,b,c):
 # takes in a set of parameters
 # returns a function that
 # when takes in i, j as arguments
-# produce a square constraint object
+# produce a coordinate offset transform
 # @ arguments: oxa, oxb, oxc = xform args for the ox prameter
 # -----------: oya, oyb, oyc = xform args for the oy prameter
-# -----------: 0, 0, wwc     = xform args for the w  prameter
-def mk_sq_xform(oxa,oxb,oxc,
-                oya,oyb,oyc,
-                wwc):
+def mk_coord_xform(oxa,oxb,oxc, oya,oyb,oyc):
   ox_xform = mk_xform(oxa,oxb,oxc)
   oy_xform = mk_xform(oya,oyb,oyc)
-  ow_xform = mk_xform(0, 0, wwc)
-  def mk_xform_sq(i,j): 
+  def mk_xform_coord(i,j): 
     xformed_x = ox_xform(i,j)
     xformed_y = oy_xform(i,j)
-    xformed_w = ow_xform(i,j)
-    return mk_square(xformed_x, xformed_y, xformed_w)
+    return xformed_x, xformed_y
 
-  return mk_xform_sq
+  return mk_xform_coord
 
-# takes in a set of parameters
-# returns a function that
-# when takes in i, j as arguments
-# produce a line constraint object
-# @ arguments: sxa, sxb, sxc = xform args for the sx prameter
-# -----------: sya, syb, syc = xform args for the sy prameter
-# ^ with these 2 xforms it will produce a start point
-# @ arguments: movex, movey
-# ^ with these 2 xforms it will creat the end-point based off of the start
-def mk_line_xform(sxa,sxb,sxc,
-                  sya,syb,syc,
-                  movex, movey, supress_i, supress_j):
-  sx_xform = mk_xform(sxa,sxb,sxc)
-  sy_xform = mk_xform(sya,syb,syc)
-  def mk_xform_line(i,j): 
-    xformed_sx = sx_xform(i,j)
-    xformed_sy = sy_xform(i,j)
-    t_x = xformed_sx + movex
-    t_y = xformed_sy + movey
-    if supress_i and i == 0:
-      return mk_null()
-    if supress_j and j == 0:
-      return mk_null()
-    return mk_line(xformed_sx, xformed_sy, t_x, t_y)
+# given an coord x and y 
+# produce a square with offset and width
+def mk_sq_from_coord(coord_x, coord_y, offset_x, offset_y, w):
+  return mk_square(coord_x + offset_x,
+                   coord_y + offset_y,w)
 
-  return mk_xform_line
+
+# given coord x and y
+# produce a line with start offset, end offset
+def mk_line_from_coord(coord_x, coord_y, i, j,
+                       start_x, start_y,
+                       end_x, end_y,
+                       supress_i, supress_j):
+  if supress_i and i == 0:
+    return mk_null()
+  if supress_j and j == 0:
+    return mk_null()
+  return mk_line(coord_x + start_x, coord_y + start_y,
+                 coord_x + end_x, coord_y + end_y)
 
 # render shapes onto a 100 by 100 canvas
 def render(shapes):
@@ -121,11 +109,10 @@ def render(shapes):
   return canvas
 
 # --------------------------- generators -------------------------- #
-def sample_w():
-  return [ random.choice([2,5,8]) ]
 
-def sample_pos():
-  base_choice = [0, 5, 10, 20, 40]
+def sample_coord_xform_params():
+  # base_choice = [0, 5, 10, 20, 40]
+  base_choice = range(30)
   x_a = random.choice(base_choice)
   x_b = random.choice(base_choice)
   x_c = random.choice(base_choice)
@@ -134,13 +121,26 @@ def sample_pos():
   y_c = random.choice(base_choice)
   return [x_a, x_b, x_c, y_a, y_b, y_c]
 
-def sample_line_wh():
-  w = random.choice(range(40))
-  h = random.choice(range(40))
-  return [w-20, h-20]
+def sample_square_params():
+  base_choice = range(40)
+  offset_x = random.choice(base_choice) - 20
+  offset_y = random.choice(base_choice) - 20
+  w = random.choice([2,3,5])
+  return [offset_x, offset_y, w]
 
-def sample_supress_iter():
-  return [ random.choice([True, False]) ]
+def sample_line_params():
+  def sample_supress_iter():
+    return [ random.choice([True, False]) ]
+
+  base_choice = range(80)
+  s_x = random.choice(base_choice) - 40
+  s_y = random.choice(base_choice) - 40
+  t_x = random.choice(base_choice) - 40
+  t_y = random.choice(base_choice) - 40
+  return [s_x, s_y, t_x, t_y]\
+          + sample_supress_iter()\
+          + sample_supress_iter()
+
 
 def sample_iter():
   return random.choice(range(1,4))
@@ -155,34 +155,36 @@ def square_no_overlap(squares):
   
 def _sample_scene():
   num_squares = 3
-  num_lines = 3
+  num_lines = 4
   num_i_iter = sample_iter()
   num_j_iter = sample_iter()
 
-  square_params = [sample_pos() + sample_w()\
+  coord_params = sample_coord_xform_params()
+  square_params = [sample_square_params()\
                    for _ in range(num_squares)]
-  line_params = [sample_pos() + sample_line_wh()\
-                 + sample_supress_iter() + sample_supress_iter()\
+  line_params = [sample_line_params()\
                  for _ in range(num_lines)]
 
-  square_xforms = [mk_sq_xform(*s_par) for s_par in square_params]
-  line_xforms = [mk_line_xform(*l_par) for l_par in line_params]
+  coord_xform = mk_coord_xform(*coord_params)
 
   squares = []
   lines = []
   for i in range(num_i_iter):
     for j in range(num_j_iter):
-      for sq_xform in square_xforms:
-        squares.append(sq_xform(i,j))
-      for line_xform in line_xforms:
-        lines.append(line_xform(i,j))
+      coord_x, coord_y = coord_xform(i,j)
+      for s_params in square_params:
+        square = mk_sq_from_coord(coord_x, coord_y, *s_params)
+        squares.append(square)
+      for l_params in line_params:
+        line = mk_line_from_coord(coord_x, coord_y, i, j, *l_params)
+        lines.append(line)
 
   return squares, lines
 
 def sample_scene():
   squares, lines = _sample_scene()
-#  while not square_no_overlap(squares):
-#    squares, lines = _sample_scene()
+  while not square_no_overlap(squares):
+    squares, lines = _sample_scene()
 
   return render(squares + lines)
   
@@ -190,27 +192,42 @@ def sample_scene():
 if __name__ == "__main__":
 
   from draw import *
-
+  import time
   def hand_example():
-    oxa,oxb,oxc,oya,oyb,oyc,wwc = 20, 5, 10, 5, 20, 20, 5
-    sq1_xform = mk_sq_xform(oxa,oxb,oxc,oya,oyb,oyc,wwc)
-    
-    sxa,sxb,sxc,sya,syb,syc = 20, 5, 10, 5, 20, 20
-    line1_xform = mk_line_xform(sxa, sxb, sxc, sya, syb, syc, 20, 20, True, True)
+    num_i_iter = 4
+    num_j_iter = 4
+    coord_params = [25, 4, 10, 0, 25, 10]
+    square_params = []
+    square_params = [[0,0,5], [5,12,3], [-8,12,2]]
+    line_params = [[0,0,5,12,False,False],
+                   [0,0,-8,12,False,False],
+                   [0,0,-20,0,True,False],
+                   [-8,12,-23,-15,True,True]
+                  ]
 
-    shapes = []
+    coord_xform = mk_coord_xform(*coord_params)
 
-    for i in range(4):
-      for j in range(3):
-        sq = sq1_xform(i,j)
-        line = line1_xform(i,j)
-        shapes.append(sq)
-        shapes.append(line)
+    squares = []
+    lines = []
+    for i in range(num_i_iter):
+      for j in range(num_j_iter):
+        coord_x, coord_y = coord_xform(i,j)
+        for s_params in square_params:
+          square = mk_sq_from_coord(coord_x, coord_y, *s_params)
+          squares.append(square)
+        for l_params in line_params:
+          line = mk_line_from_coord(coord_x, coord_y, i, j, *l_params)
+          lines.append(line)
 
-    print shapes 
+    return squares, lines
 
-  scene = sample_scene()
+  squares, lines = hand_example()
+  rendered = render(squares + lines)
+  draw_orig(rendered, "./drawings/test_canvas_hand.png")
 
-  draw_orig(scene, "./drawings/test_canvas.png")
+  for i in range(1000):
+    scene = sample_scene()
+    draw_orig(scene, "./drawings/test_canvas.png")
+    time.sleep(2)
+    print "HOHO"
 
-  print "HOHO"
