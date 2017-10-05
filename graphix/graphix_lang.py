@@ -1,6 +1,8 @@
 import numpy as np
 import random
 
+L = 64
+
 # null shape
 def mk_null():
   def null(x,y):
@@ -96,12 +98,12 @@ def mk_line_from_coord(coord_x, coord_y, i, j,
   return mk_line(coord_x + start_x, coord_y + start_y,
                  coord_x + end_x, coord_y + end_y)
 
-# render shapes onto a 100 by 100 canvas
+# render shapes onto a L by L canvas
 def render(shapes):
-  canvas = np.zeros([100,100])
+  canvas = np.zeros([L,L])
 
-  for x in range(100):
-    for y in range(100):
+  for x in range(L):
+    for y in range(L):
       for s in shapes:
         if s(x,y):
           canvas[y][x] = 1
@@ -146,8 +148,8 @@ def sample_iter():
   return random.choice(range(1,4))
 
 def square_no_overlap(squares):
-  for i in range(100):
-    for j in range(100):
+  for i in range(L):
+    for j in range(L):
       preds = [1 if s(i,j) else 0 for s in squares]
       if sum(preds) > 1:
         return False
@@ -183,43 +185,44 @@ def _sample_scene():
 
 def sample_scene():
   squares, lines = _sample_scene()
+
   while not square_no_overlap(squares):
     squares, lines = _sample_scene()
 
   return render(squares + lines)
   
+def hand_example():
+  num_i_iter = 3
+  num_j_iter = 3
+  coord_params = [25, 4, 10, 0, 25, 5]
+  square_params = []
+  square_params = [[0,0,5], [5,12,3], [-8,12,2]]
+  line_params = [[0,0,5,12,False,False],
+                 [0,0,-8,12,False,False],
+                 [0,0,-20,0,True,False],
+                 [-8,12,-23,-15,True,True]
+                ]
+
+  coord_xform = mk_coord_xform(*coord_params)
+
+  squares = []
+  lines = []
+  for i in range(num_i_iter):
+    for j in range(num_j_iter):
+      coord_x, coord_y = coord_xform(i,j)
+      for s_params in square_params:
+        square = mk_sq_from_coord(coord_x, coord_y, *s_params)
+        squares.append(square)
+      for l_params in line_params:
+        line = mk_line_from_coord(coord_x, coord_y, i, j, *l_params)
+        lines.append(line)
+
+  return squares, lines
 
 if __name__ == "__main__":
 
   from draw import *
   import time
-  def hand_example():
-    num_i_iter = 4
-    num_j_iter = 4
-    coord_params = [25, 4, 10, 0, 25, 10]
-    square_params = []
-    square_params = [[0,0,5], [5,12,3], [-8,12,2]]
-    line_params = [[0,0,5,12,False,False],
-                   [0,0,-8,12,False,False],
-                   [0,0,-20,0,True,False],
-                   [-8,12,-23,-15,True,True]
-                  ]
-
-    coord_xform = mk_coord_xform(*coord_params)
-
-    squares = []
-    lines = []
-    for i in range(num_i_iter):
-      for j in range(num_j_iter):
-        coord_x, coord_y = coord_xform(i,j)
-        for s_params in square_params:
-          square = mk_sq_from_coord(coord_x, coord_y, *s_params)
-          squares.append(square)
-        for l_params in line_params:
-          line = mk_line_from_coord(coord_x, coord_y, i, j, *l_params)
-          lines.append(line)
-
-    return squares, lines
 
   squares, lines = hand_example()
   rendered = render(squares + lines)

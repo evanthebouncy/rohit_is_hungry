@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pylab as plt
 import multiprocessing as mp
+from graphix_lang import L
 
 from matplotlib import figure
 
@@ -55,7 +56,8 @@ def draw_allob(img, name, ob_prefix):
   ret = np.zeros([L,L,1])
   for ii in range(L):
     for jj in range(L):
-      labb = img[ii][jj][0]
+      labb = 0.5 if img[ii][jj][0] == img[ii][jj][1] else img[ii][jj][0]
+      # labb = img[ii][jj][0]
       # labb = img[ii][jj][0] - img[ii][jj][1]
       ret[ii][jj][0] = labb
 
