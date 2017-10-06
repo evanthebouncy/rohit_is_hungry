@@ -2,6 +2,7 @@ import numpy as np
 import random
 
 L = 64
+S_WIDTHS = [2,3,5]
 
 # null shape
 def mk_null():
@@ -102,8 +103,8 @@ def mk_line_from_coord(coord_x, coord_y, i, j,
 def render(shapes):
   canvas = np.zeros([L,L])
 
-  for x in range(L):
-    for y in range(L):
+  for y in range(L):
+    for x in range(L):
       for s in shapes:
         if s(x,y):
           canvas[y][x] = 1
@@ -127,7 +128,7 @@ def sample_square_params():
   base_choice = range(40)
   offset_x = random.choice(base_choice) - 20
   offset_y = random.choice(base_choice) - 20
-  w = random.choice([2,3,5])
+  w = random.choice(S_WIDTHS)
   return [offset_x, offset_y, w]
 
 def sample_line_params():
@@ -191,24 +192,22 @@ def sample_scene():
 
   return render(squares + lines)
   
-def hand_example():
-  num_i_iter = 3
-  num_j_iter = 3
-  coord_params = [25, 4, 10, 0, 25, 5]
-  square_params = []
-  square_params = [[0,0,5], [5,12,3], [-8,12,2]]
-  line_params = [[0,0,5,12,False,False],
-                 [0,0,-8,12,False,False],
-                 [0,0,-20,0,True,False],
-                 [-8,12,-23,-15,True,True]
-                ]
+def mk_scene(params):
 
-  coord_xform = mk_coord_xform(*coord_params)
+  n_squares = params['n_squares']
+  # n_lines
+  iter_i = params['iter_i']
+  iter_j = params['iter_j']
+  transforms = params['transforms']
+  square_params = params['squares']
+  line_params = params["lines"]
+
+  coord_xform = mk_coord_xform(*transforms)
 
   squares = []
   lines = []
-  for i in range(num_i_iter):
-    for j in range(num_j_iter):
+  for i in range(iter_i):
+    for j in range(iter_j):
       coord_x, coord_y = coord_xform(i,j)
       for s_params in square_params:
         square = mk_sq_from_coord(coord_x, coord_y, *s_params)
@@ -224,13 +223,26 @@ if __name__ == "__main__":
   from draw import *
   import time
 
-  squares, lines = hand_example()
+  par1 = {
+    "n_squares" : 3,
+    "iter_i" : 3,
+    "iter_j" : 3,
+    "transforms" : [25, 4, 10, 0, 25, 5],
+    "squares" : [[0,0,5], [5,12,3], [-8,12,2]],
+    "lines" : [[0,0,5,12,False,False],
+                   [0,0,-8,12,False,False],
+                   [0,0,-20,0,True,False],
+                   [-8,12,-23,-15,True,True]
+                  ],
+  }
+
+  squares, lines = mk_scene(par1)
   rendered = render(squares + lines)
-  draw_orig(rendered, "./drawings/test_canvas_hand.png")
+  draw_orig(rendered, "./hand_drawings/test_canvas_hand.png")
 
   for i in range(1000):
     scene = sample_scene()
-    draw_orig(scene, "./drawings/test_canvas.png")
+    draw_orig(scene, "./hand_drawings/test_canvas.png")
     time.sleep(2)
     print "HOHO"
 

@@ -1,9 +1,11 @@
 from z3 import *
 import numpy as np
+from util import *
 
 N_SQUARES = 3
 ITER_I_BND = 3
 ITER_J_BND = 3
+S_WIDTHS = [2,3,5]
 
 class Square(object):
 
@@ -60,7 +62,10 @@ class DrawingSolver:
         for sq_num in xrange(N_SQUARES):
             self.c_x.append(Int('cx_%d' % sq_num))
             self.c_y.append(Int('cy_%d' % sq_num))
-            self.w.append(Int('w_%d' % sq_num))
+            s_width = Int('w_%d' % sq_num)
+            self.w.append(s_width)
+            # constrain width
+            self.s.add(Or([s_width == w for w in S_WIDTHS]))
 
         for i in xrange(ITER_I_BND):
             for j in xrange(ITER_J_BND):
@@ -82,15 +87,20 @@ class DrawingSolver:
 
 
     def solve_grid(self, program_size_bnd, grid):
+        print "solving grid "
         (M,N) = grid.shape
 
         self.s.add(self.program_size <= program_size_bnd)
 
-        for x in xrange(M):
-            for y in xrange(N):
-                value = True if grid[x][y] else False
+        # the outer loop is actually y and the inner is x
+        for y in xrange(M):
+            for x in xrange(N):
+                same_line_print("constraining {} {}".format(x,y))
+                value = True if grid[y][x] else False
                 all_shapes_occupy = Or([sq_const(x,y) for sq_const in self.sq_constraints])
                 self.s.add(value == all_shapes_occupy)
+
+        print "finished adding constraints, solving . . ."
 
         if self.s.check() == sat:
             model = self.s.model()
@@ -105,21 +115,19 @@ class DrawingSolver:
             ret['transforms'] = [model[xform_param].as_long() for xform_param in self.transforms]
             squares = [[] for _ in range(ret['n_squares'])]
             for square_id in range(ret['n_squares']):
-              squares[square_id].append(model[self.c_x[square_id]])
-              squares[square_id].append(model[self.c_y[square_id]])
-              squares[square_id].append(model[self.w[square_id]])
+              squares[square_id].append(model[self.c_x[square_id]].as_long())
+              squares[square_id].append(model[self.c_y[square_id]].as_long())
+              squares[square_id].append(model[self.w[square_id]].as_long())
             ret['squares'] = squares
-            
-            
+
+            ret['lines'] = []
             return ret
-            # for i in xrange(N_SQUARES):
-            #     output.append((model[c_x[i]].as_long(),model[c_y[i]].as_long(),model[w[i]].as_long()))
-            # return output
         else:
-            #print "UNSAT!"
             return "UNSAT"
 
 if __name__ == '__main__':
+  # for this simple picture overwrite the width constrain
+  S_WIDTHS = [0,1]
   grid = np.array([
           [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
           [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
