@@ -194,12 +194,38 @@ class Implynet:
     for chosen in sub_constraints:
       loc, val = chosen
       constraint_probs[loc[0]][loc[1]] = 1.0
-    return np.unravel_index(constraint_probs.argmin(), constraint_probs.shape)
 
-  def get_trace(self, query, constraints):
+    min_value = constraint_probs.min()
+    idx1s, idx2s = np.where(constraint_probs == min_value)
+    min_indexes = zip(idx1s,idx2s)
+    return random.choice(min_indexes)
+    
+#    return np.unravel_index(constraint_probs.argmin(), constraint_probs.shape)
+
+  def get_sorted_unlikely(self, sub_constraints, constraints):
+    all_preds = self.get_all_preds(sub_constraints)
+
+    constraint_probs = np.sum(all_preds * constraints, axis=2)
+    print all_preds.shape, constraints.shape, constraint_probs.shape
+    
+    for chosen in sub_constraints:
+      loc, val = chosen
+      constraint_probs[loc[0]][loc[1]] = 1.0
+
+    to_sort = []
+    for y in range(L):
+      for x in range(L):
+        prob = constraint_probs[y][x]
+        to_sort.append((prob, (x,y)))
+    
+    return sorted(to_sort)
+
+  def get_trace(self, query, constraints, bound=0):
     L,L,_ = constraints.shape
     obs = []
-    for i in range(L*L):
+
+    bound = L*L if bound == 0 else bound
+    for i in range(bound):
       chosen_qry = self.get_most_unlikely(obs, constraints)
       print i, chosen_qry
       obs.append((chosen_qry, query(chosen_qry)))

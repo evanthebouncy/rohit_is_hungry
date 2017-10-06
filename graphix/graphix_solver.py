@@ -1,6 +1,7 @@
 from z3 import *
 import numpy as np
 from util import *
+import time
 
 N_SQUARES = 3
 ITER_I_BND = 3
@@ -85,26 +86,23 @@ class DrawingSolver:
                     self.sq_constraints.append(Square(self.c_x[sq_num]+transform_x, self.c_y[sq_num]+transform_y, self.w[sq_num], 
                                                run_at_ij, square_exist).inside)
 
+    def solve(self, program_size_bnd, constraints):
 
-    def solve_grid(self, program_size_bnd, grid):
-        print "solving grid "
-        (M,N) = grid.shape
-
+        start_time = time.time()
+        print "adding constraints . . . "
         self.s.add(self.program_size <= program_size_bnd)
+        for x_y, val in constraints:
+          value = val
+          all_shapes_occupy = Or([sq_const(*x_y) for sq_const in self.sq_constraints])
+          self.s.add(value == all_shapes_occupy)
 
-        # the outer loop is actually y and the inner is x
-        for y in xrange(M):
-            for x in xrange(N):
-                same_line_print("constraining {} {}".format(x,y))
-                value = True if grid[y][x] else False
-                all_shapes_occupy = Or([sq_const(x,y) for sq_const in self.sq_constraints])
-                self.s.add(value == all_shapes_occupy)
-
+        model_building_time = time.time() - start_time
         print "finished adding constraints, solving . . ."
 
         if self.s.check() == sat:
             model = self.s.model()
-            print model
+            
+            solving_time = time.time() - start_time - model_building_time
             ret = {}
             # get the loop iteration information and bounds
             ret['iter_i'] = model[self.iter_i].as_long()
@@ -121,9 +119,25 @@ class DrawingSolver:
             ret['squares'] = squares
 
             ret['lines'] = []
+
+            ret['building_time'] = model_building_time
+            ret['solvng_time'] = solving_time
             return ret
         else:
             return "UNSAT"
+
+    def solve_grid(self, program_size_bnd, grid):
+        print "solving grid "
+        (M,N) = grid.shape
+
+        constraints = []
+        # the outer loop is actually y and the inner is x
+        for y in xrange(M):
+            for x in xrange(N):
+                value = True if grid[y][x] else False
+                constraints.append(((x,y),value))
+        return self.solve(program_size_bnd, constraints)
+
 
 if __name__ == '__main__':
   # for this simple picture overwrite the width constrain
