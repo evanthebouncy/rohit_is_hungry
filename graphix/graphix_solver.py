@@ -24,99 +24,116 @@ class Square(object):
 def transform(i,j,a,b,c):
     return i*a + j*b + c
 
-def create_solver(program_size_bnd, grid):
-    (M,N) = grid.shape
-    s = Solver()
+# the solver for taking in constraints and make them into squares
+class DrawingSolver:
 
-    (c_x, c_y, w, ds, sq_constraints) = ([], [], [], [], [])
+    def __init__(self):
+        self.mk_solver()
 
-    transforms = [Int('xform'+c) for c in ['a', 'b', 'c', 'd', 'e', 'f']]
-    x_transforms = transforms[:3]
-    y_transforms = transforms[3:]
+    def mk_solver(self):
+        self.s = Solver()
 
-    iter_i = Int('iter_bnd_i')
-    iter_j = Int('iter_bnd_j')
-    n_squares = Int('n_squares')
+        # overall bound on the size of the program
+        self.iter_i = Int('iter_bnd_i')
+        self.iter_j = Int('iter_bnd_j')
+        self.n_squares = Int('n_squares')
+        self.program_size = Int('program_size')
+        # constraints on iterations and n squares and program size
+        self.s.add(self.program_size == self.iter_i + self.iter_j + self.n_squares)
+        self.s.add(self.iter_i <= ITER_I_BND)
+        self.s.add(self.iter_j <= ITER_J_BND)
+        self.s.add(1 <= self.n_squares)
+        self.s.add(self.n_squares <= N_SQUARES)
 
-    s.add(1 <= n_squares)
-    s.add(n_squares <= N_SQUARES)
-    s.add(iter_i <= ITER_I_BND)
-    s.add(iter_j <= ITER_J_BND)
+        # coordinate transformations
+        self.transforms = [Int('xform'+c) for c in ['a', 'b', 'c', 'd', 'e', 'f']]
+        self.x_transforms = self.transforms[:3]
+        self.y_transforms = self.transforms[3:]
 
-    program_size = Int('program_size')
-    s.add(program_size == iter_i + iter_j + n_squares)
+        # parameters for the square
+        self.c_x, self.c_y, self.w = [],[],[] 
+        # the list of square constraints being created
+        self.sq_constraints = []
 
-    s.add(program_size <= program_size_bnd)
 
-    for i in xrange(ITER_I_BND):
-        for j in xrange(ITER_J_BND):
-            transform_x = Int('tx_{}_{}'.format(i,j))
-            transform_y = Int('ty_{}_{}'.format(i,j))
-            s.add(transform_x == transform(i,j,*x_transforms))
-            s.add(transform_y == transform(i,j,*y_transforms))
+        # make some square parameters
+        for sq_num in xrange(N_SQUARES):
+            self.c_x.append(Int('cx_%d' % sq_num))
+            self.c_y.append(Int('cy_%d' % sq_num))
+            self.w.append(Int('w_%d' % sq_num))
 
-            # check if a particular i, j iteration is being executed
-            run_at_ij = Bool('run_at_{}_{}'.format(i,j))
-            s.add(run_at_ij == And([i < iter_i, j < iter_j]))
+        for i in xrange(ITER_I_BND):
+            for j in xrange(ITER_J_BND):
+                transform_x = Int('tx_{}_{}'.format(i,j))
+                transform_y = Int('ty_{}_{}'.format(i,j))
+                self.s.add(transform_x == transform(i,j,*self.x_transforms))
+                self.s.add(transform_y == transform(i,j,*self.y_transforms))
+
+                # check if a particular i, j iteration is being executed
+                run_at_ij = Bool('run_at_{}_{}'.format(i,j))
+                self.s.add(run_at_ij == And([i < self.iter_i, j < self.iter_j]))
+                
+                for sq_num in xrange(N_SQUARES):
+                    # check if this square should exist
+                    square_exist = Bool('square_exist_{}'.format(sq_num))
+                    self.s.add(square_exist == (sq_num < self.n_squares))
+                    self.sq_constraints.append(Square(self.c_x[sq_num]+transform_x, self.c_y[sq_num]+transform_y, self.w[sq_num], 
+                                               run_at_ij, square_exist).inside)
+
+
+    def solve_grid(self, program_size_bnd, grid):
+        (M,N) = grid.shape
+
+        self.s.add(self.program_size <= program_size_bnd)
+
+        for x in xrange(M):
+            for y in xrange(N):
+                value = True if grid[x][y] else False
+                all_shapes_occupy = Or([sq_const(x,y) for sq_const in self.sq_constraints])
+                self.s.add(value == all_shapes_occupy)
+
+        if self.s.check() == sat:
+            model = self.s.model()
+            print model
+            ret = {}
+            # get the loop iteration information and bounds
+            ret['iter_i'] = model[self.iter_i].as_long()
+            ret['iter_j'] = model[self.iter_j].as_long()
+            ret['n_squares'] = model[self.n_squares].as_long()
+            ret['program_size'] = model[self.program_size].as_long()
+            # get the transform information
+            ret['transforms'] = [model[xform_param].as_long() for xform_param in self.transforms]
+            squares = [[] for _ in range(ret['n_squares'])]
+            for square_id in range(ret['n_squares']):
+              squares[square_id].append(model[self.c_x[square_id]])
+              squares[square_id].append(model[self.c_y[square_id]])
+              squares[square_id].append(model[self.w[square_id]])
+            ret['squares'] = squares
             
-            for sq_num in xrange(N_SQUARES):
-                c_x.append(Int('cx_%d' % sq_num))
-                c_y.append(Int('cy_%d' % sq_num))
-                w.append(Int('w_%d' % sq_num))
-                # check if this square should exist
-                square_exist = Bool('square_exist_{}'.format(sq_num))
-                s.add(square_exist == (sq_num < n_squares))
-                sq_constraints.append(Square(c_x[sq_num]+transform_x, c_y[sq_num]+transform_y, w[sq_num], 
-                                             run_at_ij, square_exist).inside)
+            
+            return ret
+            # for i in xrange(N_SQUARES):
+            #     output.append((model[c_x[i]].as_long(),model[c_y[i]].as_long(),model[w[i]].as_long()))
+            # return output
+        else:
+            #print "UNSAT!"
+            return "UNSAT"
 
-    for i in xrange(M):
-        for j in xrange(N):
-            value = True if grid[i][j] else False
-            all_shapes_occupy = Or([sq_const(i,j) for sq_const in sq_constraints])
-            s.add(value == all_shapes_occupy)
+if __name__ == '__main__':
+  grid = np.array([
+          [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
+          [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
+          [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
+          [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
+          [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
+          [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
+          [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          ])
 
-
-    # for weight in w:
-    #     s.add(weight >= 0)
-
-    if s.check() == sat:
-        model = s.model()
-        print model
-        output = []
-        # output.append((model[transform_x],model[transform_y]))
-        for i in xrange(N_SQUARES):
-            output.append((model[c_x[i]].as_long(),model[c_y[i]].as_long(),model[w[i]].as_long()))
-        return output
-    else:
-        #print "UNSAT!"
-        return "UNSAT"
-
-
-
-
-
-grid = np.array([
-        [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
-        [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
-        [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
-        [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
-        [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ])
-# grid = np.array([
-#     [1, 0, 0],
-#     [0, 0, 1],
-#     [0, 0, 0]
-#     ])
-
-t = (0, 3)
-c = (2, 0)
-w = 1
-
-print create_solver(6, grid)
+  solver = DrawingSolver()
+  print solver.solve_grid(7, grid)
