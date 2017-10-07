@@ -7,6 +7,9 @@ N_SQUARES = 3
 ITER_I_BND = 3
 ITER_J_BND = 3
 S_WIDTHS = [2,3,5]
+TR_LOW_BND, TR_HIGH_BND = 0, 30
+SQ_LOW_BND, SQ_HIGH_BND = -20, 20
+
 
 class Square(object):
 
@@ -52,6 +55,10 @@ class DrawingSolver:
         self.transforms = [Int('xform'+c) for c in ['a', 'b', 'c', 'd', 'e', 'f']]
         self.x_transforms = self.transforms[:3]
         self.y_transforms = self.transforms[3:]
+        # set range limit on these transforms
+        for tr_par in self.transforms:
+          self.s.add(tr_par < TR_HIGH_BND)
+          self.s.add(tr_par >= TR_LOW_BND)
 
         # parameters for the square
         self.c_x, self.c_y, self.w = [],[],[] 
@@ -61,10 +68,17 @@ class DrawingSolver:
 
         # make some square parameters
         for sq_num in xrange(N_SQUARES):
-            self.c_x.append(Int('cx_%d' % sq_num))
-            self.c_y.append(Int('cy_%d' % sq_num))
-            s_width = Int('w_%d' % sq_num)
+            sq_offset_x = Int('sq_offset_x_%d' % sq_num)
+            sq_offset_y = Int('sq_offset_y_%d' % sq_num)
+            s_width = Int('sq_w_%d' % sq_num)
+
+            self.c_x.append(sq_offset_x)
+            self.c_y.append(sq_offset_y)
             self.w.append(s_width)
+
+            # constrain offset 
+            self.s.add(And([sq_offset_x >= SQ_LOW_BND, sq_offset_x < SQ_HIGH_BND]))
+            self.s.add(And([sq_offset_y >= SQ_LOW_BND, sq_offset_y < SQ_HIGH_BND]))
             # constrain width
             self.s.add(Or([s_width == w for w in S_WIDTHS]))
 
@@ -138,6 +152,51 @@ class DrawingSolver:
                 constraints.append(((x,y),value))
         return self.solve(program_size_bnd, constraints)
 
+def check(params, orig_render, i):
+  from data import *
+  from draw import *
+  
+  from graphix_lang import * 
+  squares,lines = mk_scene(params)
+  rendered = render(squares+lines)
+
+  grid_constraints = img_2_bool(rendered)
+  draw_allob(grid_constraints, "hand_drawings/recovered_cegis{}.png".format(i), [])
+
+  diff = rendered - orig_render
+  diff_idx1, diff_idx2 = np.where(diff != 0)
+
+  if len(diff_idx1) == 0:
+    return None
+
+  else:
+    iddd = random.choice(range(len(diff_idx1)))
+    id1,id2 = diff_idx1[iddd], diff_idx2[iddd]
+    return (int(id2), int(id1)), True if orig_render[id1][id2] else False
+
+
+def CEGIS(constraints, rendered_orig, start_constraints = []):
+
+  sub_constraints = constraints[:1] + start_constraints
+
+  i = 0
+  
+  while True:
+    i += 1
+    solver = DrawingSolver()
+    print sub_constraints
+    paras = solver.solve(10, sub_constraints)
+    print "paras"
+    print paras
+    ce = check(paras, rendered_orig, i)
+    print "ce"
+    print ce
+    if ce == None:
+      return paras
+    else:
+      sub_constraints.append(ce)
+  
+   
 
 if __name__ == '__main__':
   # for this simple picture overwrite the width constrain
