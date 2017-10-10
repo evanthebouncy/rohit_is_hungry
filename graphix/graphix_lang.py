@@ -19,7 +19,36 @@ def mk_square(s_x,s_y,w):
 
 # takes in parameters: start x, start y, terminal x, terminal y
 # returns a predicate function that draws the line
-def mk_line(s_x,s_y,t_x,t_y):
+def mk_line(s_x,s_y,t_x,t_y,l_kind):
+  x_min, x_max = min(s_x,t_x), max(s_x,t_x)
+  y_min, y_max = min(s_y,t_y), max(s_y,t_y)
+
+  def line(x,y):
+    # if out of bound then no way
+    if x < x_min or x > x_max or y < y_min or y > y_max:
+      return False
+    top_edge = y == y_min
+    right_edge = x == x_max
+    left_edge = x == x_min
+    bot_edge = y == y_max
+
+    l1 = top_edge or right_edge
+    l2 = right_edge or bot_edge
+    l3 = bot_edge or left_edge
+    l4 = left_edge or top_edge
+
+    na = (s_x == x_min and s_y == y_min) or (s_x == x_max and s_y == y_max)
+
+    if na and l_kind: return l1
+    if na and not l_kind: return l3
+    if not na and l_kind: return l2
+    if not na and not l_kind: return l4
+
+  return line
+
+# takes in parameters: start x, start y, terminal x, terminal y
+# returns a predicate function that draws the line
+def mk_line_diag(s_x,s_y,t_x,t_y):
   x_min, x_max = min(s_x,t_x), max(s_x,t_x)
   y_min, y_max = min(s_y,t_y), max(s_y,t_y)
   line_diffx = t_x - s_x
@@ -91,13 +120,13 @@ def mk_sq_from_coord(coord_x, coord_y, offset_x, offset_y, w):
 def mk_line_from_coord(coord_x, coord_y, i, j,
                        start_x, start_y,
                        end_x, end_y,
-                       supress_i, supress_j):
+                       supress_i, supress_j, line_kind):
   if supress_i and i == 0:
     return mk_null()
   if supress_j and j == 0:
     return mk_null()
   return mk_line(coord_x + start_x, coord_y + start_y,
-                 coord_x + end_x, coord_y + end_y)
+                 coord_x + end_x, coord_y + end_y, line_kind)
 
 # render shapes onto a L by L canvas
 def render(shapes):
@@ -132,7 +161,7 @@ def sample_square_params():
   return [offset_x, offset_y, w]
 
 def sample_line_params():
-  def sample_supress_iter():
+  def sample_bool():
     return [ random.choice([True, False]) ]
 
   base_choice = range(80)
@@ -141,8 +170,9 @@ def sample_line_params():
   t_x = random.choice(base_choice) - 40
   t_y = random.choice(base_choice) - 40
   return [s_x, s_y, t_x, t_y]\
-          + sample_supress_iter()\
-          + sample_supress_iter()
+          + sample_bool()\
+          + sample_bool()\
+          + sample_bool()
 
 
 def sample_iter():
@@ -187,9 +217,6 @@ def _sample_scene():
 def sample_scene():
   squares, lines = _sample_scene()
 
-  while not square_no_overlap(squares):
-    squares, lines = _sample_scene()
-
   return render(squares + lines)
   
 def mk_scene(params):
@@ -228,11 +255,12 @@ if __name__ == "__main__":
     "iter_i" : 3,
     "iter_j" : 3,
     "transforms" : [25, 4, 10, 0, 25, 5],
-    "squares" : [[0,0,5], [5,12,3], [-8,12,2]],
-    "lines" : [[0,0,5,12,False,False],
-                   [0,0,-8,12,False,False],
-                   [0,0,-20,0,True,False],
-                   [-8,12,-23,-15,True,True]
+    "squares" : [[0,0,5], [5,14,3], [-8,12,2]],
+    "lines" : [
+                   [0,0,5,12,False,False, True],
+                   [0,0,-8,12,False,False, True],
+                   [0,0,-20,0,True,False, True],
+                   [-10,12,-20,-8,True,True, True],
                   ],
   }
 
