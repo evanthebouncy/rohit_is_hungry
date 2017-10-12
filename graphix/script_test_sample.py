@@ -1,9 +1,11 @@
 from model import *
 from draw import *
 import sys
+import hand_examples
 
-squares, lines = hand_example()
-rendered = render(squares + lines)
+squares_orig,lines_orig = mk_scene(hand_examples.ex_box_line1)
+# squares, lines = hand_example()
+rendered = render(squares_orig + lines_orig)
 constraints = img_2_bool(rendered)
 draw_allob(constraints, "drawings/constraints.png", [])
 
