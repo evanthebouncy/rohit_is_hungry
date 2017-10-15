@@ -23,10 +23,11 @@ constraints = img_2_constraints(rendered_squares, rendered_lines)
 hints = {
 }
 
-# stime = time.time()
-# CEGIS(constraints, rendered_squares, rendered_lines, [], hints)
-# print "total time "
-# print time.time() - stime
+stime = time.time()
+CEGIS(constraints, rendered_squares, rendered_lines, [], hints)
+print "total time "
+print time.time() - stime
+assert 0
 
 def invert(constraints, name):
   solver = DrawingSolver()

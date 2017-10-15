@@ -33,11 +33,20 @@ def embed_cnn_layer(input_var):
 
   print cur.get_shape() 
   return cur
-#   embed = tf.reshape(cur, [N_BATCH, L * L * 2])
-# 
-#   embed = tf.layers.dense(embed, 200, activation= tf.nn.relu)
-# 
-#   return embed
+
+
+# transform constraint (x, y)->val into image (id2 id1)->[1.0,0.0] (reversing order)
+def optional_xform(obs):
+  if obs == [] or len(obs[0]) == 2: return obs
+  id1_id2_to_value = {}
+  for ob in obs:
+    x_y, stype, val = ob
+    id1,id2 = rev(*x_y)
+    if (id1,id2) not in  id1_id2_to_value:
+      id1_id2_to_value[(id1,id2)] = False
+    id1_id2_to_value[(id1,id2)] = id1_id2_to_value[(id1,id2)] or val
+  return [(id1_id2, [1.0, 0.0] if id1_id2_to_value[id1_id2] else [0.0, 1.0])\
+           for id1_id2 in id1_id2_to_value]
 
 class Implynet:
 
@@ -146,15 +155,15 @@ class Implynet:
 
   # a placeholder to feed in a single observation
   def get_feed_dic_obs(self, obs):
-    # needing to create all the nessisary feeds
-    obss = []
-    
     num_obs = len(obs)
     _obs = np.zeros([L,L,2])
+
     for ob_idx in range(num_obs):
       cord, lab = obs[ob_idx]
       xx, yy = cord
       _obs[xx][yy] = lab
+
+    draw_allob(_obs, "hand_drawings/cur_obs.png",[])
     
     obss = np.array([_obs for i in range(N_BATCH)])
 
@@ -185,27 +194,15 @@ class Implynet:
     most_conf = min(most_confs)
     return most_conf[1]
 
-  def get_most_unlikely(self, sub_constraints, constraints, n_batch=1):
+  # this should work over index space, i.e. id1,id2 directly onto image. flip all constraints
+  # around to this form
+  def get_sorted_unlikely(self, sub_constraints, full_image, i=0):
+    constraints = img_2_labels(full_image)
+    # if this is called from a solver end these can be booleans, convert back to labels
+    sub_constraints = optional_xform(sub_constraints)
+
     all_preds = self.get_all_preds(sub_constraints)
-
-    constraint_probs = np.sum(all_preds * constraints, axis=2)
-    print all_preds.shape, constraints.shape, constraint_probs.shape
-    
-    for chosen in sub_constraints:
-      loc, val = chosen
-      constraint_probs[loc[0]][loc[1]] = 1.0
-
-    min_value = constraint_probs.min()
-    idx1s, idx2s = np.where(constraint_probs == min_value)
-    min_indexes = zip(idx1s,idx2s)
-    print min_value, "min value"
-    random.shuffle(min_indexes)
-    return min_indexes[:n_batch]
-    
-#    return np.unravel_index(constraint_probs.argmin(), constraint_probs.shape)
-
-  def get_sorted_unlikely(self, sub_constraints, constraints):
-    all_preds = self.get_all_preds(sub_constraints)
+    draw_allob(all_preds, "hand_drawings/pred_{}.png".format(i),[])
 
     constraint_probs = np.sum(all_preds * constraints, axis=2)
     
@@ -214,23 +211,23 @@ class Implynet:
       constraint_probs[loc[0]][loc[1]] = 1.0
 
     to_sort = []
-    for y in range(L):
-      for x in range(L):
-        prob = constraint_probs[x][y]
-        to_sort.append((prob+1e-5*random.random(), (x,y)))
+    for id1 in range(L):
+      for id2 in range(L):
+        prob = constraint_probs[id1][id2]
+        to_sort.append((prob+1e-5*random.random(), (id1,id2)))
     
     return sorted(to_sort)
 
-  def get_trace(self, query, constraints, bound=0):
-    L,L,_ = constraints.shape
+  def get_trace(self, r_img, increment=10):
+    query = mk_query(r_img)
+    M,N = r_img.shape
     obs = []
 
-    bound = L*L if bound == 0 else bound
+    bound = M*N
     for i in range(bound):
-      # chosen_qrys = self.get_most_unlikely(obs, constraints, 20)
-      sorted_qrys = self.get_sorted_unlikely(obs, constraints)
+      sorted_qrys = self.get_sorted_unlikely(obs, r_img)
       min_prob = sorted_qrys[0][0]
-      sorted_qrys = sorted_qrys[:10]
+      sorted_qrys = sorted_qrys[:increment]
       chosen_qrys = [xx[1] for xx in sorted_qrys]
       print i, min_prob
       for chosen_qry in chosen_qrys:
@@ -238,8 +235,11 @@ class Implynet:
 
       all_preds = self.get_all_preds(obs)
       draw_allob(all_preds, "drawings/pred{0}.png".format(i), [])
-      constraint_probs = np.sum(all_preds * constraints, axis=2)
-      draw_orig(constraint_probs, "drawings/constraint_prob{0}.png".format(i))
+
+      # constraints = 
+      # constraint_probs = np.sum(all_preds * constraints, axis=2)
+      # draw_orig(constraint_probs, "drawings/constraint_prob{0}.png".format(i))
+
       if min_prob > 0.6:
         break
     return obs

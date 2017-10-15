@@ -7,26 +7,33 @@ def same_line_print(message):
   sys.stdout.flush()
 
 def mk_query(img):
-  def qry(x_y):
-    x,y = x_y
-    if img[x][y] == 1.0:
+  assert len(img.shape) == 2
+  def qry(id1_id2):
+    id1,id2 = id1_id2
+    if img[id1][id2] == 1.0:
       return [1.0, 0.0]
     else:
       return [0.0, 1.0]
   return qry
 
+def rev(x,y):
+  return y,x
+
+# takes an image (with reversed index)
+# to x y which is actually ordered id2 id1
 def img_2_constraints(img_squares, img_lines):
   M,N = img_squares.shape
   ret = []
-  for y in range(M):
-    for x in range(N):
-      square_val = bool(img_squares[y][x] == 1)
-      line_val = bool(img_lines[y][x] == 1)
-      ret.append(((x,y),'square',square_val))
-      ret.append(((x,y),'line',line_val))
+  for id1 in range(M):
+    for id2 in range(N):
+      square_val = bool(img_squares[id1][id2] == 1)
+      line_val = bool(img_lines[id1][id2] == 1)
+      ret.append(((id2,id1),'square',square_val))
+      ret.append(((id2,id1),'line',line_val))
       
   return ret
 
+# turn image into a label, preserve the reverse ordering of index
 def img_2_labels(img):
   full_obs = np.zeros([L,L,2])
   qry = mk_query(img)

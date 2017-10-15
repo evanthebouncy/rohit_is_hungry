@@ -1,7 +1,8 @@
 import numpy as np
 import random
 
-L = 64
+L = 32
+# L = 64
 S_WIDTHS = [2,3,5]
 
 # null shape
@@ -129,6 +130,7 @@ def mk_line_from_coord(coord_x, coord_y, i, j,
                  coord_x + end_x, coord_y + end_y, line_kind)
 
 # render shapes onto a L by L canvas
+# render goes from x,y space to id1,id2 space by flipping
 def render(shapes):
   canvas = np.zeros([L,L])
 

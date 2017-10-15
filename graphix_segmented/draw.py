@@ -51,6 +51,7 @@ def draw_orig(img, name):
   ret = np.reshape(img, [L1,L2,1])
   draw(ret, name)
 
+# draws in image space
 def draw_allob(img, name, ob_prefix):
   
   ret = np.zeros([L,L,1])

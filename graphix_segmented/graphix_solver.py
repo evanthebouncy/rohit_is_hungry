@@ -307,6 +307,7 @@ class DrawingSolver:
                 constraints.append(((x,y),value))
         return self.solve(program_size_bnd, constraints)
 
+# check returns in index space
 def check(params, square_render, line_render, i):
   squares, lines = mk_scene(params)
   s_render = render(squares)
@@ -322,22 +323,12 @@ def check(params, square_render, line_render, i):
   draw_orig(diff, "hand_drawings/diff_{}.png".format(i))
 
   diff_idx1, diff_idx2 = np.where(diff != 0)
-  print len(diff_idx1)
 
   if len(diff_idx1) == 0:
     return None
 
   else:
-#     ret = []
-#     for iddd in range(len(diff_idx1)):
-      iddd = random.choice(range(len(diff_idx1)))
-      id1,id2 = diff_idx1[iddd], diff_idx2[iddd]
-        
-      square_val = bool(square_render[id1][id2] == 1)
-      line_val =   bool(line_render[id1][id2] == 1)
-      return   [((int(id2), int(id1)), 'square', square_val),
-                ((int(id2), int(id1)), 'line', line_val)]
-
+    return zip(diff_idx1, diff_idx2)
 
 def CEGIS(constraints, rendered_squares, rendered_lines, start_constraints = [], hints=[]):
 
@@ -352,13 +343,15 @@ def CEGIS(constraints, rendered_squares, rendered_lines, start_constraints = [],
     paras = synth_solver.solve(15, sub_constraints, hints)
     print "paras"
     print paras
-    ce = check(paras, rendered_squares, rendered_lines, i)
-    print "ce"
-    print ce
-    if ce == None:
+    ces = check(paras, rendered_squares, rendered_lines, i)
+    if ces == None:
       return paras
     else:
-      sub_constraints += ce
+      id1,id2 = random.choice(ces)
+      square_val = bool(rendered_squares[id1][id2] == 1)
+      line_val =   bool(rendered_lines[id1][id2] == 1)
+      sub_constraints +=    [((int(id2), int(id1)), 'square', square_val),
+                             ((int(id2), int(id1)), 'line', line_val)]
   
    
 
