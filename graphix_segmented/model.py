@@ -218,7 +218,7 @@ class Implynet:
     
     return sorted(to_sort)
 
-  def get_trace(self, r_img, increment=10):
+  def get_trace(self, r_img, increment=10, fraction=0.1):
     query = mk_query(r_img)
     M,N = r_img.shape
     obs = []
@@ -240,30 +240,10 @@ class Implynet:
       # constraint_probs = np.sum(all_preds * constraints, axis=2)
       # draw_orig(constraint_probs, "drawings/constraint_prob{0}.png".format(i))
 
-      if min_prob > 0.6:
+      # if min_prob > 0.3:
+      #   break
+      if len(obs) > fraction * (M*N):
         break
     return obs
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

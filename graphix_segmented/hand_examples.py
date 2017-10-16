@@ -36,3 +36,49 @@ ex_line1 = {
              [-10,12,-20,-8,True,True, True],
             ],
 }
+
+ex2 = {
+  "n_squares" : 2,
+  "iter_i" : 3,
+  "iter_j" : 3,
+  "transforms" : [10, 2, 3, 2, 10, 3],
+  "squares" : [
+                [0,0,2], 
+                [5,5,2], 
+              ],
+  "lines" : [
+              [0,0,0,-9, False,True, True],
+              [0,0,-9,0,True,False, True],
+            ],
+}
+
+ex3 = {
+  "n_squares" : 3,
+  "iter_i" : 2,
+  "iter_j" : 2,
+  "transforms" : [10, 2, 3, 2, 10, 3],
+  "squares" : [
+                [0,5,2], 
+                [0,0,2], 
+                [10,5,2], 
+              ],
+  "lines" : [
+#               [0,0,0,-9, False,True, True],
+#               [0,0,-9,0,True,False, True],
+            ],
+}
+
+ex4 = {
+  "n_squares" : 2,
+  "iter_i" : 2,
+  "iter_j" : 2,
+  "transforms" : [10, 2, 3, 2, 10, 3],
+  "squares" : [
+                [0,0,2], 
+                [9,9,2], 
+              ],
+  "lines" : [
+              [9,0,0,9, False,False, True],
+              [2,-9,-9,2,False,False, True],
+            ],
+}

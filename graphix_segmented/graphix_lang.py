@@ -1,9 +1,19 @@
 import numpy as np
 import random
 
-L = 32
 # L = 64
-S_WIDTHS = [2,3,5]
+# S_WIDTHS = [2,3,5]
+
+L = 32
+N_SQUARES  = 2
+N_LINES    = 2
+ITER_I_BND = 2
+ITER_J_BND = 2
+S_WIDTHS   = [2]
+TR_LOW_BND, TR_HIGH_BND = 0, 10
+SQ_LOW_BND, SQ_HIGH_BND = -10, 10
+N_ITERS = 2
+
 
 # null shape
 def mk_null():
@@ -83,7 +93,6 @@ def mk_line_diag(s_x,s_y,t_x,t_y):
     return left_right_logic() or up_down_logic()
 
   return line
-    
 
 # takes in 3 integers a,b,c
 # returns a linear transform on i, j
@@ -145,8 +154,7 @@ def render(shapes):
 # --------------------------- generators -------------------------- #
 
 def sample_coord_xform_params():
-  # base_choice = [0, 5, 10, 20, 40]
-  base_choice = range(30)
+  base_choice = range(TR_LOW_BND, TR_HIGH_BND+1)
   x_a = random.choice(base_choice)
   x_b = random.choice(base_choice)
   x_c = random.choice(base_choice)
@@ -156,9 +164,9 @@ def sample_coord_xform_params():
   return [x_a, x_b, x_c, y_a, y_b, y_c]
 
 def sample_square_params():
-  base_choice = range(40)
-  offset_x = random.choice(base_choice) - 20
-  offset_y = random.choice(base_choice) - 20
+  base_choice = range(SQ_LOW_BND, SQ_HIGH_BND+1)
+  offset_x = random.choice(base_choice)
+  offset_y = random.choice(base_choice)
   w = random.choice(S_WIDTHS)
   return [offset_x, offset_y, w]
 
@@ -166,11 +174,11 @@ def sample_line_params():
   def sample_bool():
     return [ random.choice([True, False]) ]
 
-  base_choice = range(80)
-  s_x = random.choice(base_choice) - 40
-  s_y = random.choice(base_choice) - 40
-  t_x = random.choice(base_choice) - 40
-  t_y = random.choice(base_choice) - 40
+  base_choice = range(SQ_LOW_BND, SQ_HIGH_BND+1)
+  s_x = random.choice(base_choice)
+  s_y = random.choice(base_choice)
+  t_x = random.choice(base_choice)
+  t_y = random.choice(base_choice)
   return [s_x, s_y, t_x, t_y]\
           + sample_bool()\
           + sample_bool()\
@@ -178,7 +186,7 @@ def sample_line_params():
 
 
 def sample_iter():
-  return random.choice(range(1,4))
+  return random.choice(range(1, N_ITERS+1))
 
 def square_no_overlap(squares):
   for i in range(L):
@@ -188,17 +196,15 @@ def square_no_overlap(squares):
         return False
   return True 
   
-def _sample_scene():
-  num_squares = 3
-  num_lines = 4
+def sample_scene():
   num_i_iter = sample_iter()
   num_j_iter = sample_iter()
 
-  coord_params = sample_coord_xform_params()
+  coord_params  = sample_coord_xform_params()
   square_params = [sample_square_params()\
-                   for _ in range(num_squares)]
-  line_params = [sample_line_params()\
-                 for _ in range(num_lines)]
+                   for _ in range(N_SQUARES)]
+  line_params   = [sample_line_params()\
+                   for _ in range(N_LINES)]
 
   coord_xform = mk_coord_xform(*coord_params)
 
@@ -215,11 +221,6 @@ def _sample_scene():
         lines.append(line)
 
   return squares, lines
-
-def sample_scene():
-  squares, lines = _sample_scene()
-
-  return render(squares + lines)
   
 def mk_scene(params):
 

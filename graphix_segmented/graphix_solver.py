@@ -6,14 +6,6 @@ from data import *
 from draw import *
 from graphix_lang import * 
 
-N_SQUARES = 3
-N_LINES = 4
-ITER_I_BND = 3
-ITER_J_BND = 3
-S_WIDTHS = [2,3,5]
-TR_LOW_BND, TR_HIGH_BND = 0, 30
-SQ_LOW_BND, SQ_HIGH_BND = -20, 20
-
 def Max(solver,x,y):
   z = FreshInt()
   solver.add(z == z3.If(x < y, y, x))
@@ -126,7 +118,7 @@ class DrawingSolver:
         self.y_transforms = self.transforms[3:]
         # set range limit on these transforms
         for tr_par in self.transforms:
-          self.s.add(tr_par < TR_HIGH_BND)
+          self.s.add(tr_par <= TR_HIGH_BND)
           self.s.add(tr_par >= TR_LOW_BND)
 
         # parameters for the square
@@ -150,8 +142,8 @@ class DrawingSolver:
             self.w.append(s_width)
 
             # constrain offset 
-            self.s.add(And([sq_offset_x >= SQ_LOW_BND, sq_offset_x < SQ_HIGH_BND]))
-            self.s.add(And([sq_offset_y >= SQ_LOW_BND, sq_offset_y < SQ_HIGH_BND]))
+            self.s.add(And([sq_offset_x >= SQ_LOW_BND, sq_offset_x <= SQ_HIGH_BND]))
+            self.s.add(And([sq_offset_y >= SQ_LOW_BND, sq_offset_y <= SQ_HIGH_BND]))
             # constrain width
             self.s.add(Or([s_width == w for w in S_WIDTHS]))
 
@@ -167,10 +159,10 @@ class DrawingSolver:
             l_kind = Bool('l_kind_%d' % line_num)
 
             # constrain offset 
-            self.s.add(And([l_off_sx >= SQ_LOW_BND, l_off_sx < SQ_HIGH_BND]))
-            self.s.add(And([l_off_sy >= SQ_LOW_BND, l_off_sy < SQ_HIGH_BND]))
-            self.s.add(And([l_off_tx >= SQ_LOW_BND, l_off_tx < SQ_HIGH_BND]))
-            self.s.add(And([l_off_ty >= SQ_LOW_BND, l_off_ty < SQ_HIGH_BND]))
+            self.s.add(And([l_off_sx >= SQ_LOW_BND, l_off_sx <= SQ_HIGH_BND]))
+            self.s.add(And([l_off_sy >= SQ_LOW_BND, l_off_sy <= SQ_HIGH_BND]))
+            self.s.add(And([l_off_tx >= SQ_LOW_BND, l_off_tx <= SQ_HIGH_BND]))
+            self.s.add(And([l_off_ty >= SQ_LOW_BND, l_off_ty <= SQ_HIGH_BND]))
 
             self.s.add(l_off_sy <= l_off_ty)
 
@@ -236,12 +228,12 @@ class DrawingSolver:
 
         start_time = time.time()
 
-        print "adding constraints . . . "
+        print "adding {} constraints . . . ".format(len(constraints))
         self.s.add(self.program_size <= program_size_bnd)
         for x_y, c_type, val in constraints:
           if (x_y, c_type, val) not in self.seen:
             self.seen.add((x_y, c_type, val)) 
-            print x_y, c_type, val
+            # print x_y, c_type, val
             assert c_type in ["line", "square"]
             value = val
             all_squares_occupy = Or([sq_const(*x_y) for sq_const in self.sq_constraints])
@@ -341,8 +333,8 @@ def CEGIS(constraints, rendered_squares, rendered_lines, start_constraints = [],
     i += 1
     print sub_constraints
     paras = synth_solver.solve(15, sub_constraints, hints)
-    print "paras"
-    print paras
+    # print "paras"
+    # print paras
     ces = check(paras, rendered_squares, rendered_lines, i)
     if ces == None:
       return paras
