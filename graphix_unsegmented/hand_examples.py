@@ -37,7 +37,7 @@ ex_line1 = {
             ],
 }
 
-ex2 = {
+ex_scale = {
   "n_squares" : 2,
   "iter_i" : 3,
   "iter_j" : 3,
@@ -47,24 +47,20 @@ ex2 = {
                 [5,5,2], 
               ],
   "lines" : [
-              [0,0,0,-9, False,True, True],
-              [0,0,-9,0,True,False, True],
             ],
 }
 
-ex3 = {
-  "n_squares" : 3,
-  "iter_i" : 2,
-  "iter_j" : 2,
-  "transforms" : [10, 2, 3, 2, 10, 3],
+ex_grid = {
+  "n_squares" : 1,
+  "iter_i" : 3,
+  "iter_j" : 3,
+  "transforms" : [10, 0, 5, 0, 10, 0],
   "squares" : [
                 [0,5,2], 
-                [0,0,2], 
-                [10,5,2], 
               ],
   "lines" : [
-#               [0,0,0,-9, False,True, True],
-#               [0,0,-9,0,True,False, True],
+               [0,2,0,-7, False,True, True],
+               [0,5,-7,5,True,False, True],
             ],
 }
 

@@ -1,18 +1,10 @@
 import numpy as np
 import random
 
+from meta_params import *
+
 # L = 64
 # S_WIDTHS = [2,3,5]
-
-L = 32
-N_SQUARES  = 2
-N_LINES    = 2
-ITER_I_BND = 2
-ITER_J_BND = 2
-S_WIDTHS   = [2]
-TR_LOW_BND, TR_HIGH_BND = 0, 10
-SQ_LOW_BND, SQ_HIGH_BND = -10, 10
-N_ITERS = 2
 
 
 # null shape

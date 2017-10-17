@@ -229,7 +229,8 @@ class DrawingSolver:
         start_time = time.time()
 
         print "adding {} constraints . . . ".format(len(constraints))
-        self.s.add(self.program_size <= program_size_bnd)
+        self.s.add(self.program_size <= P_SIZE)
+        # self.s.add(self.program_size <= program_size_bnd)
         for x_y, val in constraints:
           if (x_y, val) not in self.seen:
             self.seen.add((x_y, val)) 
@@ -305,7 +306,7 @@ def check(params, true_render, i):
 
   diff = rendered - true_render
 
-  draw_orig(diff, "hand_drawings/diff_{}.png".format(i))
+  # draw_orig(diff, "hand_drawings/diff_{}.png".format(i))
 
   diff_idx1, diff_idx2 = np.where(diff != 0)
 
