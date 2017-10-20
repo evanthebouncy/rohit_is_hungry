@@ -134,6 +134,7 @@ if __name__ == '__main__':
   if correct_pos and correct_neg:
     print 'Passed!'
 
+  # can get stuck sometimes, for instance re.match('(^((00)*(10011)*)*$)', '000000000000000000000000000000000000000000000000000000000000000')
   for i in range(100000):
     print i
     params = generate_params()
