@@ -39,20 +39,30 @@ def solve(examples, params2):
 
 if __name__ == '__main__':
     import random
+    import time
     from generator import *
-    params = generate_params()
+    for i in xrange(100):
+        times = []
+        
+        params = generate_params()
 
-    pos_examples = [(generate_positive_example(params), True) for i in xrange(random.randint(30, 100))]
-    neg_examples = [(generate_negative_example(params), False) for i in xrange(random.randint(30, 100))]
+        pos_examples = [(generate_positive_example(params), True) for i in xrange(random.randint(100, 500))]
+        neg_examples = [(generate_negative_example(params), False) for i in xrange(random.randint(100, 500))]
 
-    examples = pos_examples + neg_examples
-    random.shuffle(examples)
+        examples = pos_examples + neg_examples
+        random.shuffle(examples)
 
-    for example, label in examples:
-        if check_example(params, example) != label:
-            print params, example, label
-    else:
-        print "yes"
+        for example, label in examples:
+            if check_example(params, example) != label:
+                print params, example, label
 
-    print params
-    print solve(examples, params)
+        print params
+        start = time.time()
+        ans = solve(examples, params)
+        if not check_same_params(params, ans):
+            print "Not correct solution", ans
+        else:
+            print ans
+        times.append(time.time()-start)
+        print times[-1]
+    print sum(times)/len(times)

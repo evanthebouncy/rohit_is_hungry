@@ -1,5 +1,4 @@
 import random
-import re
 
 
 POSSIBLE_PARAMS = ['', '1', '0', '01', '10', '11', '00']
@@ -18,14 +17,26 @@ def check_example(params, example):
   Return:
     True if a match is found and it completely captures the example
   '''
-  regex = '((?:(?:{}{}{})*(?:{}{}{})*)*)'.format(*params)
-  # print regex, example
-  matcher = re.match(regex, example)
-  if matcher is None:
-    return False
-  else:
-    # first matched group is the biggest
-    return matcher.groups()[0] == example
+  for i in xrange(1, 4):
+    if len(example) % i == 0:
+      chunk = example[0:len(example)/i]
+      for j in xrange(1, i):
+        if chunk != example[j*len(example)/i:(j+1)*len(example)/i]:
+          break
+      else:
+        # goes here if the loop finishes completely without breaks
+        if check_subregex(params, chunk):# or check_subregex2(params, chunk) or check_subregex3(params, chunk) or check_subregex4(params, chunk):
+          return True
+  return False
+
+
+def check_subregex(params, chunk):
+  pieces = (''.join(params[:3]), ''.join(params[3:]))
+  for i in xrange(4):
+    for j in xrange(4):
+        if pieces[0]*i + pieces[1]*j == chunk:
+            return True
+  return False
 
 
 def generate_params():
@@ -35,6 +46,12 @@ def generate_params():
     list of 6 parameters
   '''
   return [get_param() for _ in xrange(6)]
+
+def check_same_params(p1, p2):
+  pieces1 = (''.join(p1[:3]), ''.join(p1[3:]))
+  pieces2 = (''.join(p2[:3]), ''.join(p2[3:]))
+  return pieces1 == pieces2 or pieces1 == (pieces2[1], pieces2[0])
+
 
 
 def generate_positive_example(params):
@@ -51,6 +68,9 @@ def generate_positive_example(params):
 
   s1 = ''.join(params[:3])*first_star
   s2 = ''.join(params[3:])*second_star
+  if not check_example(params, str((s1+s2)*outer_star)):
+    print str((s1+s2)*outer_star), first_star, second_star, outer_star, params
+    raise Exception('derp')
   return str((s1+s2)*outer_star)
 
 
@@ -93,31 +113,36 @@ def generate_negative_example(params, p1=0.5, p2=0.1, p3=0.1, rec_depth=0):
 
 if __name__ == '__main__':
   # TEST!
-  params = generate_params()
-  # print params
-  # print '((({}{}{})*({}{}{})*)*)'.format(*params)
-  # pos = [generate_positive_example(params) for i in xrange(50)]
-  # neg = [generate_negative_example(params) for i in xrange(50)]
+  for i in xrange(1000):
+      params = generate_params()
+      print params
+      print '((?:(?:{}{}{})+?(?:{}{}{})*)*)'.format(*params)
+      pos = [generate_positive_example(params) for i in xrange(50)]
+      neg = [generate_negative_example(params) for i in xrange(50)]
 
-  # print "pos ", pos
-  # print "neg ", neg
+      # print "pos ", pos
+      # print "neg ", neg
 
-  # print 'Testing positive...'
-  # correct_pos = True
-  # for p in pos:
-  #   correct_pos &= check_example(params, p)
-  # if not correct_pos:
-  #   print 'something is wrong with positive examples'
+      print 'Testing positive...'
+      correct_pos = True
+      for p in pos:
+        correct_pos &= check_example(params, p)
+        if not check_example(params, p):
+            print params, p
+      if not correct_pos:
+        print 'something is wrong with positive examples'
 
-  # print 'Testing negative...'
-  # correct_neg = True
-  # for n in neg:
-  #   correct_neg &= not check_example(params, n)
-  # if not correct_neg:
-  #   print 'something is wrong with negative examples'
+      print 'Testing negative...'
+      correct_neg = True
+      for n in neg:
+        correct_neg &= not check_example(params, n)
+      if not correct_neg:
+        print 'something is wrong with negative examples'
 
-  # if correct_pos and correct_neg:
-  #   print 'Passed!'
+      if correct_pos and correct_neg:
+        print 'Passed!'
+      else:
+        raise Exception("Something is still wrong! :(")
   import time
   start = time.time()
   # can get stuck sometimes, for instance re.match('(^((00)*(10011)*)*$)', '000000000000000000000000000000000000000000000000000000000000000')
