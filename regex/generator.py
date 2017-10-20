@@ -1,4 +1,6 @@
 import random
+import re
+from automata import Automata
 
 
 POSSIBLE_PARAMS = ['', '1', '0', '01', '10', '11', '00']
@@ -17,26 +19,19 @@ def check_example(params, example):
   Return:
     True if a match is found and it completely captures the example
   '''
-  for i in xrange(1, 4):
-    if len(example) % i == 0:
-      chunk = example[0:len(example)/i]
-      for j in xrange(1, i):
-        if chunk != example[j*len(example)/i:(j+1)*len(example)/i]:
-          break
-      else:
-        # goes here if the loop finishes completely without breaks
-        if check_subregex(params, chunk):# or check_subregex2(params, chunk) or check_subregex3(params, chunk) or check_subregex4(params, chunk):
-          return True
-  return False
-
-
-def check_subregex(params, chunk):
-  pieces = (''.join(params[:3]), ''.join(params[3:]))
-  for i in xrange(4):
-    for j in xrange(4):
-        if pieces[0]*i + pieces[1]*j == chunk:
-            return True
-  return False
+  # for i in xrange(1, 4):
+  #   if len(example) % i == 0:
+  #     # chunk = example[0:len(example)/i]
+  #     for j in xrange(0, i):
+  #       chunk = example[j*len(example)/i:(j+1)*len(example)/i]
+  #       if not check_subregex(params, chunk):
+  #         break
+  #     else:
+  #       # goes here if the loop finishes completely without breaks
+  #       return True
+  # return False
+  a = Automata(params)
+  return a.test_string(example)
 
 
 def generate_params():
@@ -62,19 +57,20 @@ def generate_positive_example(params):
   Returns:
     string example that follows the regex
   '''
-  first_star = random.randint(0, 3)
-  second_star = random.randint(0, 3)
   outer_star = random.randint(1, 3)
 
-  s1 = ''.join(params[:3])*first_star
-  s2 = ''.join(params[3:])*second_star
-  if not check_example(params, str((s1+s2)*outer_star)):
-    print str((s1+s2)*outer_star), first_star, second_star, outer_star, params
-    raise Exception('derp')
-  return str((s1+s2)*outer_star)
+  s = ''
+  for i in xrange(outer_star):
+    first_star = random.randint(0, 3)
+    second_star = random.randint(0, 3)
+    s1 = ''.join(params[:3])*first_star
+    s2 = ''.join(params[3:])*second_star
+    s += s1+s2
+
+  return s
 
 
-def generate_negative_example(params, p1=0.5, p2=0.1, p3=0.1, rec_depth=0):
+def generate_negative_example(params, p1=0.5, p2=0.5, p3=0.5, rec_depth=0):
   if rec_depth > 100:
     return None
   '''Creates an example that does not follow the regex
@@ -88,10 +84,8 @@ def generate_negative_example(params, p1=0.5, p2=0.1, p3=0.1, rec_depth=0):
     string example that does not follow the params
   '''
   def flip(char):
-    if char == '1': return '0'
-    if char == '0': return '1'
-    assert 0
-
+    return random.choice([x for x in POSSIBLE_PARAMS if x != char])
+    
   if random.random() < p1:
     example = list(generate_positive_example(params))
     for i in xrange(len(example)):
