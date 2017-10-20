@@ -13,38 +13,52 @@ def transform_label(label):
 
 solve_count = []
 
-def solve(examples, params2):
+def solve(examples):
     global solve_count
     break_ind = {}
     count = 0
-    '''Iteratively goes through all possible examples to find a solution'''
-    params = [None for i in xrange(6)] # placeholder
-    for p1 in POSSIBLE_PARAMS:
+    params = [None for i in xrange(4)]
+    for p1 in unit_gen():
         params[0] = p1
-        for p2 in POSSIBLE_PARAMS:
+        for p2 in unit_gen():
             params[1] = p2
-            for p3 in POSSIBLE_PARAMS:
+            for p3 in unit_gen():
                 params[2] = p3
-                for p4 in POSSIBLE_PARAMS:
+                for p4 in unit_gen():
+                    count += 1
                     params[3] = p4
-                    for p5 in POSSIBLE_PARAMS:
-                        params[4] = p5
-                        for p6 in POSSIBLE_PARAMS:
-                            count += 1
-                            params[5] = p6
-                            for i, (example, label) in enumerate(examples):
-                                label = transform_label(label)
-                                if check_example(params, example) != label:
-                                    if i not in break_ind:
-                                        break_ind[i] = 1
-                                    else:
-                                        break_ind[i] += 1
-                                    break
+                    for i, (example, label) in enumerate(examples):
+                        label = transform_label(label)
+                        if check_example(params, example) != label:
+                            if i not in break_ind:
+                                break_ind[i] = 1
                             else:
-                                solve_count.append(count)
-                                return params, break_ind
-
+                                break_ind[i] += 1
+                            break
+                    else:
+                        solve_count.append(count)
+                        return params, break_ind
     raise Exception('UNSAT!')
+
+def CEGIS(examples):
+    counter_examples = []
+    while True:
+        candidate_params, _ = solve(counter_examples)
+        ces = check(examples, candidate_params) # get all counter examples of candidate_params
+        if ces == []:
+            print "found solution with ", len(counter_examples)
+            return candidate_params
+        else:
+            counter_examples.append(ces[0])
+
+
+def check(examples, params):
+    counter_examples = []
+    for example, label in examples:
+        if check_example(params, example) != label:
+            counter_examples.append((example, label))
+    return counter_examples
+
 
 
 if __name__ == '__main__':
@@ -56,18 +70,18 @@ if __name__ == '__main__':
         
         params = generate_params()
 
-        pos_examples = [(generate_positive_example(params), True) for i in xrange(500)]
-        neg_examples = [(generate_negative_example(params), False) for i in xrange(500)]
+        pos_examples = [(generate_positive_example(params), True) for i in xrange(50)]
+        neg_examples = [(generate_negative_example(params), False) for i in xrange(950)]
 
         examples = pos_examples + neg_examples
         random.shuffle(examples)
 
-        examples_subset = [x for x in examples if random.random() < 0.05]
+        examples_subset = [x for x in examples if random.random() < 0.1]
         
         print params
         # running correct program
         start = time.time()
-        ans, break_ind1 = solve(examples, params)
+        ans, break_ind1 = solve(examples)
         times.append(time.time()-start)
 
 
@@ -76,13 +90,16 @@ if __name__ == '__main__':
         # random.shuffle(examples)
 
         start = time.time()
-        ans, break_ind2 = solve(examples_subset, params)
+        ans, break_ind2 = solve(examples_subset)
+        times.append(time.time()-start)
+
+        start = time.time()
+        ans2 = CEGIS(examples)
         times.append(time.time()-start)
 
         print solve_count
-        print break_ind1
-        print break_ind2
-        ['10', '1', '0', '11', '00', '1']
+        print break_ind1, max(break_ind1.keys())
+        print break_ind2, max(break_ind2.keys())
         # print examples_subset
 
         bad = False

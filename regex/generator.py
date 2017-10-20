@@ -3,7 +3,19 @@ import re
 from automata import Automata
 
 
-POSSIBLE_PARAMS = ['', '1', '0', '01', '10', '11', '00']
+POSSIBLE_PARAMS = ['', '1', '0', '01', '10', '11', '00', '1111','0110', '011', '111', '010','000']
+
+# POSSIBLE_PARAMS = ['', '11011','0110', '0101', '111', '0010','000', '01101']
+
+
+def unit_gen():
+  for x in POSSIBLE_PARAMS:
+    yield x
+    # for i in POSSIBLE_PARAMS:
+    #     for i2 in POSSIBLE_PARAMS:
+    #         for i3 in POSSIBLE_PARAMS:
+    #             yield i+i2+i3
+
 
 
 def get_param():
@@ -40,13 +52,11 @@ def generate_params():
   Returns:
     list of 6 parameters
   '''
-  return [get_param() for _ in xrange(6)]
-
-def check_same_params(p1, p2):
-  pieces1 = (''.join(p1[:3]), ''.join(p1[3:]))
-  pieces2 = (''.join(p2[:3]), ''.join(p2[3:]))
-  return pieces1 == pieces2 or pieces1 == (pieces2[1], pieces2[0])
-
+  params = []
+  for i in xrange(4):
+    s = [get_param() for _ in xrange(1)]
+    params.append(s)
+  return params
 
 
 def generate_positive_example(params):
@@ -57,21 +67,28 @@ def generate_positive_example(params):
   Returns:
     string example that follows the regex
   '''
-  outer_star = random.randint(1, 3)
-
   s = ''
-  for i in xrange(outer_star):
+
+  intro = params[0]
+  s += ''.join(intro) * random.randint(0, 3)
+
+  verse = params[1]
+  chorus = params[2]
+
+  for i in xrange(random.randint(0, 3)):
     first_star = random.randint(0, 3)
     second_star = random.randint(0, 3)
-    s1 = ''.join(params[:3])*first_star
-    s2 = ''.join(params[3:])*second_star
-    s += s1+s2
+    s1 = ''.join(verse)*first_star
+    s2 = ''.join(chorus)*second_star
+    s+= s1+s2
 
+  outro = params[3]
+  s += ''.join(outro) * random.randint(0, 3)
   return s
 
 
 def generate_negative_example(params, p1=0.5, p2=0.5, p3=0.5, rec_depth=0):
-  if rec_depth > 100:
+  if rec_depth > 10:
     return None
   '''Creates an example that does not follow the regex
 
@@ -110,8 +127,9 @@ if __name__ == '__main__':
   for i in xrange(1000):
       params = generate_params()
       print params
-      print '((?:(?:{}{}{})+?(?:{}{}{})*)*)'.format(*params)
+      # print '((?:(?:{}{}{})+?(?:{}{}{})*)*)'.format(*params)
       pos = [generate_positive_example(params) for i in xrange(50)]
+      print 'got pos'
       neg = [generate_negative_example(params) for i in xrange(50)]
 
       # print "pos ", pos

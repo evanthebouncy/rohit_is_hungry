@@ -46,33 +46,44 @@ def build_subauto(s, qid=None):
 class Automata(object):
 
     def __init__(self, params):
-        s1_states = build_subauto(''.join(params[:3]), qid='1')
-        s2_states = build_subauto(''.join(params[3:]), qid='2')
+        intro = build_subauto(''.join(params[0]), qid='0')
+        verse = build_subauto(''.join(params[1]), qid='1')
+        chorus = build_subauto(''.join(params[2]), qid='2')
+        outro = build_subauto(''.join(params[3]), qid='3')
 
         self.start = State('start')
         end = State('End')
         self.true_end = State('The True End', is_end=True)
 
         # add epsilons
-        self.start.add_epsilon_transition(s1_states[0])
-        self.start.add_epsilon_transition(s2_states[0])
+        self.start.add_epsilon_transition(intro[0])
+        self.start.add_epsilon_transition(verse[0])
+        self.start.add_epsilon_transition(chorus[0])
+        self.start.add_epsilon_transition(outro[0])
         self.start.add_epsilon_transition(end)
 
-        s1_states[-1].add_epsilon_transition(s2_states[0])
-        s1_states[-1].add_epsilon_transition(end)
-        s1_states[-1].add_epsilon_transition(self.start)
-        s2_states[-1].add_epsilon_transition(end)
-        s2_states[-1].add_epsilon_transition(self.start)
+        intro[-1].add_epsilon_transition(self.start)
+        intro[-1].add_epsilon_transition(verse[0])
 
-        end.add_epsilon_transition(self.start)
+        verse[-1].add_epsilon_transition(verse[0])
+        verse[-1].add_epsilon_transition(chorus[0])
+
+        chorus[-1].add_epsilon_transition(verse[0])
+        chorus[-1].add_epsilon_transition(outro[0])
+
+        outro[-1].add_epsilon_transition(outro[0])
+        outro[-1].add_epsilon_transition(end)
+
         end.add_epsilon_transition(self.true_end)
 
-        states = [self.start, end, self.true_end] + s1_states + s2_states
+        states = [self.start, end, self.true_end] + intro + verse + chorus + outro
         # for state in states:
         #     print state.name, state.transitions, state.eps
         self.state_map = {s.name: s for s in states}
 
     def test_string(self, s):
+        if s is None:
+            return False
         current_states = self._run_eps_step({self.start.name})
 
         # now run each step
@@ -100,18 +111,3 @@ class Automata(object):
             current_states = current_states.union(found)
 
         return current_states
-
-
-if __name__ == '__main__':
-    from generator import *
-    params = generate_params()
-    print params
-    a = Automata(params)
-
-    for i in xrange(100):
-        ex = generate_positive_example(params)
-        if not a.test_string(ex):
-            print ex
-
-
-
