@@ -50,6 +50,8 @@ class Automata(object):
         verse = build_subauto(''.join(params[1]), qid='1')
         chorus = build_subauto(''.join(params[2]), qid='2')
         outro = build_subauto(''.join(params[3]), qid='3')
+        outro2 = build_subauto(''.join(params[4]), qid='4')
+        outro3 = build_subauto(''.join(params[5]), qid='5')
 
         self.start = State('start')
         end = State('End')
@@ -62,21 +64,27 @@ class Automata(object):
         self.start.add_epsilon_transition(outro[0])
         self.start.add_epsilon_transition(end)
 
-        intro[-1].add_epsilon_transition(self.start)
         intro[-1].add_epsilon_transition(verse[0])
 
         verse[-1].add_epsilon_transition(verse[0])
         verse[-1].add_epsilon_transition(chorus[0])
 
-        chorus[-1].add_epsilon_transition(verse[0])
+        chorus[-1].add_epsilon_transition(chorus[0])
         chorus[-1].add_epsilon_transition(outro[0])
 
         outro[-1].add_epsilon_transition(outro[0])
-        outro[-1].add_epsilon_transition(end)
+        outro[-1].add_epsilon_transition(outro2[0])
+
+        outro2[-1].add_epsilon_transition(outro2[0])
+        outro2[-1].add_epsilon_transition(outro3[0])
+
+        outro3[-1].add_epsilon_transition(outro[0])
+        outro3[-1].add_epsilon_transition(self.start)
+        outro3[-1].add_epsilon_transition(end)
 
         end.add_epsilon_transition(self.true_end)
 
-        states = [self.start, end, self.true_end] + intro + verse + chorus + outro
+        states = [self.start, end, self.true_end] + intro + verse + chorus + outro + outro2 + outro3
         # for state in states:
         #     print state.name, state.transitions, state.eps
         self.state_map = {s.name: s for s in states}

@@ -7,9 +7,18 @@ POSSIBLE_PARAMS = ['', '1', '0', '01', '10', '11', '00', '1111','0110', '011', '
 
 # POSSIBLE_PARAMS = ['', '11011','0110', '0101', '111', '0010','000', '01101']
 
+param_space = [
+  ['01', '11', '000'],
+  ['110', '101', '1111'],
+  ['0100', '10', '1000'],
+  ['011', '1110', '1010'],
+  ['10101', '', '1001'],
+  ['1', '11011', '0001'],
+]
 
-def unit_gen():
-  for x in POSSIBLE_PARAMS:
+
+def unit_gen(i):
+  for x in param_space[i]:
     yield x
     # for i in POSSIBLE_PARAMS:
     #     for i2 in POSSIBLE_PARAMS:
@@ -18,9 +27,9 @@ def unit_gen():
 
 
 
-def get_param():
+def get_param(i):
   '''Returns a random character from characters'''
-  return random.choice(POSSIBLE_PARAMS)
+  return random.choice(param_space[i])
 
 
 def check_example(params, example):
@@ -53,8 +62,8 @@ def generate_params():
     list of 6 parameters
   '''
   params = []
-  for i in xrange(4):
-    s = [get_param() for _ in xrange(1)]
+  for i in xrange(6):
+    s = [get_param(i) for _ in xrange(1)]
     params.append(s)
   return params
 
@@ -70,20 +79,26 @@ def generate_positive_example(params):
   s = ''
 
   intro = params[0]
-  s += ''.join(intro) * random.randint(0, 3)
+  # s += ''.join(intro) * random.randint(0, 3)
 
   verse = params[1]
   chorus = params[2]
+  outro = params[3]
+  outro2 = params[4]
+  outro3 = params[5]
 
   for i in xrange(random.randint(0, 3)):
-    first_star = random.randint(0, 3)
-    second_star = random.randint(0, 3)
-    s1 = ''.join(verse)*first_star
-    s2 = ''.join(chorus)*second_star
-    s+= s1+s2
+    s = ''
+    for p in params:
+      s += ''.join(p)*random.randint(1,3) if random.random() < 0.50 else ''
+    # first_star = random.randint(0, 3)
+    # second_star = random.randint(0, 3)
+    # s1 = ''.join(verse)*first_star
+    # s2 = ''.join(chorus)*second_star
+    # s+= s1+s2
 
-  outro = params[3]
-  s += ''.join(outro) * random.randint(0, 3)
+  # outro = params[3]
+  # s += ''.join(outro) * random.randint(0, 3)
   return s
 
 
@@ -113,7 +128,7 @@ def generate_negative_example(params, p1=0.5, p2=0.5, p3=0.5, rec_depth=0):
     new_params = [] + params
     for i in xrange(len(new_params)):
       if random.random() < p3:
-        new_params[i] = get_param()
+        new_params[i] = get_param(i)
     example = generate_positive_example(new_params)
 
   if check_example(params, example):
@@ -124,7 +139,7 @@ def generate_negative_example(params, p1=0.5, p2=0.5, p3=0.5, rec_depth=0):
 
 if __name__ == '__main__':
   # TEST!
-  for i in xrange(1000):
+  for i in xrange(10):
       params = generate_params()
       print params
       # print '((?:(?:{}{}{})+?(?:{}{}{})*)*)'.format(*params)
@@ -158,7 +173,7 @@ if __name__ == '__main__':
   import time
   start = time.time()
   # can get stuck sometimes, for instance re.match('(^((00)*(10011)*)*$)', '000000000000000000000000000000000000000000000000000000000000000')
-  for i in range(100000):
+  for i in range(1000):
     params = generate_params()
     e = generate_negative_example(params)
     now = time.time()
