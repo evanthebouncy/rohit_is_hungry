@@ -48,21 +48,22 @@ def CEGIS(examples):
     counter_examples = []
     while True:
         candidate_params, _ = solve(counter_examples)
-        ces = get_first_counter(examples, candidate_params) # get all counter examples of candidate_params
+        ces = check(examples, candidate_params) # get all counter examples of candidate_params
         if ces == []:
             print "found solution with ", len(counter_examples)
-            return candidate_params
+            # print counter_examples
+            return candidate_params, counter_examples
         else:
             counter_examples.append(ces[0])
 
 
-def get_first_counter(examples, params):
-    counter_examples = []
-    for example, label in examples:
-        if check_example(params, example) != label:
-            counter_examples.append((example, label))
-            return counter_examples
-    return counter_examples
+# def get_first_counter(examples, params):
+#     counter_examples = []
+#     for example, label in examples:
+#         if check_example(params, example) != label:
+#             counter_examples.append((example, label))
+#             return counter_examples
+#     return counter_examples
 
 
 def check(examples, params):
@@ -89,31 +90,34 @@ if __name__ == '__main__':
         examples = pos_examples + neg_examples
         random.shuffle(examples)
 
-        examples_subset = [x for x in examples if random.random() < 0.1]
+        examples_subset = [x for x in examples if random.random() < 0.01]
         
-        print params
+        print "target params ", params
         # running correct program
         start = time.time()
         ans, break_ind1 = solve(examples)
+        print "inverted params ", ans
         times.append(time.time()-start)
 
-
-        # running fraction
-        # examples_subset = examples[:100]
-        # random.shuffle(examples)
 
         start = time.time()
         ans, break_ind2 = solve(examples_subset)
+        print "subeset params ", ans
         times.append(time.time()-start)
 
         start = time.time()
-        ans2 = CEGIS(examples)
+        ans2, oracle_examples = CEGIS(examples)
+        print "cegis params ", ans2
         times.append(time.time()-start)
 
-        print solve_count
-        print break_ind1, max(break_ind1.keys())
-        print break_ind2, max(break_ind2.keys())
-        # print examples_subset
+        start = time.time()
+        ans3, _ = solve(oracle_examples)
+        print "oracular params ", ans3
+        times.append(time.time()-start)
+
+        print 'solve counts ', solve_count
+        print 'failure counts ', break_ind1, max(break_ind1.keys())
+        print 'failure counts ', break_ind2, max(break_ind2.keys())
 
         bad = False
         counter_examples = []
@@ -121,10 +125,14 @@ if __name__ == '__main__':
             if check_example(ans, example) != label:
                 counter_examples.append((example, label))
                 bad = True
-        print len(examples_subset)
         print len(counter_examples), counter_examples[:5]
 
-        if not bad:
-            print 'SUCCESS', ans
+        if bad:
+            print 'SUBSET FAILED'
+        else:
+            print 'SUBSET SUCCESS'
         
         print times
+        print "cegis counter exmaples "
+        print oracle_examples
+

@@ -7,13 +7,22 @@ POSSIBLE_PARAMS = ['', '1', '0', '01', '10', '11', '00', '1111','0110', '011', '
 
 # POSSIBLE_PARAMS = ['', '11011','0110', '0101', '111', '0010','000', '01101']
 
+# param_space = [
+#   ['0', '1'],
+#   ['00', '01', '10', '11'],
+#   ['000', '001', '010', '011'],
+#   ['100', '101', '110', '111'],
+#   ['1001', '1010', '0110','1100','0011'],
+#   ['1110', '0001', '1011','0100','0111','1000'],
+# ]
+
 param_space = [
-  ['01', '11', '000'],
-  ['110', '101', '1111'],
-  ['0100', '10', '1000'],
-  ['011', '1110', '1010'],
-  ['10101', '', '1001'],
-  ['1', '11011', '0001'],
+  ['000', '001', '010', '011'],
+  ['100', '101', '110', '111'],
+  ['0', '1', '1101', '0010', '0000'],
+  ['00', '01', '10', '11', '1111'],
+  ['1001', '1010', '0110', '1100', '0011','0101'],
+  ['1110', '0001', '1011', '0100', '0111', '1000'],
 ]
 
 
@@ -87,10 +96,10 @@ def generate_positive_example(params):
   outro2 = params[4]
   outro3 = params[5]
 
-  for i in xrange(random.randint(0, 3)):
+  for i in xrange(random.randint(1, 4)):
     s = ''
     for p in params:
-      s += ''.join(p)*random.randint(1,3) if random.random() < 0.50 else ''
+      s += ''.join(p)*random.randint(1,4) if random.random() < 0.50 else ''
     # first_star = random.randint(0, 3)
     # second_star = random.randint(0, 3)
     # s1 = ''.join(verse)*first_star
@@ -102,7 +111,7 @@ def generate_positive_example(params):
   return s
 
 
-def generate_negative_example(params, p1=0.5, p2=0.5, p3=0.5, rec_depth=0):
+def generate_negative_example(params, p1=1.0, p2=0.1, p3=0.5, rec_depth=0):
   if rec_depth > 10:
     return None
   '''Creates an example that does not follow the regex
@@ -116,7 +125,10 @@ def generate_negative_example(params, p1=0.5, p2=0.5, p3=0.5, rec_depth=0):
     string example that does not follow the params
   '''
   def flip(char):
-    return random.choice([x for x in POSSIBLE_PARAMS if x != char])
+    # return random.choice([x for x in POSSIBLE_PARAMS if x != char])
+    if char == '0': return '1'
+    if char == '1': return '0'
+    assert 0, "IMPSSIBRU!"
     
   if random.random() < p1:
     example = list(generate_positive_example(params))
