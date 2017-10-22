@@ -16,15 +16,61 @@ POSSIBLE_PARAMS = ['', '1', '0', '01', '10', '11', '00', '1111','0110', '011', '
 #   ['1110', '0001', '1011','0100','0111','1000'],
 # ]
 
-param_space = [
-  ['000', '001', '010', '011'],
-  ['100', '101', '110', '111'],
-  ['0', '1', '1101', '0010', '0000'],
-  ['00', '01', '10', '11', '1111'],
-  ['1001', '1010', '0110', '1100', '0011','0101'],
-  ['1110', '0001', '1011', '0100', '0111', '1000'],
-]
+# param_space = [
+#   ['01', '000', '001', '010', '0101'],
+#   ['10', '100', '101', '110', '111'],
+#   ['0', '1101', '0010', '0000'],
+#   ['00', '1111', '1010','0111', '1000'],
+#   ['1', '011', '1001', '0110', '1100', '0011'],
+#   ['11', '1110', '0001', '1011', '0100'],
+# ]
 
+# param_space = [
+#   ['0', '01', '000', '001', '010', '0101'],
+#   ['1', '01', '000', '001', '010', '0101'],
+#   ['0', '10', '000', '001', '010', '0101'],
+#   ['0', '01', '111', '001', '010', '0101'],
+#   ['0', '01', '000', '110', '010', '0101'],
+#   ['0', '01', '000', '001', '101', '0101'],
+# ]
+
+# param_space = [
+#   ['00','10','01','11','001', '000','000',],
+#   ['00','10','01','11','000', '010','000',],
+#   ['00','10','01','11','000', '000','010',],
+#   ['00','10','01','11','000', '100','000',],
+#   ['00','10','01','11','100', '000','000',],
+#   ['00','10','01','11','000', '011','000',],
+# ]
+
+# # this works, very hard though, with length up 50
+# param_space = [
+#   ['0', '00', '000', '01', '000', '001', '010', '0100'],
+#   ['0', '00', '000', '11', '110', '011', '110'],
+#   ['0', '00', '000', '1101', '0111', '1110'],
+#   ['0', '00', '000', '1111', '1010','0111', '1000'],
+#   ['0', '00', '000', '1', '011', '1001', '0110', '1100', '0011'],
+#   ['0', '00', '000', '1110', '0001', '1011', '0100'],
+# ]
+
+# # this kinda works
+# param_space = [
+#   ['0', '10', '01', '100', '010','001'],
+#   ['0', '10', '01', '11', '110', '011'],
+#   ['0', '10', '01', '0111', '1110'],
+#   ['0', '10', '01', '1111'],
+#   ['0', '10', '01', '1001', '0110', '1100', '0011'],
+#   ['0', '10', '01', '1000', '0001', '0010', '0100'],
+# ]
+
+param_space = [
+  ['0', '01', '10', '0000', '10000'],
+  ['0', '01', '10', '1000', '01000'],
+  ['0', '01', '10', '0100', '00100'],
+  ['0', '01', '10', '0010', '00010'],
+  ['0', '01', '10', '0001', '00001'],
+  ['0', '01', '10', '1111', '11111'],
+]
 
 def unit_gen(i):
   for x in param_space[i]:
@@ -76,6 +122,25 @@ def generate_params():
     params.append(s)
   return params
 
+def god_example(params):
+  s = ''
+
+  intro = params[0]
+  # s += ''.join(intro) * random.randint(0, 3)
+
+  verse = params[1]
+  chorus = params[2]
+  outro = params[3]
+  outro2 = params[4]
+  outro3 = params[5]
+
+  for i in xrange(3):
+    s = ''
+    for p in params:
+      s += ''.join(p)*2
+  print len(s)
+  return s
+
 
 def generate_positive_example(params):
   '''Creates an example that follows the regex
@@ -96,10 +161,10 @@ def generate_positive_example(params):
   outro2 = params[4]
   outro3 = params[5]
 
-  for i in xrange(random.randint(1, 4)):
+  for i in xrange(random.randint(1, 5)):
     s = ''
     for p in params:
-      s += ''.join(p)*random.randint(1,4) if random.random() < 0.50 else ''
+      s += ''.join(p)*random.randint(0,5) # if random.random() < 0.50 else ''
     # first_star = random.randint(0, 3)
     # second_star = random.randint(0, 3)
     # s1 = ''.join(verse)*first_star
@@ -108,10 +173,14 @@ def generate_positive_example(params):
 
   # outro = params[3]
   # s += ''.join(outro) * random.randint(0, 3)
-  return s
+  if len(s) < 30:
+      return s
+  else:
+      # print "DAMMIT ", len(s)
+      return generate_positive_example(params)
 
 
-def generate_negative_example(params, p1=1.0, p2=0.1, p3=0.5, rec_depth=0):
+def generate_negative_example(params, p1=1.0, p2=0.3, p3=0.5, rec_depth=0):
   if rec_depth > 10:
     return None
   '''Creates an example that does not follow the regex
