@@ -58,6 +58,14 @@ def run_comparison():
 
   inverter.clear_solver()
 
+  stime = time.time()
+  inverted_params = inverter.invert_full(constraints, rendered, "rand+cegis", 0.1)
+  rand_cegis_time = time.time() - stime
+  squares,lines = mk_scene(inverted_params)
+  draw_orig(render(squares+lines), "hand_drawings/result_rand+cegis.png")
+
+  inverter.clear_solver()
+
   print "all done times "
   print "nn ", nn_time
   print "rand ", rand_time
@@ -65,5 +73,6 @@ def run_comparison():
   print "rcegis ", r_cegis_time
   print "cegis ",  cegis_time
   print "nn then cegis ", nn_cegis_time
+  print "rand then cegis ", rand_cegis_time
 
 run_comparison()

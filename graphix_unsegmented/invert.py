@@ -66,7 +66,7 @@ class Inverter:
         sub_constraints +=    [((int(x), int(y)), val)]
 
   def invert_full(self, constraints, full_img, method="full", fraction=0.1):
-    assert method in ["full", "rand", "nn", "nn+cegis"]
+    assert method in ["full", "rand", "nn", "nn+cegis", "rand+cegis"]
 
     if method == "full":
       params = self.s.solve(8, constraints)
@@ -88,6 +88,10 @@ class Inverter:
     if method == "nn+cegis":
       trace_obs = self.impnet.get_trace(full_img, 20, fraction)
       sub_constraints = obs_to_constraints(trace_obs, full_img)
+      return self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)
+
+    if method == "rand+cegis":
+      sub_constraints = random.sample(constraints, int(fraction * len(constraints)))
       return self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)
 
 

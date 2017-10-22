@@ -93,3 +93,16 @@ ex5 = {
             ],
 
 }
+
+draw_params = {
+  "I" : 3,
+  "J" : 3,
+  "affine_xform" : [10, 0, 5, 0, 10, 0],
+  "squares" : [
+                [0,5], 
+              ],
+  "lines" : [
+               [0,2,0,-7,False,True],
+               [0,5,-7,5,True,False],
+            ],
+}
