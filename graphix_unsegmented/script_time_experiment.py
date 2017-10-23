@@ -9,12 +9,17 @@ import time
 assert not USING_SHOWCASE, "still using showcase params plz change meta_param.py "
 inverter = Inverter()
 
-for i in xrange(10000):
-
+i = 0
+while True:
   params = sample_params()
   squares_orig,lines_orig = mk_scene(params)
   rendered = render(squares_orig + lines_orig)
+  # only test on sufficiently complex, non-trivial images
+  if np.sum(rendered) < 100:
+    continue
   constraints = img_2_constraints(rendered)
+
+  i += 1
 
   draw_orig(rendered, "hand_drawings/target.png")
 

@@ -1,2 +1,2 @@
-script_time_experiment.py
+python script_time_experiment.py
 
