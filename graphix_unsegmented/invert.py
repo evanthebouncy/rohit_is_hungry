@@ -28,10 +28,12 @@ class Inverter:
     self.s = DrawingSolver()
 
   def invert_cegis(self, constraints, render, method="cegis", sub_constraints=None):
-    print method
+    b_time = 0
+    s_time = 0
+    # print method
     assert method in ["cegis", "r_cegis", "nn_cegis", "nn",]
     i = 0
-    sub_constraints = constraints[:2] if sub_constraints == None else sub_constraints
+    sub_constraints = constraints[:1] if sub_constraints == None else sub_constraints
 
     # ces is stored in idx space
     # pick a counter example, also return in idx space
@@ -54,10 +56,15 @@ class Inverter:
     while True:
       i += 1
       paras = self.s.solve(8, sub_constraints, {})
-      print paras
+      # print paras
+      b_time += paras['building_time']
+      s_time += paras['solving_time']
       # counter example in idx space
       ces = check(paras, render, i)
       if ces == None:
+        paras['building_time'] = b_time
+        paras['solving_time'] = s_time
+        paras['ce_size'] = len(sub_constraints)
         return paras
       else:
         id1,id2 = ce_picker(ces)
@@ -70,29 +77,40 @@ class Inverter:
 
     if method == "full":
       params = self.s.solve(8, constraints)
+      params['ce_size'] = len(constraints)
       return params
 
     if method == "rand":
       sub_constraints = random.sample(constraints, int(fraction * len(constraints)))
       params = self.s.solve(8, sub_constraints)
+      params['ce_size'] = len(sub_constraints)
       return params
 
     if method == "nn":
+      s_time = time.time()
       trace_obs = self.impnet.get_trace(full_img, 20, fraction)
+      nn_time = time.time() - s_time
       sub_constraints = obs_to_constraints(trace_obs, full_img)
       # the length won't perfectly lineup so we can clip a bit
       sub_constraints = sub_constraints[:int(fraction * len(constraints))]
       params = self.s.solve(8, sub_constraints)
+      params['ce_size'] = len(sub_constraints)
+      params['nn_time'] = nn_time
       return params
-
-    if method == "nn+cegis":
-      trace_obs = self.impnet.get_trace(full_img, 20, fraction)
-      sub_constraints = obs_to_constraints(trace_obs, full_img)
-      return self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)
 
     if method == "rand+cegis":
       sub_constraints = random.sample(constraints, int(fraction * len(constraints)))
       return self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)
+
+    if method == "nn+cegis":
+      s_time = time.time()
+      trace_obs = self.impnet.get_trace(full_img, 20, fraction)
+      nn_time = time.time() - s_time
+      sub_constraints = obs_to_constraints(trace_obs, full_img)
+      params = self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)
+      params['nn_time'] = nn_time
+      return params
+
 
 
 

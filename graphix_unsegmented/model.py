@@ -229,7 +229,7 @@ class Implynet:
       min_prob = sorted_qrys[0][0]
       sorted_qrys = sorted_qrys[:increment]
       chosen_qrys = [xx[1] for xx in sorted_qrys]
-      print i, min_prob
+      # print i, min_prob
       for chosen_qry in chosen_qrys:
         obs.append((chosen_qry, query(chosen_qry)))
 

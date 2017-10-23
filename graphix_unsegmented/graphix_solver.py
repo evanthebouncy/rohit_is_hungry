@@ -223,12 +223,12 @@ class DrawingSolver:
     def solve(self, program_size_bnd, constraints, hints={}):
         probes = []
 
-        print "adding hints . . ."
+        # print "adding hints . . ."
         self.add_hints(hints)
 
         start_time = time.time()
 
-        print "adding {} constraints . . . ".format(len(constraints))
+        # print "adding {} constraints . . . ".format(len(constraints))
         self.s.add(self.program_size <= P_SIZE)
         # self.s.add(self.program_size <= program_size_bnd)
         for x_y, val in constraints:
@@ -240,7 +240,7 @@ class DrawingSolver:
             self.s.add(all_any_occupy == val)
 
         model_building_time = time.time() - start_time
-        print "finished adding constraints, solving . . ."
+        # print "finished adding constraints, solving . . ."
 
         if self.s.check() == sat:
             model = self.s.model()
@@ -277,7 +277,7 @@ class DrawingSolver:
             ret['lines'] = lines
 
             ret['building_time'] = model_building_time
-            ret['solvng_time'] = solving_time
+            ret['solving_time'] = solving_time
 
             return ret
         else:
