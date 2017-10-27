@@ -72,7 +72,8 @@ class Inverter:
         val = bool(render[id1][id2] == 1)
         sub_constraints +=    [((int(x), int(y)), val)]
 
-  def invert_full(self, constraints, full_img, method="full", fraction=0.1):
+  def invert_full(self, constraints, full_img, method="full", confidence=0.9):
+    fraction = 0.1
     assert method in ["full", "rand", "nn", "nn+cegis", "rand+cegis"]
 
     if method == "full":
@@ -88,11 +89,9 @@ class Inverter:
 
     if method == "nn":
       s_time = time.time()
-      trace_obs = self.impnet.get_trace(full_img, 20, fraction)
+      trace_obs = self.impnet.get_trace(full_img, 20, confidence)
       nn_time = time.time() - s_time
       sub_constraints = obs_to_constraints(trace_obs, full_img)
-      # the length won't perfectly lineup so we can clip a bit
-      sub_constraints = sub_constraints[:int(fraction * len(constraints))]
       params = self.s.solve(8, sub_constraints)
       params['ce_size'] = len(sub_constraints)
       params['nn_time'] = nn_time
@@ -104,7 +103,7 @@ class Inverter:
 
     if method == "nn+cegis":
       s_time = time.time()
-      trace_obs = self.impnet.get_trace(full_img, 20, fraction)
+      trace_obs = self.impnet.get_trace(full_img, 20, confidence)
       nn_time = time.time() - s_time
       sub_constraints = obs_to_constraints(trace_obs, full_img)
       params = self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)

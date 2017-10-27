@@ -218,7 +218,7 @@ class Implynet:
     
     return sorted(to_sort)
 
-  def get_trace(self, r_img, increment=10, fraction=0.1):
+  def get_trace(self, r_img, increment=10, confidence=0.9):
     query = mk_query(r_img)
     M,N = r_img.shape
     obs = []
@@ -226,10 +226,11 @@ class Implynet:
     bound = M*N
     for i in range(bound):
       sorted_qrys = self.get_sorted_unlikely(obs, r_img)
-      min_prob = sorted_qrys[0][0]
+      # min_prob = sorted_qrys[0][0]
+      avg_prob = np.mean([x[0] for x in sorted_qrys])
       sorted_qrys = sorted_qrys[:increment]
       chosen_qrys = [xx[1] for xx in sorted_qrys]
-      # print i, min_prob
+      # print i, avg_prob, confidence
       for chosen_qry in chosen_qrys:
         obs.append((chosen_qry, query(chosen_qry)))
 
@@ -242,7 +243,7 @@ class Implynet:
 
       # if min_prob > 0.3:
       #   break
-      if len(obs) > fraction * (M*N):
+      if avg_prob > confidence:
         break
     return obs
 

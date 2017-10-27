@@ -25,17 +25,17 @@ while True:
 
   i_full_params = inverter.invert_full(constraints, rendered, "full")
   inverter.clear_solver()
-  i_rand_params = inverter.invert_full(constraints, rendered, "rand", 0.1)
+  i_rand_params = inverter.invert_full(constraints, rendered, "rand")
   inverter.clear_solver()
-  i_nn_params = inverter.invert_full(constraints, rendered, "nn", 0.1)
+  i_nn_params = inverter.invert_full(constraints, rendered, "nn", 0.9)
   inverter.clear_solver()
   i_cegis_params = inverter.invert_cegis(constraints, rendered, "cegis")
   inverter.clear_solver()
   i_rcegis_params = inverter.invert_cegis(constraints, rendered, "r_cegis")
   inverter.clear_solver()
-  i_rand_cegis_params = inverter.invert_full(constraints, rendered, "rand+cegis", 0.1)
+  i_rand_cegis_params = inverter.invert_full(constraints, rendered, "rand+cegis")
   inverter.clear_solver()
-  i_nn_cegis_params = inverter.invert_full(constraints, rendered, "nn+cegis")
+  i_nn_cegis_params = inverter.invert_full(constraints, rendered, "nn+cegis", 0.9)
   inverter.clear_solver()
 
 
