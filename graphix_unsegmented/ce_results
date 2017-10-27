@@ -1,0 +1,1249 @@
+using default params
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcublas.so.8.0 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcudnn.so.5 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcufft.so.8.0 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:135] successfully opened CUDA library libcurand.so.8.0 locally
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE3 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:910] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:885] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 7.93GiB
+Free memory: 6.97GiB
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:906] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:916] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+(20, 32, 32, 20)
+32
+Tensor("imply/unstack:0", shape=(20, 32, 20), dtype=float32)
+Tensor("imply/unstack_32:31", shape=(20, 20), dtype=float32)
+building prediction for each slice 
+predictor 0 0predictor 0 1predictor 0 2predictor 0 3predictor 0 4predictor 0 5predictor 0 6predictor 0 7predictor 0 8predictor 0 9predictor 0 10predictor 0 11predictor 0 12predictor 0 13predictor 0 14predictor 0 15predictor 0 16predictor 0 17predictor 0 18predictor 0 19predictor 0 20predictor 0 21predictor 0 22predictor 0 23predictor 0 24predictor 0 25predictor 0 26predictor 0 27predictor 0 28predictor 0 29predictor 0 30predictor 0 31predictor 1 0predictor 1 1predictor 1 2predictor 1 3predictor 1 4predictor 1 5predictor 1 6predictor 1 7predictor 1 8predictor 1 9predictor 1 10predictor 1 11predictor 1 12predictor 1 13predictor 1 14predictor 1 15predictor 1 16predictor 1 17predictor 1 18predictor 1 19predictor 1 20predictor 1 21predictor 1 22predictor 1 23predictor 1 24predictor 1 25predictor 1 26predictor 1 27predictor 1 28predictor 1 29predictor 1 30predictor 1 31predictor 2 0predictor 2 1predictor 2 2predictor 2 3predictor 2 4predictor 2 5predictor 2 6predictor 2 7predictor 2 8predictor 2 9predictor 2 10predictor 2 11predictor 2 12predictor 2 13predictor 2 14predictor 2 15predictor 2 16predictor 2 17predictor 2 18predictor 2 19predictor 2 20predictor 2 21predictor 2 22predictor 2 23predictor 2 24predictor 2 25predictor 2 26predictor 2 27predictor 2 28predictor 2 29predictor 2 30predictor 2 31predictor 3 0predictor 3 1predictor 3 2predictor 3 3predictor 3 4predictor 3 5predictor 3 6predictor 3 7predictor 3 8predictor 3 9predictor 3 10predictor 3 11predictor 3 12predictor 3 13predictor 3 14predictor 3 15predictor 3 16predictor 3 17predictor 3 18predictor 3 19predictor 3 20predictor 3 21predictor 3 22predictor 3 23predictor 3 24predictor 3 25predictor 3 26predictor 3 27predictor 3 28predictor 3 29predictor 3 30predictor 3 31predictor 4 0predictor 4 1predictor 4 2predictor 4 3predictor 4 4predictor 4 5predictor 4 6predictor 4 7predictor 4 8predictor 4 9predictor 4 10predictor 4 11predictor 4 12predictor 4 13predictor 4 14predictor 4 15predictor 4 16predictor 4 17predictor 4 18predictor 4 19predictor 4 20predictor 4 21predictor 4 22predictor 4 23predictor 4 24predictor 4 25predictor 4 26predictor 4 27predictor 4 28predictor 4 29predictor 4 30predictor 4 31predictor 5 0predictor 5 1predictor 5 2predictor 5 3predictor 5 4predictor 5 5predictor 5 6predictor 5 7predictor 5 8predictor 5 9predictor 5 10predictor 5 11predictor 5 12predictor 5 13predictor 5 14predictor 5 15predictor 5 16predictor 5 17predictor 5 18predictor 5 19predictor 5 20predictor 5 21predictor 5 22predictor 5 23predictor 5 24predictor 5 25predictor 5 26predictor 5 27predictor 5 28predictor 5 29predictor 5 30predictor 5 31predictor 6 0predictor 6 1predictor 6 2predictor 6 3predictor 6 4predictor 6 5predictor 6 6predictor 6 7predictor 6 8predictor 6 9predictor 6 10predictor 6 11predictor 6 12predictor 6 13predictor 6 14predictor 6 15predictor 6 16predictor 6 17predictor 6 18predictor 6 19predictor 6 20predictor 6 21predictor 6 22predictor 6 23predictor 6 24predictor 6 25predictor 6 26predictor 6 27predictor 6 28predictor 6 29predictor 6 30predictor 6 31predictor 7 0predictor 7 1predictor 7 2predictor 7 3predictor 7 4predictor 7 5predictor 7 6predictor 7 7predictor 7 8predictor 7 9predictor 7 10predictor 7 11predictor 7 12predictor 7 13predictor 7 14predictor 7 15predictor 7 16predictor 7 17predictor 7 18predictor 7 19predictor 7 20predictor 7 21predictor 7 22predictor 7 23predictor 7 24predictor 7 25predictor 7 26predictor 7 27predictor 7 28predictor 7 29predictor 7 30predictor 7 31predictor 8 0predictor 8 1predictor 8 2predictor 8 3predictor 8 4predictor 8 5predictor 8 6predictor 8 7predictor 8 8predictor 8 9predictor 8 10predictor 8 11predictor 8 12predictor 8 13predictor 8 14predictor 8 15predictor 8 16predictor 8 17predictor 8 18predictor 8 19predictor 8 20predictor 8 21predictor 8 22predictor 8 23predictor 8 24predictor 8 25predictor 8 26predictor 8 27predictor 8 28predictor 8 29predictor 8 30predictor 8 31predictor 9 0predictor 9 1predictor 9 2predictor 9 3predictor 9 4predictor 9 5predictor 9 6predictor 9 7predictor 9 8predictor 9 9predictor 9 10predictor 9 11predictor 9 12predictor 9 13predictor 9 14predictor 9 15predictor 9 16predictor 9 17predictor 9 18predictor 9 19predictor 9 20predictor 9 21predictor 9 22predictor 9 23predictor 9 24predictor 9 25predictor 9 26predictor 9 27predictor 9 28predictor 9 29predictor 9 30predictor 9 31predictor 10 0predictor 10 1predictor 10 2predictor 10 3predictor 10 4predictor 10 5predictor 10 6predictor 10 7predictor 10 8predictor 10 9predictor 10 10predictor 10 11predictor 10 12predictor 10 13predictor 10 14predictor 10 15predictor 10 16predictor 10 17predictor 10 18predictor 10 19predictor 10 20predictor 10 21predictor 10 22predictor 10 23predictor 10 24predictor 10 25predictor 10 26predictor 10 27predictor 10 28predictor 10 29predictor 10 30predictor 10 31predictor 11 0predictor 11 1predictor 11 2predictor 11 3predictor 11 4predictor 11 5predictor 11 6predictor 11 7predictor 11 8predictor 11 9predictor 11 10predictor 11 11predictor 11 12predictor 11 13predictor 11 14predictor 11 15predictor 11 16predictor 11 17predictor 11 18predictor 11 19predictor 11 20predictor 11 21predictor 11 22predictor 11 23predictor 11 24predictor 11 25predictor 11 26predictor 11 27predictor 11 28predictor 11 29predictor 11 30predictor 11 31predictor 12 0predictor 12 1predictor 12 2predictor 12 3predictor 12 4predictor 12 5predictor 12 6predictor 12 7predictor 12 8predictor 12 9predictor 12 10predictor 12 11predictor 12 12predictor 12 13predictor 12 14predictor 12 15predictor 12 16predictor 12 17predictor 12 18predictor 12 19predictor 12 20predictor 12 21predictor 12 22predictor 12 23predictor 12 24predictor 12 25predictor 12 26predictor 12 27predictor 12 28predictor 12 29predictor 12 30predictor 12 31predictor 13 0predictor 13 1predictor 13 2predictor 13 3predictor 13 4predictor 13 5predictor 13 6predictor 13 7predictor 13 8predictor 13 9predictor 13 10predictor 13 11predictor 13 12predictor 13 13predictor 13 14predictor 13 15predictor 13 16predictor 13 17predictor 13 18predictor 13 19predictor 13 20predictor 13 21predictor 13 22predictor 13 23predictor 13 24predictor 13 25predictor 13 26predictor 13 27predictor 13 28predictor 13 29predictor 13 30predictor 13 31predictor 14 0predictor 14 1predictor 14 2predictor 14 3predictor 14 4predictor 14 5predictor 14 6predictor 14 7predictor 14 8predictor 14 9predictor 14 10predictor 14 11predictor 14 12predictor 14 13predictor 14 14predictor 14 15predictor 14 16predictor 14 17predictor 14 18predictor 14 19predictor 14 20predictor 14 21predictor 14 22predictor 14 23predictor 14 24predictor 14 25predictor 14 26predictor 14 27predictor 14 28predictor 14 29predictor 14 30predictor 14 31predictor 15 0predictor 15 1predictor 15 2predictor 15 3predictor 15 4predictor 15 5predictor 15 6predictor 15 7predictor 15 8predictor 15 9predictor 15 10predictor 15 11predictor 15 12predictor 15 13predictor 15 14predictor 15 15predictor 15 16predictor 15 17predictor 15 18predictor 15 19predictor 15 20predictor 15 21predictor 15 22predictor 15 23predictor 15 24predictor 15 25predictor 15 26predictor 15 27predictor 15 28predictor 15 29predictor 15 30predictor 15 31predictor 16 0predictor 16 1predictor 16 2predictor 16 3predictor 16 4predictor 16 5predictor 16 6predictor 16 7predictor 16 8predictor 16 9predictor 16 10predictor 16 11predictor 16 12predictor 16 13predictor 16 14predictor 16 15predictor 16 16predictor 16 17predictor 16 18predictor 16 19predictor 16 20predictor 16 21predictor 16 22predictor 16 23predictor 16 24predictor 16 25predictor 16 26predictor 16 27predictor 16 28predictor 16 29predictor 16 30predictor 16 31predictor 17 0predictor 17 1predictor 17 2predictor 17 3predictor 17 4predictor 17 5predictor 17 6predictor 17 7predictor 17 8predictor 17 9predictor 17 10predictor 17 11predictor 17 12predictor 17 13predictor 17 14predictor 17 15predictor 17 16predictor 17 17predictor 17 18predictor 17 19predictor 17 20predictor 17 21predictor 17 22predictor 17 23predictor 17 24predictor 17 25predictor 17 26predictor 17 27predictor 17 28predictor 17 29predictor 17 30predictor 17 31predictor 18 0predictor 18 1predictor 18 2predictor 18 3predictor 18 4predictor 18 5predictor 18 6predictor 18 7predictor 18 8predictor 18 9predictor 18 10predictor 18 11predictor 18 12predictor 18 13predictor 18 14predictor 18 15predictor 18 16predictor 18 17predictor 18 18predictor 18 19predictor 18 20predictor 18 21predictor 18 22predictor 18 23predictor 18 24predictor 18 25predictor 18 26predictor 18 27predictor 18 28predictor 18 29predictor 18 30predictor 18 31predictor 19 0predictor 19 1predictor 19 2predictor 19 3predictor 19 4predictor 19 5predictor 19 6predictor 19 7predictor 19 8predictor 19 9predictor 19 10predictor 19 11predictor 19 12predictor 19 13predictor 19 14predictor 19 15predictor 19 16predictor 19 17predictor 19 18predictor 19 19predictor 19 20predictor 19 21predictor 19 22predictor 19 23predictor 19 24predictor 19 25predictor 19 26predictor 19 27predictor 19 28predictor 19 29predictor 19 30predictor 19 31predictor 20 0predictor 20 1predictor 20 2predictor 20 3predictor 20 4predictor 20 5predictor 20 6predictor 20 7predictor 20 8predictor 20 9predictor 20 10predictor 20 11predictor 20 12predictor 20 13predictor 20 14predictor 20 15predictor 20 16predictor 20 17predictor 20 18predictor 20 19predictor 20 20predictor 20 21predictor 20 22predictor 20 23predictor 20 24predictor 20 25predictor 20 26predictor 20 27predictor 20 28predictor 20 29predictor 20 30predictor 20 31predictor 21 0predictor 21 1predictor 21 2predictor 21 3predictor 21 4predictor 21 5predictor 21 6predictor 21 7predictor 21 8predictor 21 9predictor 21 10predictor 21 11predictor 21 12predictor 21 13predictor 21 14predictor 21 15predictor 21 16predictor 21 17predictor 21 18predictor 21 19predictor 21 20predictor 21 21predictor 21 22predictor 21 23predictor 21 24predictor 21 25predictor 21 26predictor 21 27predictor 21 28predictor 21 29predictor 21 30predictor 21 31predictor 22 0predictor 22 1predictor 22 2predictor 22 3predictor 22 4predictor 22 5predictor 22 6predictor 22 7predictor 22 8predictor 22 9predictor 22 10predictor 22 11predictor 22 12predictor 22 13predictor 22 14predictor 22 15predictor 22 16predictor 22 17predictor 22 18predictor 22 19predictor 22 20predictor 22 21predictor 22 22predictor 22 23predictor 22 24predictor 22 25predictor 22 26predictor 22 27predictor 22 28predictor 22 29predictor 22 30predictor 22 31predictor 23 0predictor 23 1predictor 23 2predictor 23 3predictor 23 4predictor 23 5predictor 23 6predictor 23 7predictor 23 8predictor 23 9predictor 23 10predictor 23 11predictor 23 12predictor 23 13predictor 23 14predictor 23 15predictor 23 16predictor 23 17predictor 23 18predictor 23 19predictor 23 20predictor 23 21predictor 23 22predictor 23 23predictor 23 24predictor 23 25predictor 23 26predictor 23 27predictor 23 28predictor 23 29predictor 23 30predictor 23 31predictor 24 0predictor 24 1predictor 24 2predictor 24 3predictor 24 4predictor 24 5predictor 24 6predictor 24 7predictor 24 8predictor 24 9predictor 24 10predictor 24 11predictor 24 12predictor 24 13predictor 24 14predictor 24 15predictor 24 16predictor 24 17predictor 24 18predictor 24 19predictor 24 20predictor 24 21predictor 24 22predictor 24 23predictor 24 24predictor 24 25predictor 24 26predictor 24 27predictor 24 28predictor 24 29predictor 24 30predictor 24 31predictor 25 0predictor 25 1predictor 25 2predictor 25 3predictor 25 4predictor 25 5predictor 25 6predictor 25 7predictor 25 8predictor 25 9predictor 25 10predictor 25 11predictor 25 12predictor 25 13predictor 25 14predictor 25 15predictor 25 16predictor 25 17predictor 25 18predictor 25 19predictor 25 20predictor 25 21predictor 25 22predictor 25 23predictor 25 24predictor 25 25predictor 25 26predictor 25 27predictor 25 28predictor 25 29predictor 25 30predictor 25 31predictor 26 0predictor 26 1predictor 26 2predictor 26 3predictor 26 4predictor 26 5predictor 26 6predictor 26 7predictor 26 8predictor 26 9predictor 26 10predictor 26 11predictor 26 12predictor 26 13predictor 26 14predictor 26 15predictor 26 16predictor 26 17predictor 26 18predictor 26 19predictor 26 20predictor 26 21predictor 26 22predictor 26 23predictor 26 24predictor 26 25predictor 26 26predictor 26 27predictor 26 28predictor 26 29predictor 26 30predictor 26 31predictor 27 0predictor 27 1predictor 27 2predictor 27 3predictor 27 4predictor 27 5predictor 27 6predictor 27 7predictor 27 8predictor 27 9predictor 27 10predictor 27 11predictor 27 12predictor 27 13predictor 27 14predictor 27 15predictor 27 16predictor 27 17predictor 27 18predictor 27 19predictor 27 20predictor 27 21predictor 27 22predictor 27 23predictor 27 24predictor 27 25predictor 27 26predictor 27 27predictor 27 28predictor 27 29predictor 27 30predictor 27 31predictor 28 0predictor 28 1predictor 28 2predictor 28 3predictor 28 4predictor 28 5predictor 28 6predictor 28 7predictor 28 8predictor 28 9predictor 28 10predictor 28 11predictor 28 12predictor 28 13predictor 28 14predictor 28 15predictor 28 16predictor 28 17predictor 28 18predictor 28 19predictor 28 20predictor 28 21predictor 28 22predictor 28 23predictor 28 24predictor 28 25predictor 28 26predictor 28 27predictor 28 28predictor 28 29predictor 28 30predictor 28 31predictor 29 0predictor 29 1predictor 29 2predictor 29 3predictor 29 4predictor 29 5predictor 29 6predictor 29 7predictor 29 8predictor 29 9predictor 29 10predictor 29 11predictor 29 12predictor 29 13predictor 29 14predictor 29 15predictor 29 16predictor 29 17predictor 29 18predictor 29 19predictor 29 20predictor 29 21predictor 29 22predictor 29 23predictor 29 24predictor 29 25predictor 29 26predictor 29 27predictor 29 28predictor 29 29predictor 29 30predictor 29 31predictor 30 0predictor 30 1predictor 30 2predictor 30 3predictor 30 4predictor 30 5predictor 30 6predictor 30 7predictor 30 8predictor 30 9predictor 30 10predictor 30 11predictor 30 12predictor 30 13predictor 30 14predictor 30 15predictor 30 16predictor 30 17predictor 30 18predictor 30 19predictor 30 20predictor 30 21predictor 30 22predictor 30 23predictor 30 24predictor 30 25predictor 30 26predictor 30 27predictor 30 28predictor 30 29predictor 30 30predictor 30 31predictor 31 0predictor 31 1predictor 31 2predictor 31 3predictor 31 4predictor 31 5predictor 31 6predictor 31 7predictor 31 8predictor 31 9predictor 31 10predictor 31 11predictor 31 12predictor 31 13predictor 31 14predictor 31 15predictor 31 16predictor 31 17predictor 31 18predictor 31 19predictor 31 20predictor 31 21predictor 31 22predictor 31 23predictor 31 24predictor 31 25predictor 31 26predictor 31 27predictor 31 28predictor 31 29predictor 31 30predictor 31 31(32, 32, 20, 2)
+splitted observation 
+doing cost 0doing cost 1doing cost 2doing cost 3doing cost 4doing cost 5doing cost 6doing cost 7doing cost 8doing cost 9doing cost 10doing cost 11doing cost 12doing cost 13doing cost 14doing cost 15doing cost 16doing cost 17doing cost 18doing cost 19doing cost 20doing cost 21doing cost 22doing cost 23doing cost 24doing cost 25doing cost 26doing cost 27doing cost 28doing cost 29doing cost 30doing cost 31doing cost 32doing cost 33doing cost 34doing cost 35doing cost 36doing cost 37doing cost 38doing cost 39doing cost 40doing cost 41doing cost 42doing cost 43doing cost 44doing cost 45doing cost 46doing cost 47doing cost 48doing cost 49doing cost 50doing cost 51doing cost 52doing cost 53doing cost 54doing cost 55doing cost 56doing cost 57doing cost 58doing cost 59doing cost 60doing cost 61doing cost 62doing cost 63doing cost 64doing cost 65doing cost 66doing cost 67doing cost 68doing cost 69doing cost 70doing cost 71doing cost 72doing cost 73doing cost 74doing cost 75doing cost 76doing cost 77doing cost 78doing cost 79doing cost 80doing cost 81doing cost 82doing cost 83doing cost 84doing cost 85doing cost 86doing cost 87doing cost 88doing cost 89doing cost 90doing cost 91doing cost 92doing cost 93doing cost 94doing cost 95doing cost 96doing cost 97doing cost 98doing cost 99doing cost 100doing cost 101doing cost 102doing cost 103doing cost 104doing cost 105doing cost 106doing cost 107doing cost 108doing cost 109doing cost 110doing cost 111doing cost 112doing cost 113doing cost 114doing cost 115doing cost 116doing cost 117doing cost 118doing cost 119doing cost 120doing cost 121doing cost 122doing cost 123doing cost 124doing cost 125doing cost 126doing cost 127doing cost 128doing cost 129doing cost 130doing cost 131doing cost 132doing cost 133doing cost 134doing cost 135doing cost 136doing cost 137doing cost 138doing cost 139doing cost 140doing cost 141doing cost 142doing cost 143doing cost 144doing cost 145doing cost 146doing cost 147doing cost 148doing cost 149doing cost 150doing cost 151doing cost 152doing cost 153doing cost 154doing cost 155doing cost 156doing cost 157doing cost 158doing cost 159doing cost 160doing cost 161doing cost 162doing cost 163doing cost 164doing cost 165doing cost 166doing cost 167doing cost 168doing cost 169doing cost 170doing cost 171doing cost 172doing cost 173doing cost 174doing cost 175doing cost 176doing cost 177doing cost 178doing cost 179doing cost 180doing cost 181doing cost 182doing cost 183doing cost 184doing cost 185doing cost 186doing cost 187doing cost 188doing cost 189doing cost 190doing cost 191doing cost 192doing cost 193doing cost 194doing cost 195doing cost 196doing cost 197doing cost 198doing cost 199doing cost 200doing cost 201doing cost 202doing cost 203doing cost 204doing cost 205doing cost 206doing cost 207doing cost 208doing cost 209doing cost 210doing cost 211doing cost 212doing cost 213doing cost 214doing cost 215doing cost 216doing cost 217doing cost 218doing cost 219doing cost 220doing cost 221doing cost 222doing cost 223doing cost 224doing cost 225doing cost 226doing cost 227doing cost 228doing cost 229doing cost 230doing cost 231doing cost 232doing cost 233doing cost 234doing cost 235doing cost 236doing cost 237doing cost 238doing cost 239doing cost 240doing cost 241doing cost 242doing cost 243doing cost 244doing cost 245doing cost 246doing cost 247doing cost 248doing cost 249doing cost 250doing cost 251doing cost 252doing cost 253doing cost 254doing cost 255doing cost 256doing cost 257doing cost 258doing cost 259doing cost 260doing cost 261doing cost 262doing cost 263doing cost 264doing cost 265doing cost 266doing cost 267doing cost 268doing cost 269doing cost 270doing cost 271doing cost 272doing cost 273doing cost 274doing cost 275doing cost 276doing cost 277doing cost 278doing cost 279doing cost 280doing cost 281doing cost 282doing cost 283doing cost 284doing cost 285doing cost 286doing cost 287doing cost 288doing cost 289doing cost 290doing cost 291doing cost 292doing cost 293doing cost 294doing cost 295doing cost 296doing cost 297doing cost 298doing cost 299doing cost 300doing cost 301doing cost 302doing cost 303doing cost 304doing cost 305doing cost 306doing cost 307doing cost 308doing cost 309doing cost 310doing cost 311doing cost 312doing cost 313doing cost 314doing cost 315doing cost 316doing cost 317doing cost 318doing cost 319doing cost 320doing cost 321doing cost 322doing cost 323doing cost 324doing cost 325doing cost 326doing cost 327doing cost 328doing cost 329doing cost 330doing cost 331doing cost 332doing cost 333doing cost 334doing cost 335doing cost 336doing cost 337doing cost 338doing cost 339doing cost 340doing cost 341doing cost 342doing cost 343doing cost 344doing cost 345doing cost 346doing cost 347doing cost 348doing cost 349doing cost 350doing cost 351doing cost 352doing cost 353doing cost 354doing cost 355doing cost 356doing cost 357doing cost 358doing cost 359doing cost 360doing cost 361doing cost 362doing cost 363doing cost 364doing cost 365doing cost 366doing cost 367doing cost 368doing cost 369doing cost 370doing cost 371doing cost 372doing cost 373doing cost 374doing cost 375doing cost 376doing cost 377doing cost 378doing cost 379doing cost 380doing cost 381doing cost 382doing cost 383doing cost 384doing cost 385doing cost 386doing cost 387doing cost 388doing cost 389doing cost 390doing cost 391doing cost 392doing cost 393doing cost 394doing cost 395doing cost 396doing cost 397doing cost 398doing cost 399doing cost 400doing cost 401doing cost 402doing cost 403doing cost 404doing cost 405doing cost 406doing cost 407doing cost 408doing cost 409doing cost 410doing cost 411doing cost 412doing cost 413doing cost 414doing cost 415doing cost 416doing cost 417doing cost 418doing cost 419doing cost 420doing cost 421doing cost 422doing cost 423doing cost 424doing cost 425doing cost 426doing cost 427doing cost 428doing cost 429doing cost 430doing cost 431doing cost 432doing cost 433doing cost 434doing cost 435doing cost 436doing cost 437doing cost 438doing cost 439doing cost 440doing cost 441doing cost 442doing cost 443doing cost 444doing cost 445doing cost 446doing cost 447doing cost 448doing cost 449doing cost 450doing cost 451doing cost 452doing cost 453doing cost 454doing cost 455doing cost 456doing cost 457doing cost 458doing cost 459doing cost 460doing cost 461doing cost 462doing cost 463doing cost 464doing cost 465doing cost 466doing cost 467doing cost 468doing cost 469doing cost 470doing cost 471doing cost 472doing cost 473doing cost 474doing cost 475doing cost 476doing cost 477doing cost 478doing cost 479doing cost 480doing cost 481doing cost 482doing cost 483doing cost 484doing cost 485doing cost 486doing cost 487doing cost 488doing cost 489doing cost 490doing cost 491doing cost 492doing cost 493doing cost 494doing cost 495doing cost 496doing cost 497doing cost 498doing cost 499doing cost 500doing cost 501doing cost 502doing cost 503doing cost 504doing cost 505doing cost 506doing cost 507doing cost 508doing cost 509doing cost 510doing cost 511doing cost 512doing cost 513doing cost 514doing cost 515doing cost 516doing cost 517doing cost 518doing cost 519doing cost 520doing cost 521doing cost 522doing cost 523doing cost 524doing cost 525doing cost 526doing cost 527doing cost 528doing cost 529doing cost 530doing cost 531doing cost 532doing cost 533doing cost 534doing cost 535doing cost 536doing cost 537doing cost 538doing cost 539doing cost 540doing cost 541doing cost 542doing cost 543doing cost 544doing cost 545doing cost 546doing cost 547doing cost 548doing cost 549doing cost 550doing cost 551doing cost 552doing cost 553doing cost 554doing cost 555doing cost 556doing cost 557doing cost 558doing cost 559doing cost 560doing cost 561doing cost 562doing cost 563doing cost 564doing cost 565doing cost 566doing cost 567doing cost 568doing cost 569doing cost 570doing cost 571doing cost 572doing cost 573doing cost 574doing cost 575doing cost 576doing cost 577doing cost 578doing cost 579doing cost 580doing cost 581doing cost 582doing cost 583doing cost 584doing cost 585doing cost 586doing cost 587doing cost 588doing cost 589doing cost 590doing cost 591doing cost 592doing cost 593doing cost 594doing cost 595doing cost 596doing cost 597doing cost 598doing cost 599doing cost 600doing cost 601doing cost 602doing cost 603doing cost 604doing cost 605doing cost 606doing cost 607doing cost 608doing cost 609doing cost 610doing cost 611doing cost 612doing cost 613doing cost 614doing cost 615doing cost 616doing cost 617doing cost 618doing cost 619doing cost 620doing cost 621doing cost 622doing cost 623doing cost 624doing cost 625doing cost 626doing cost 627doing cost 628doing cost 629doing cost 630doing cost 631doing cost 632doing cost 633doing cost 634doing cost 635doing cost 636doing cost 637doing cost 638doing cost 639doing cost 640doing cost 641doing cost 642doing cost 643doing cost 644doing cost 645doing cost 646doing cost 647doing cost 648doing cost 649doing cost 650doing cost 651doing cost 652doing cost 653doing cost 654doing cost 655doing cost 656doing cost 657doing cost 658doing cost 659doing cost 660doing cost 661doing cost 662doing cost 663doing cost 664doing cost 665doing cost 666doing cost 667doing cost 668doing cost 669doing cost 670doing cost 671doing cost 672doing cost 673doing cost 674doing cost 675doing cost 676doing cost 677doing cost 678doing cost 679doing cost 680doing cost 681doing cost 682doing cost 683doing cost 684doing cost 685doing cost 686doing cost 687doing cost 688doing cost 689doing cost 690doing cost 691doing cost 692doing cost 693doing cost 694doing cost 695doing cost 696doing cost 697doing cost 698doing cost 699doing cost 700doing cost 701doing cost 702doing cost 703doing cost 704doing cost 705doing cost 706doing cost 707doing cost 708doing cost 709doing cost 710doing cost 711doing cost 712doing cost 713doing cost 714doing cost 715doing cost 716doing cost 717doing cost 718doing cost 719doing cost 720doing cost 721doing cost 722doing cost 723doing cost 724doing cost 725doing cost 726doing cost 727doing cost 728doing cost 729doing cost 730doing cost 731doing cost 732doing cost 733doing cost 734doing cost 735doing cost 736doing cost 737doing cost 738doing cost 739doing cost 740doing cost 741doing cost 742doing cost 743doing cost 744doing cost 745doing cost 746doing cost 747doing cost 748doing cost 749doing cost 750doing cost 751doing cost 752doing cost 753doing cost 754doing cost 755doing cost 756doing cost 757doing cost 758doing cost 759doing cost 760doing cost 761doing cost 762doing cost 763doing cost 764doing cost 765doing cost 766doing cost 767doing cost 768doing cost 769doing cost 770doing cost 771doing cost 772doing cost 773doing cost 774doing cost 775doing cost 776doing cost 777doing cost 778doing cost 779doing cost 780doing cost 781doing cost 782doing cost 783doing cost 784doing cost 785doing cost 786doing cost 787doing cost 788doing cost 789doing cost 790doing cost 791doing cost 792doing cost 793doing cost 794doing cost 795doing cost 796doing cost 797doing cost 798doing cost 799doing cost 800doing cost 801doing cost 802doing cost 803doing cost 804doing cost 805doing cost 806doing cost 807doing cost 808doing cost 809doing cost 810doing cost 811doing cost 812doing cost 813doing cost 814doing cost 815doing cost 816doing cost 817doing cost 818doing cost 819doing cost 820doing cost 821doing cost 822doing cost 823doing cost 824doing cost 825doing cost 826doing cost 827doing cost 828doing cost 829doing cost 830doing cost 831doing cost 832doing cost 833doing cost 834doing cost 835doing cost 836doing cost 837doing cost 838doing cost 839doing cost 840doing cost 841doing cost 842doing cost 843doing cost 844doing cost 845doing cost 846doing cost 847doing cost 848doing cost 849doing cost 850doing cost 851doing cost 852doing cost 853doing cost 854doing cost 855doing cost 856doing cost 857doing cost 858doing cost 859doing cost 860doing cost 861doing cost 862doing cost 863doing cost 864doing cost 865doing cost 866doing cost 867doing cost 868doing cost 869doing cost 870doing cost 871doing cost 872doing cost 873doing cost 874doing cost 875doing cost 876doing cost 877doing cost 878doing cost 879doing cost 880doing cost 881doing cost 882doing cost 883doing cost 884doing cost 885doing cost 886doing cost 887doing cost 888doing cost 889doing cost 890doing cost 891doing cost 892doing cost 893doing cost 894doing cost 895doing cost 896doing cost 897doing cost 898doing cost 899doing cost 900doing cost 901doing cost 902doing cost 903doing cost 904doing cost 905doing cost 906doing cost 907doing cost 908doing cost 909doing cost 910doing cost 911doing cost 912doing cost 913doing cost 914doing cost 915doing cost 916doing cost 917doing cost 918doing cost 919doing cost 920doing cost 921doing cost 922doing cost 923doing cost 924doing cost 925doing cost 926doing cost 927doing cost 928doing cost 929doing cost 930doing cost 931doing cost 932doing cost 933doing cost 934doing cost 935doing cost 936doing cost 937doing cost 938doing cost 939doing cost 940doing cost 941doing cost 942doing cost 943doing cost 944doing cost 945doing cost 946doing cost 947doing cost 948doing cost 949doing cost 950doing cost 951doing cost 952doing cost 953doing cost 954doing cost 955doing cost 956doing cost 957doing cost 958doing cost 959doing cost 960doing cost 961doing cost 962doing cost 963doing cost 964doing cost 965doing cost 966doing cost 967doing cost 968doing cost 969doing cost 970doing cost 971doing cost 972doing cost 973doing cost 974doing cost 975doing cost 976doing cost 977doing cost 978doing cost 979doing cost 980doing cost 981doing cost 982doing cost 983doing cost 984doing cost 985doing cost 986doing cost 987doing cost 988doing cost 989doing cost 990doing cost 991doing cost 992doing cost 993doing cost 994doing cost 995doing cost 996doing cost 997doing cost 998doing cost 999doing cost 1000doing cost 1001doing cost 1002doing cost 1003doing cost 1004doing cost 1005doing cost 1006doing cost 1007doing cost 1008doing cost 1009doing cost 1010doing cost 1011doing cost 1012doing cost 1013doing cost 1014doing cost 1015doing cost 1016doing cost 1017doing cost 1018doing cost 1019doing cost 1020doing cost 1021doing cost 1022doing cost 1023computing gradient 
+computation graph completely built 
+Model restored.
+/usr/lib/pymodules/python2.7/matplotlib/collections.py:548: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if self._edgecolors == 'face':
+/usr/lib/pymodules/python2.7/matplotlib/colorbar.py:829: RuntimeWarning: invalid value encountered in divide
+  z = np.take(y, i0) + (xn - np.take(b, i0)) * dy / db
+/usr/lib/pymodules/python2.7/matplotlib/colorbar.py:581: RuntimeWarning: invalid value encountered in greater
+  inrange = (ticks > -0.001) & (ticks < 1.001)
+/usr/lib/pymodules/python2.7/matplotlib/colorbar.py:581: RuntimeWarning: invalid value encountered in less
+  inrange = (ticks > -0.001) & (ticks < 1.001)
+===================================== number 1 with 105.0 pixels 
+time_rand:  2.63125991821 0.338748931885 102 0.92578125
+time_nn_cegis:  2.75629901886 1.08055520058 102 5.79447102547 0.9921875 100
+===================================== number 2 with 114.0 pixels 
+time_rand:  2.65640997887 1.74184012413 102 0.9765625
+time_nn_cegis:  3.07822203636 0.727356910706 120 5.90284919739 0.998046875 120
+===================================== number 3 with 139.0 pixels 
+time_rand:  2.62574100494 0.398532867432 102 0.8525390625
+time_nn_cegis:  3.7621691227 4.10324382782 141 7.57677197456 0.9892578125 140
+===================================== number 4 with 121.0 pixels 
+time_rand:  2.71470093727 0.349581956863 102 0.9228515625
+time_nn_cegis:  3.61807513237 1.51441884041 140 7.58718180656 1.0 140
+===================================== number 5 with 100.0 pixels 
+time_rand:  2.68365502357 0.37270617485 102 0.9072265625
+time_nn_cegis:  3.16669297218 0.395515918732 120 5.78067088127 1.0 120
+===================================== number 6 with 111.0 pixels 
+time_rand:  2.69393706322 0.383389949799 102 0.830078125
+time_nn_cegis:  3.69969296455 2.37806010246 141 7.33092403412 1.0 140
+===================================== number 7 with 184.0 pixels 
+time_rand:  2.83760404587 1.22067809105 102 0.9052734375
+time_nn_cegis:  4.83560609818 1.71924805641 180 9.30097985268 1.0 180
+===================================== number 8 with 171.0 pixels 
+time_rand:  2.67233920097 5.73531794548 102 0.8486328125
+time_nn_cegis:  4.89037799835 3.96560907364 180 9.71689510345 1.0 180
+===================================== number 9 with 182.0 pixels 
+time_rand:  2.65127801895 1.02320384979 102 0.8583984375
+time_nn_cegis:  3.90397500992 2.78504800797 142 6.84228801727 0.9931640625 140
+===================================== number 10 with 178.0 pixels 
+time_rand:  2.79927682877 0.559280157089 102 0.8525390625
+time_nn_cegis:  3.63910293579 1.35986113548 140 7.49457097054 1.0 140
+===================================== number 11 with 110.0 pixels 
+time_rand:  2.63980197906 0.396422147751 102 0.9453125
+time_nn_cegis:  2.68016815186 1.17837691307 100 5.38553404808 0.990234375 100
+===================================== number 12 with 110.0 pixels 
+time_rand:  2.73480510712 0.671741008759 102 0.896484375
+time_nn_cegis:  3.19434475899 0.996314048767 122 6.18686103821 0.9560546875 120
+===================================== number 13 with 139.0 pixels 
+time_rand:  2.74173092842 1.47678089142 102 0.826171875
+time_nn_cegis:  3.67580294609 3.03025102615 140 7.43920493126 1.0 140
+===================================== number 14 with 149.0 pixels 
+time_rand:  2.64563012123 2.92184782028 102 0.9052734375
+time_nn_cegis:  3.27475070953 11.9511082172 123 6.57124996185 0.9794921875 120
+===================================== number 15 with 151.0 pixels 
+time_rand:  2.66111707687 0.321020841599 102 0.8837890625
+time_nn_cegis:  3.23224282265 14.9845261574 121 5.6473839283 0.99609375 120
+===================================== number 16 with 119.0 pixels 
+time_rand:  2.6796939373 0.322495937347 102 0.9482421875
+time_nn_cegis:  2.69352626801 2.65434789658 101 5.30798387527 1.0 100
+===================================== number 17 with 110.0 pixels 
+time_rand:  2.72095704079 1.16575503349 102 0.875
+time_nn_cegis:  3.19639611244 7.34294080734 120 5.78031206131 0.9306640625 120
+===================================== number 18 with 101.0 pixels 
+time_rand:  2.64147114754 0.399199962616 102 0.8994140625
+time_nn_cegis:  2.66612100601 15.4556539059 100 5.39777302742 0.9970703125 100
+===================================== number 19 with 123.0 pixels 
+time_rand:  2.72183799744 0.375313043594 102 0.8974609375
+time_nn_cegis:  3.81487226486 11.2453629971 145 7.46963906288 0.98828125 140
+===================================== number 20 with 156.0 pixels 
+time_rand:  2.70199799538 0.338385820389 102 0.8662109375
+time_nn_cegis:  3.81355595589 16.762087822 143 7.02164316177 0.9970703125 140
+===================================== number 21 with 186.0 pixels 
+time_rand:  2.7772898674 0.820409059525 102 0.9072265625
+time_nn_cegis:  4.46415185928 7.70759916306 155 5.77964186668 1.0 120
+===================================== number 22 with 136.0 pixels 
+time_rand:  2.7198381424 0.437790870667 102 0.884765625
+time_nn_cegis:  4.25648212433 3.80788183212 161 7.80322003365 0.9384765625 160
+===================================== number 23 with 102.0 pixels 
+time_rand:  2.69199299812 0.426358938217 102 0.92578125
+time_nn_cegis:  2.69889593124 4.42882084846 102 5.33427190781 0.98828125 100
+===================================== number 24 with 139.0 pixels 
+time_rand:  2.62233495712 1.00045514107 102 0.9013671875
+time_nn_cegis:  4.14845585823 2.38828015327 160 8.21561098099 1.0 160
+===================================== number 25 with 156.0 pixels 
+time_rand:  2.62916493416 1.34010505676 102 0.904296875
+time_nn_cegis:  4.1794462204 1.98768997192 161 8.17919206619 0.998046875 160
+===================================== number 26 with 159.0 pixels 
+time_rand:  2.61889910698 0.60653591156 102 0.873046875
+time_nn_cegis:  3.08167886734 31.3428370953 120 5.7736158371 1.0 120
+===================================== number 27 with 179.0 pixels 
+time_rand:  2.69785189629 0.393278121948 102 0.96484375
+time_nn_cegis:  3.21498608589 0.966052293777 121 6.83777689934 0.9912109375 120
+===================================== number 28 with 189.0 pixels 
+time_rand:  2.71960091591 1.10464000702 102 0.8623046875
+time_nn_cegis:  4.71323204041 3.18217086792 180 9.06789898872 1.0 180
+===================================== number 29 with 125.0 pixels 
+time_rand:  2.62036085129 1.38561701775 102 0.890625
+time_nn_cegis:  3.69932508469 1.00991606712 141 6.78631019592 1.0 140
+===================================== number 30 with 205.0 pixels 
+time_rand:  2.69095206261 0.95346903801 102 0.87109375
+time_nn_cegis:  4.22370100021 4.25079798698 161 8.18108582497 0.998046875 160
+===================================== number 31 with 163.0 pixels 
+time_rand:  2.73217892647 0.69934797287 102 0.8984375
+time_nn_cegis:  3.68364477158 4.86473107338 141 7.20723414421 0.978515625 140
+===================================== number 32 with 178.0 pixels 
+time_rand:  2.63639211655 1.38425302505 102 0.890625
+time_nn_cegis:  4.16476488113 6.40092611313 162 8.12986397743 0.998046875 160
+===================================== number 33 with 107.0 pixels 
+time_rand:  2.6551258564 0.354331016541 102 0.9287109375
+time_nn_cegis:  3.01204228401 0.963724374771 115 4.88575816154 0.9912109375 100
+===================================== number 34 with 161.0 pixels 
+time_rand:  2.63310599327 1.5359787941 102 0.89453125
+time_nn_cegis:  4.16071200371 1.20905995369 160 8.0879650116 1.0 160
+===================================== number 35 with 198.0 pixels 
+time_rand:  2.69778490067 1.7561109066 102 0.9091796875
+time_nn_cegis:  3.91925096512 3.19437813759 141 6.63221406937 1.0 140
+===================================== number 36 with 170.0 pixels 
+time_rand:  2.7127828598 0.563590049744 102 0.88671875
+time_nn_cegis:  4.63426613808 1.41212081909 180 9.20594596863 1.0 180
+===================================== number 37 with 191.0 pixels 
+time_rand:  2.69157099724 0.68829703331 102 0.8271484375
+time_nn_cegis:  4.14655089378 5.56202507019 161 8.16866707802 0.99609375 160
+===================================== number 38 with 236.0 pixels 
+time_rand:  2.62637901306 3.52075004578 102 0.9609375
+time_nn_cegis:  5.19339609146 5.8230509758 202 9.88750004768 0.9990234375 200
+===================================== number 39 with 186.0 pixels 
+time_rand:  2.64010906219 1.95426011086 102 0.884765625
+time_nn_cegis:  4.30893397331 7.56833696365 161 8.13842701912 0.9990234375 160
+===================================== number 40 with 169.0 pixels 
+time_rand:  2.60028886795 1.12394714355 102 0.85546875
+time_nn_cegis:  3.07275700569 1.19279193878 120 6.4742000103 1.0 120
+===================================== number 41 with 237.0 pixels 
+time_rand:  2.6225271225 3.44792199135 102 0.8525390625
+time_nn_cegis:  4.17806816101 1.72307085991 160 7.65080094337 1.0 160
+===================================== number 42 with 101.0 pixels 
+time_rand:  2.68311715126 0.445828914642 102 0.9287109375
+time_nn_cegis:  2.64070677757 4.35487341881 102 5.51781201363 0.9521484375 100
+===================================== number 43 with 168.0 pixels 
+time_rand:  2.6936109066 0.545697927475 102 0.921875
+time_nn_cegis:  4.20582509041 2.10519003868 160 8.30467700958 1.0 160
+===================================== number 44 with 158.0 pixels 
+time_rand:  2.68825006485 0.535325050354 102 0.8212890625
+time_nn_cegis:  3.71292519569 27.2828447819 142 6.64869594574 0.9892578125 140
+===================================== number 45 with 114.0 pixels 
+time_rand:  2.61142277718 0.293669223785 102 0.8974609375
+time_nn_cegis:  3.2359919548 4.44918084145 122 5.97512507439 0.9990234375 120
+===================================== number 46 with 279.0 pixels 
+time_rand:  2.6688477993 19.1131920815 102 0.880859375
+time_nn_cegis:  5.10688400269 1.91900205612 200 10.3382079601 1.0 200
+===================================== number 47 with 121.0 pixels 
+time_rand:  2.64225792885 0.413866043091 102 0.8837890625
+time_nn_cegis:  3.24252390862 0.952572107315 121 6.12710595131 0.9833984375 120
+===================================== number 48 with 100.0 pixels 
+time_rand:  2.70071291924 0.663589954376 102 0.87890625
+time_nn_cegis:  2.64536213875 0.459728956223 101 4.81438088417 0.994140625 100
+===================================== number 49 with 160.0 pixels 
+time_rand:  2.66279006004 0.535242080688 102 0.8828125
+time_nn_cegis:  4.00934505463 1.464220047 160 8.13114309311 1.0 160
+===================================== number 50 with 108.0 pixels 
+time_rand:  2.62792515755 0.48316192627 102 0.91796875
+time_nn_cegis:  2.58762788773 1.92235016823 100 5.24444484711 0.98828125 100
+===================================== number 51 with 170.0 pixels 
+time_rand:  2.66547584534 1.55916213989 102 0.875
+time_nn_cegis:  4.13524889946 2.74242210388 161 7.59818387032 1.0 160
+===================================== number 52 with 212.0 pixels 
+time_rand:  2.71074008942 5.48553800583 102 0.841796875
+time_nn_cegis:  4.32484483719 29.2270503044 163 7.9878718853 0.994140625 160
+===================================== number 53 with 236.0 pixels 
+time_rand:  2.61810398102 1.77751708031 102 0.908203125
+time_nn_cegis:  5.28438901901 1.89542198181 202 10.0830659866 1.0 200
+===================================== number 54 with 165.0 pixels 
+time_rand:  2.63364291191 0.318141937256 102 0.9013671875
+time_nn_cegis:  4.16402983665 11.1686182022 161 8.13497614861 0.99609375 160
+===================================== number 55 with 162.0 pixels 
+time_rand:  2.62206482887 0.563615083694 102 0.908203125
+time_nn_cegis:  3.58639407158 37.3089129925 141 7.15818309784 0.9990234375 140
+===================================== number 56 with 206.0 pixels 
+time_rand:  2.58405685425 0.511272192001 102 0.92578125
+time_nn_cegis:  4.69801998138 2.78005504608 180 8.92999005318 1.0 180
+===================================== number 57 with 174.0 pixels 
+time_rand:  2.79348087311 0.506118059158 102 0.9404296875
+time_nn_cegis:  4.16003608704 1.3039689064 160 8.05114197731 1.0 160
+===================================== number 58 with 229.0 pixels 
+time_rand:  2.65369296074 2.43421888351 102 0.80859375
+time_nn_cegis:  5.17143416405 2.39090895653 200 9.61785197258 1.0 200
+===================================== number 59 with 215.0 pixels 
+time_rand:  2.64078092575 2.1581799984 102 0.830078125
+time_nn_cegis:  4.51862001419 1.94698810577 180 8.40992093086 1.0 180
+===================================== number 60 with 128.0 pixels 
+time_rand:  2.55911397934 0.468388080597 102 0.8779296875
+time_nn_cegis:  3.75442171097 4.51414394379 148 7.16908192635 0.9990234375 140
+===================================== number 61 with 119.0 pixels 
+time_rand:  2.60944104195 0.318508863449 102 0.890625
+time_nn_cegis:  2.99639201164 0.866119861603 120 6.12742614746 1.0 120
+===================================== number 62 with 194.0 pixels 
+time_rand:  2.58051395416 1.96582508087 102 0.8984375
+time_nn_cegis:  4.19157004356 5.62086677551 161 8.1263988018 0.99609375 160
+===================================== number 63 with 114.0 pixels 
+time_rand:  2.60527896881 0.465244054794 102 0.892578125
+time_nn_cegis:  3.11002588272 1.33168292046 124 5.67366600037 0.9677734375 120
+===================================== number 64 with 134.0 pixels 
+time_rand:  2.60211706161 0.910640954971 102 0.931640625
+time_nn_cegis:  3.16594290733 33.0640728474 121 5.6419210434 0.9990234375 120
+===================================== number 65 with 160.0 pixels 
+time_rand:  2.60523796082 1.96008491516 102 0.90625
+time_nn_cegis:  3.55845189095 9.3082139492 141 7.15491104126 0.9970703125 140
+===================================== number 66 with 236.0 pixels 
+time_rand:  2.57152700424 51.6060619354 102 0.939453125
+time_nn_cegis:  5.05947995186 0.863018035889 200 10.3161301613 1.0 200
+===================================== number 67 with 119.0 pixels 
+time_rand:  2.64298605919 0.399029970169 102 0.876953125
+time_nn_cegis:  3.02839422226 1.45024394989 120 5.72060608864 1.0 120
+===================================== number 68 with 158.0 pixels 
+time_rand:  2.60270404816 0.653039932251 102 0.935546875
+time_nn_cegis:  2.55402207375 0.530304908752 100 4.64131712914 0.9833984375 100
+===================================== number 69 with 119.0 pixels 
+time_rand:  2.56414890289 1.02412700653 102 0.8837890625
+time_nn_cegis:  3.55602693558 1.26151514053 141 7.15846586227 1.0 140
+===================================== number 70 with 187.0 pixels 
+time_rand:  2.54751014709 17.4383380413 102 0.8916015625
+time_nn_cegis:  4.67871308327 2.2321407795 180 9.27575111389 1.0 180
+===================================== number 71 with 205.0 pixels 
+time_rand:  2.62575006485 0.683306932449 102 0.87890625
+time_nn_cegis:  4.65612196922 5.60768508911 182 8.46059703827 0.9873046875 180
+===================================== number 72 with 187.0 pixels 
+time_rand:  2.56074595451 1.16348290443 102 0.8466796875
+time_nn_cegis:  4.07338404655 2.20277380943 161 7.474421978 0.990234375 160
+===================================== number 73 with 114.0 pixels 
+time_rand:  2.60801196098 0.736352920532 102 0.908203125
+time_nn_cegis:  3.01267504692 1.97229409218 120 6.30457401276 1.0 120
+===================================== number 74 with 100.0 pixels 
+time_rand:  2.58299803734 0.391650915146 102 0.923828125
+time_nn_cegis:  2.52991986275 0.314944982529 100 4.73548102379 1.0 100
+===================================== number 75 with 125.0 pixels 
+time_rand:  2.66386413574 3.16369485855 102 0.8984375
+time_nn_cegis:  3.08358883858 5.23820519447 122 5.6974029541 0.998046875 120
+===================================== number 76 with 124.0 pixels 
+time_rand:  2.63296985626 3.12095403671 102 0.9365234375
+time_nn_cegis:  3.14685869217 1.69249629974 123 6.1051158905 0.9990234375 120
+===================================== number 77 with 107.0 pixels 
+time_rand:  2.58188414574 0.447167873383 102 0.8818359375
+time_nn_cegis:  3.04542994499 0.969775915146 117 4.62928509712 0.994140625 100
+===================================== number 78 with 151.0 pixels 
+time_rand:  2.60084104538 0.984373092651 102 0.9306640625
+time_nn_cegis:  3.51606798172 3.82216310501 141 7.1815237999 0.9970703125 140
+===================================== number 79 with 141.0 pixels 
+time_rand:  2.59315299988 0.338167905807 102 0.9345703125
+time_nn_cegis:  2.96221709251 27.3998999596 120 5.69604921341 1.0 120
+===================================== number 80 with 127.0 pixels 
+time_rand:  2.59865093231 0.320652008057 102 0.908203125
+time_nn_cegis:  2.62517595291 23.6820878983 101 5.16448402405 0.9970703125 100
+===================================== number 81 with 242.0 pixels 
+time_rand:  2.60211014748 1.45604395866 102 0.8857421875
+time_nn_cegis:  5.14110708237 9.70585179329 202 9.94114804268 0.994140625 200
+===================================== number 82 with 148.0 pixels 
+time_rand:  2.57528376579 1.20366501808 102 0.9453125
+time_nn_cegis:  3.51825785637 7.66052412987 141 7.13142204285 0.9990234375 140
+===================================== number 83 with 206.0 pixels 
+time_rand:  2.52957701683 0.42488193512 102 0.8212890625
+time_nn_cegis:  4.5395450592 3.68680381775 180 9.02339792252 0.994140625 180
+===================================== number 84 with 106.0 pixels 
+time_rand:  2.53719687462 0.471714019775 102 0.890625
+time_nn_cegis:  2.97297310829 0.600010871887 120 5.69489002228 0.9970703125 120
+===================================== number 85 with 122.0 pixels 
+time_rand:  2.53439879417 0.472473144531 102 0.9296875
+time_nn_cegis:  3.07599496841 0.375602006912 120 6.10703587532 1.0 120
+===================================== number 86 with 127.0 pixels 
+time_rand:  2.5549428463 0.694346189499 102 0.9306640625
+time_nn_cegis:  2.58418917656 23.8237059116 103 4.59343791008 0.9892578125 100
+===================================== number 87 with 196.0 pixels 
+time_rand:  2.62738418579 0.926100969315 102 0.83984375
+time_nn_cegis:  4.09978699684 3.85509204865 160 7.97146701813 1.0 160
+===================================== number 88 with 100.0 pixels 
+time_rand:  2.58592891693 0.765512228012 102 0.912109375
+time_nn_cegis:  2.54605698586 0.315768003464 100 5.27164912224 1.0 100
+===================================== number 89 with 134.0 pixels 
+time_rand:  2.62289810181 0.630864858627 102 0.8994140625
+time_nn_cegis:  3.66031193733 0.783271074295 141 6.67942905426 1.0 140
+===================================== number 90 with 103.0 pixels 
+time_rand:  2.5946059227 0.339069128036 102 0.921875
+time_nn_cegis:  2.52930498123 3.57512402534 102 5.14291095734 0.998046875 100
+===================================== number 91 with 190.0 pixels 
+time_rand:  2.47723698616 7.88151717186 102 0.884765625
+time_nn_cegis:  3.49710488319 3.02305316925 140 7.24758696556 1.0 140
+===================================== number 92 with 184.0 pixels 
+time_rand:  2.52099895477 0.6975440979 102 0.93359375
+time_nn_cegis:  4.08882212639 7.82122802734 161 7.57721686363 0.9755859375 160
+===================================== number 93 with 113.0 pixels 
+time_rand:  2.55066013336 0.388031005859 102 0.9326171875
+time_nn_cegis:  2.13598918915 3.61390113831 85 3.90511012077 0.9951171875 80
+===================================== number 94 with 106.0 pixels 
+time_rand:  2.57505202293 0.331376075745 102 0.939453125
+time_nn_cegis:  2.56914520264 1.04090380669 101 5.24996709824 0.88671875 100
+===================================== number 95 with 118.0 pixels 
+time_rand:  2.56535506248 0.4224588871 102 0.9208984375
+time_nn_cegis:  2.63202404976 2.83436059952 105 4.73002481461 0.876953125 100
+===================================== number 96 with 180.0 pixels 
+time_rand:  2.55760407448 1.15168499947 102 0.8154296875
+time_nn_cegis:  4.19168591499 2.82183480263 167 8.09739208221 0.98046875 160
+===================================== number 97 with 204.0 pixels 
+time_rand:  2.50491714478 0.930944919586 102 0.810546875
+time_nn_cegis:  4.01637196541 7.90385174751 161 8.01166391373 1.0 160
+===================================== number 98 with 191.0 pixels 
+time_rand:  2.47087407112 0.584013938904 102 0.900390625
+time_nn_cegis:  4.35469698906 2.84438705444 180 9.04300308228 1.0 180
+===================================== number 99 with 179.0 pixels 
+time_rand:  2.48825001717 1.20910286903 102 0.87890625
+time_nn_cegis:  3.88572692871 0.887259960175 160 7.97360396385 1.0 160
+===================================== number 100 with 142.0 pixels 
+time_rand:  2.50386309624 11.6899120808 102 0.888671875
+time_nn_cegis:  3.0153632164 12.0925419331 121 5.69140911102 1.0 120
+===================================== number 101 with 168.0 pixels 
+time_rand:  2.53217983246 1.79382205009 102 0.9287109375
+time_nn_cegis:  3.97002196312 4.6826210022 160 7.5517270565 1.0 160
+===================================== number 102 with 195.0 pixels 
+time_rand:  2.58883213997 0.584356784821 102 0.884765625
+time_nn_cegis:  4.39221000671 2.61773300171 180 9.03361392021 1.0 180
+===================================== number 103 with 209.0 pixels 
+time_rand:  2.50419902802 0.433211088181 102 0.9482421875
+time_nn_cegis:  4.4688911438 3.08253979683 181 8.94116282463 0.9873046875 180
+===================================== number 104 with 100.0 pixels 
+time_rand:  2.4878911972 0.81977391243 102 0.9169921875
+time_nn_cegis:  2.98148298264 3.37187814713 120 6.12487483025 1.0 120
+===================================== number 105 with 100.0 pixels 
+time_rand:  2.58678889275 0.492200136185 102 0.8896484375
+time_nn_cegis:  2.51461291313 0.321213006973 100 4.82782411575 1.0 100
+===================================== number 106 with 185.0 pixels 
+time_rand:  2.4932820797 0.711138963699 102 0.9189453125
+time_nn_cegis:  3.96876192093 5.87420392036 160 8.14848303795 1.0 160
+===================================== number 107 with 124.0 pixels 
+time_rand:  2.48111891747 5.31247591972 102 0.8828125
+time_nn_cegis:  3.00284790993 1.92410707474 121 5.61569190025 1.0 120
+===================================== number 108 with 149.0 pixels 
+time_rand:  2.53555798531 0.331186056137 102 0.9365234375
+time_nn_cegis:  3.11383581161 6.33137083054 123 5.66971492767 0.9755859375 120
+===================================== number 109 with 122.0 pixels 
+time_rand:  2.54243397713 0.405780076981 102 0.88671875
+time_nn_cegis:  3.20840811729 1.69806814194 126 6.1387629509 0.939453125 120
+===================================== number 110 with 138.0 pixels 
+time_rand:  2.56988596916 1.11416888237 102 0.9697265625
+time_nn_cegis:  3.49668598175 1.31416392326 142 7.1948029995 1.0 140
+===================================== number 111 with 212.0 pixels 
+time_rand:  2.54408788681 25.543181181 102 0.8544921875
+time_nn_cegis:  3.98237013817 3.59991884232 162 8.05052399635 0.9814453125 160
+===================================== number 112 with 230.0 pixels 
+time_rand:  2.55011987686 2.89724397659 102 0.9921875
+time_nn_cegis:  4.99595093727 1.14912104607 200 9.96275687218 1.0 200
+===================================== number 113 with 216.0 pixels 
+time_rand:  2.49450397491 0.42439198494 102 0.916015625
+time_nn_cegis:  3.48232603073 18.7330548763 140 6.6586420536 1.0 140
+===================================== number 114 with 173.0 pixels 
+time_rand:  2.52413702011 0.559245824814 102 0.8984375
+time_nn_cegis:  3.06232023239 2.99702382088 122 6.24806499481 1.0 120
+===================================== number 115 with 256.0 pixels 
+time_rand:  2.58576107025 2.50943779945 102 0.9833984375
+time_nn_cegis:  5.34966492653 3.33496809006 221 10.9243500233 0.998046875 220
+===================================== number 116 with 190.0 pixels 
+time_rand:  2.48379397392 5.71848893166 102 0.892578125
+time_nn_cegis:  4.06501197815 3.18790602684 161 7.99910378456 0.990234375 160
+===================================== number 117 with 109.0 pixels 
+time_rand:  2.58443784714 1.05997014046 102 0.9033203125
+time_nn_cegis:  3.03910064697 1.34528255463 123 6.26678800583 0.99609375 120
+===================================== number 118 with 222.0 pixels 
+time_rand:  2.51138901711 1.65378403664 102 0.8505859375
+time_nn_cegis:  4.40518212318 4.2376639843 180 8.32910108566 1.0 180
+===================================== number 119 with 141.0 pixels 
+time_rand:  2.53829193115 4.36363005638 102 0.8818359375
+time_nn_cegis:  3.45267915726 29.6247060299 141 6.5463411808 1.0 140
+===================================== number 120 with 201.0 pixels 
+time_rand:  2.63350296021 0.599125862122 102 0.9521484375
+time_nn_cegis:  3.95825982094 5.75309920311 161 8.03950595856 0.9990234375 160
+===================================== number 121 with 247.0 pixels 
+time_rand:  2.49007415771 28.3706328869 102 0.9482421875
+time_nn_cegis:  5.03179693222 1.03457021713 200 9.96567797661 0.9990234375 200
+===================================== number 122 with 226.0 pixels 
+time_rand:  2.55314922333 7.24729681015 102 0.912109375
+time_nn_cegis:  4.41313886642 4.11708498001 180 8.85102391243 1.0 180
+===================================== number 123 with 100.0 pixels 
+time_rand:  2.51435685158 0.486372947693 102 0.916015625
+time_nn_cegis:  2.54558205605 0.690721035004 101 4.7480070591 0.921875 100
+===================================== number 124 with 171.0 pixels 
+time_rand:  2.48563981056 0.642812013626 102 0.8828125
+time_nn_cegis:  3.46686196327 8.05498099327 140 7.02750897408 1.0 140
+===================================== number 125 with 104.0 pixels 
+time_rand:  2.48064899445 1.29923820496 102 0.921875
+time_nn_cegis:  3.06057476997 1.83645415306 125 6.21613907814 0.951171875 120
+===================================== number 126 with 109.0 pixels 
+time_rand:  2.48571610451 0.413444042206 102 0.9453125
+time_nn_cegis:  2.55335593224 0.747918128967 102 4.88538789749 0.9931640625 100
+===================================== number 127 with 119.0 pixels 
+time_rand:  2.52269411087 0.344626903534 102 0.9443359375
+time_nn_cegis:  2.9813849926 5.22436499596 122 5.66296982765 0.9931640625 120
+===================================== number 128 with 125.0 pixels 
+time_rand:  2.50664305687 0.362859010696 102 0.8681640625
+time_nn_cegis:  3.46865510941 5.81390190125 140 7.08244299889 1.0 140
+===================================== number 129 with 100.0 pixels 
+time_rand:  2.47027897835 0.336622953415 102 0.919921875
+time_nn_cegis:  1.9942741394 0.969543933868 80 3.64316987991 0.9892578125 80
+===================================== number 130 with 231.0 pixels 
+time_rand:  2.58517813683 1.18831586838 102 0.8330078125
+time_nn_cegis:  4.90218806267 5.00109505653 201 9.9480009079 0.9951171875 200
+===================================== number 131 with 106.0 pixels 
+time_rand:  2.47543001175 0.432789087296 102 0.892578125
+time_nn_cegis:  2.52181315422 2.25515794754 101 5.23006606102 0.9013671875 100
+===================================== number 132 with 236.0 pixels 
+time_rand:  2.50880813599 2.7152838707 102 0.974609375
+time_nn_cegis:  4.99612402916 2.39616203308 200 10.0007920265 1.0 200
+===================================== number 133 with 167.0 pixels 
+time_rand:  2.5496711731 0.7536008358 102 0.83984375
+time_nn_cegis:  4.33840703964 3.86066889763 180 8.91861104965 1.0 180
+===================================== number 134 with 113.0 pixels 
+time_rand:  2.56896996498 0.393126010895 102 0.9150390625
+time_nn_cegis:  2.53399705887 2.09029245377 104 4.63579893112 0.966796875 100
+===================================== number 135 with 108.0 pixels 
+time_rand:  2.50532722473 0.390478849411 102 0.9208984375
+time_nn_cegis:  2.44372797012 2.4691529274 101 5.21445703506 0.9892578125 100
+===================================== number 136 with 166.0 pixels 
+time_rand:  2.47470283508 0.506904125214 102 0.9033203125
+time_nn_cegis:  3.97932600975 2.29643797874 161 8.03249502182 0.9990234375 160
+===================================== number 137 with 102.0 pixels 
+time_rand:  2.48209500313 0.455436944962 102 0.900390625
+time_nn_cegis:  2.93383836746 0.796907663345 121 5.72139501572 0.9169921875 120
+===================================== number 138 with 120.0 pixels 
+time_rand:  2.49168801308 0.463087081909 102 0.873046875
+time_nn_cegis:  3.06132984161 6.47571277618 122 6.0438849926 0.970703125 120
+===================================== number 139 with 152.0 pixels 
+time_rand:  2.50629901886 7.51724410057 102 0.8857421875
+time_nn_cegis:  3.47115182877 4.55327701569 140 7.12205505371 1.0 140
+===================================== number 140 with 109.0 pixels 
+time_rand:  2.51676893234 0.384485960007 102 0.94140625
+time_nn_cegis:  3.10191607475 3.32511210442 123 5.64263796806 0.935546875 120
+===================================== number 141 with 222.0 pixels 
+time_rand:  2.53683805466 7.10891890526 102 0.8544921875
+time_nn_cegis:  4.38380885124 1.1955780983 180 9.05539488792 1.0 180
+===================================== number 142 with 175.0 pixels 
+time_rand:  2.519064188 0.379715919495 102 0.87890625
+time_nn_cegis:  4.01465010643 2.86895108223 161 8.04522895813 0.994140625 160
+===================================== number 143 with 102.0 pixels 
+time_rand:  2.57274913788 0.32786989212 102 0.9345703125
+time_nn_cegis:  2.65268731117 3.28858327866 106 4.70011997223 0.98046875 100
+===================================== number 144 with 100.0 pixels 
+time_rand:  2.54274106026 0.335404872894 102 0.931640625
+time_nn_cegis:  2.6022310257 1.50611591339 101 4.69532203674 0.9326171875 100
+===================================== number 145 with 191.0 pixels 
+time_rand:  2.61711502075 2.07151389122 102 0.8994140625
+time_nn_cegis:  3.05036711693 4.15833997726 122 6.13887619972 0.9990234375 120
+===================================== number 146 with 151.0 pixels 
+time_rand:  2.58055019379 0.6598508358 102 0.8857421875
+time_nn_cegis:  2.97527289391 5.10391616821 122 6.15535092354 0.9873046875 120
+===================================== number 147 with 137.0 pixels 
+time_rand:  2.50875210762 0.308748006821 102 0.9169921875
+time_nn_cegis:  3.01703715324 1.53063368797 124 5.70934009552 0.982421875 120
+===================================== number 148 with 116.0 pixels 
+time_rand:  2.50889205933 0.446145057678 102 0.93359375
+time_nn_cegis:  2.9984960556 2.25250315666 120 6.17526006699 1.0 120
+===================================== number 149 with 132.0 pixels 
+time_rand:  2.55916881561 0.880072116852 102 0.87109375
+time_nn_cegis:  3.37028098106 0.757714033127 140 7.26321387291 1.0 140
+===================================== number 150 with 142.0 pixels 
+time_rand:  2.47247481346 0.751532077789 102 0.91796875
+time_nn_cegis:  3.09739899635 5.33276510239 121 5.60583519936 0.986328125 120
+===================================== number 151 with 203.0 pixels 
+time_rand:  2.55511689186 0.5135679245 102 0.826171875
+time_nn_cegis:  3.65662193298 3.87324213982 141 7.06692194939 0.99609375 140
+===================================== number 152 with 110.0 pixels 
+time_rand:  2.5863699913 0.468038797379 102 0.908203125
+time_nn_cegis:  2.51157093048 2.2350358963 101 5.17325806618 0.9345703125 100
+===================================== number 153 with 155.0 pixels 
+time_rand:  2.53657507896 0.438663005829 102 0.857421875
+time_nn_cegis:  2.98137903214 9.90883708 121 5.66507983208 1.0 120
+===================================== number 154 with 115.0 pixels 
+time_rand:  2.51739811897 0.456849813461 102 0.8623046875
+time_nn_cegis:  3.06329584122 2.38370394707 122 6.12602186203 0.9990234375 120
+===================================== number 155 with 224.0 pixels 
+time_rand:  2.55460190773 0.336975097656 102 0.908203125
+time_nn_cegis:  3.92383384705 2.65486001968 160 7.87245583534 0.9990234375 160
+===================================== number 156 with 162.0 pixels 
+time_rand:  2.58460211754 0.659865856171 102 0.8837890625
+time_nn_cegis:  3.98067116737 2.4777097702 160 7.50826001167 1.0 160
+===================================== number 157 with 102.0 pixels 
+time_rand:  2.53776717186 0.358165979385 102 0.927734375
+time_nn_cegis:  2.65162205696 0.835752725601 106 5.20787096024 0.9326171875 100
+===================================== number 158 with 267.0 pixels 
+time_rand:  2.55948805809 9.82026195526 102 0.9833984375
+time_nn_cegis:  5.03371500969 24.4967119694 202 10.0423130989 0.9990234375 200
+===================================== number 159 with 106.0 pixels 
+time_rand:  2.49696087837 0.398526191711 102 0.947265625
+time_nn_cegis:  2.57071590424 0.768310308456 101 5.37425017357 0.998046875 100
+===================================== number 160 with 151.0 pixels 
+time_rand:  2.58400797844 2.36541795731 102 0.9599609375
+time_nn_cegis:  3.41095089912 9.18287205696 140 6.67154812813 1.0 140
+===================================== number 161 with 274.0 pixels 
+time_rand:  2.55648303032 5.49370002747 102 0.8154296875
+time_nn_cegis:  5.63016796112 2.21405982971 220 11.0099411011 1.0 220
+===================================== number 162 with 198.0 pixels 
+time_rand:  2.81930994987 0.677126169205 102 0.830078125
+time_nn_cegis:  4.05423092842 3.19233107567 161 7.97549200058 0.9990234375 160
+===================================== number 163 with 223.0 pixels 
+time_rand:  2.65814805031 1.42579293251 102 0.97265625
+time_nn_cegis:  4.07324123383 4.24001693726 161 8.58485913277 0.984375 160
+===================================== number 164 with 114.0 pixels 
+time_rand:  2.62562608719 1.58107686043 102 0.9365234375
+time_nn_cegis:  3.31295514107 2.73747777939 122 6.39632701874 0.9384765625 120
+===================================== number 165 with 166.0 pixels 
+time_rand:  2.72569489479 0.544490098953 102 0.8818359375
+time_nn_cegis:  3.12293696404 7.91356611252 121 6.03509783745 0.9970703125 120
+===================================== number 166 with 175.0 pixels 
+time_rand:  2.62088608742 1.47364592552 102 0.91015625
+time_nn_cegis:  4.60290002823 1.85513401031 180 9.28206300735 1.0 180
+===================================== number 167 with 215.0 pixels 
+time_rand:  2.62279391289 8.12038302422 102 0.8681640625
+time_nn_cegis:  3.96324491501 7.70501804352 160 8.29609107971 1.0 160
+===================================== number 168 with 172.0 pixels 
+time_rand:  2.52600097656 4.02220797539 102 0.962890625
+time_nn_cegis:  4.26804018021 6.68483781815 162 8.34019207954 0.9921875 160
+===================================== number 169 with 100.0 pixels 
+time_rand:  2.64466905594 0.497363090515 102 0.892578125
+time_nn_cegis:  2.5892829895 0.338676214218 100 4.98431110382 1.0 100
+===================================== number 170 with 100.0 pixels 
+time_rand:  2.78504920006 0.332626819611 102 1.0
+time_nn_cegis:  2.77097415924 0.705002784729 106 5.13561916351 0.98828125 100
+===================================== number 171 with 100.0 pixels 
+time_rand:  2.66147589684 0.392841100693 102 0.9189453125
+time_nn_cegis:  3.11424016953 1.78121900558 120 6.52102780342 1.0 120
+===================================== number 172 with 107.0 pixels 
+time_rand:  2.61746096611 0.599905014038 102 0.8798828125
+time_nn_cegis:  3.04132509232 1.5517642498 122 5.77818012238 0.990234375 120
+===================================== number 173 with 178.0 pixels 
+time_rand:  2.74082183838 0.977504014969 102 0.8037109375
+time_nn_cegis:  4.00063586235 3.66673612595 160 7.74605607986 1.0 160
+===================================== number 174 with 198.0 pixels 
+time_rand:  2.59662795067 0.93959403038 102 0.869140625
+time_nn_cegis:  3.69000720978 3.5637845993 143 7.48659205437 0.9912109375 140
+===================================== number 175 with 178.0 pixels 
+time_rand:  2.62748503685 1.57010817528 102 0.8974609375
+time_nn_cegis:  3.76767420769 5.28262495995 142 7.19933104515 0.9765625 140
+===================================== number 176 with 130.0 pixels 
+time_rand:  2.52814412117 0.87007188797 102 0.9287109375
+time_nn_cegis:  3.07353973389 10.3154511452 122 6.00423598289 0.9990234375 120
+===================================== number 177 with 218.0 pixels 
+time_rand:  2.6323568821 7.65597820282 102 0.869140625
+time_nn_cegis:  4.8636059761 3.68578386307 160 8.14441585541 1.0 160
+===================================== number 178 with 134.0 pixels 
+time_rand:  2.57293009758 1.10566592216 102 0.841796875
+time_nn_cegis:  4.17474508286 1.4801530838 160 8.22180819511 1.0 160
+===================================== number 179 with 190.0 pixels 
+time_rand:  2.7723801136 2.36672496796 102 0.9248046875
+time_nn_cegis:  4.15754699707 1.57760000229 160 8.29810905457 1.0 160
+===================================== number 180 with 194.0 pixels 
+time_rand:  2.53120994568 1.56650900841 102 0.89453125
+time_nn_cegis:  4.20709013939 27.4582488537 161 8.22473812103 0.998046875 160
+===================================== number 181 with 102.0 pixels 
+time_rand:  2.56093907356 1.7722928524 102 0.919921875
+time_nn_cegis:  2.67520499229 6.47771000862 100 4.86030888557 0.998046875 100
+===================================== number 182 with 122.0 pixels 
+time_rand:  2.55483007431 1.03753590584 102 0.927734375
+time_nn_cegis:  3.09318780899 2.15263199806 121 6.25398015976 0.919921875 120
+===================================== number 183 with 120.0 pixels 
+time_rand:  2.59536314011 1.45623803139 102 0.892578125
+time_nn_cegis:  2.54243898392 5.49806118011 101 4.92095398903 0.998046875 100
+===================================== number 184 with 232.0 pixels 
+time_rand:  2.60082101822 10.9584469795 102 0.89453125
+time_nn_cegis:  5.19534707069 1.82556605339 200 10.2223029137 1.0 200
+===================================== number 185 with 110.0 pixels 
+time_rand:  2.64333605766 0.614576101303 102 0.9052734375
+time_nn_cegis:  2.63802289963 0.779042959213 100 5.76831912994 0.998046875 100
+===================================== number 186 with 185.0 pixels 
+time_rand:  2.53154206276 0.458271980286 102 0.9453125
+time_nn_cegis:  3.26096391678 3.33451533318 123 5.7542860508 1.0 120
+===================================== number 187 with 126.0 pixels 
+time_rand:  2.64699697495 0.430433034897 102 0.87890625
+time_nn_cegis:  3.68662214279 4.31086397171 140 7.05182790756 1.0 140
+===================================== number 188 with 125.0 pixels 
+time_rand:  2.52215600014 0.477144956589 102 0.90625
+time_nn_cegis:  3.1560921669 4.52933597565 121 6.52495312691 0.99609375 120
+===================================== number 189 with 155.0 pixels 
+time_rand:  2.6030831337 0.342413902283 102 0.875
+time_nn_cegis:  3.1714091301 1.13561987877 120 6.46640777588 0.9990234375 120
+===================================== number 190 with 173.0 pixels 
+time_rand:  2.78658509254 0.395243883133 102 0.904296875
+time_nn_cegis:  3.54900717735 17.7912969589 142 7.12289190292 0.9990234375 140
+===================================== number 191 with 203.0 pixels 
+time_rand:  2.79807400703 1.20482087135 102 0.9267578125
+time_nn_cegis:  3.68248414993 19.2169737816 146 7.4227411747 0.9853515625 140
+===================================== number 192 with 205.0 pixels 
+time_rand:  2.49581098557 5.6334810257 102 0.865234375
+time_nn_cegis:  4.26694703102 13.3578498363 163 8.4211268425 0.9990234375 160
+===================================== number 193 with 110.0 pixels 
+time_rand:  2.73526382446 0.63915014267 102 0.875
+time_nn_cegis:  2.69526195526 3.63995504379 100 5.80654501915 1.0 100
+===================================== number 194 with 143.0 pixels 
+time_rand:  2.67861390114 0.59345293045 102 0.90234375
+time_nn_cegis:  3.5578148365 1.09683299065 141 6.86050200462 0.9990234375 140
+===================================== number 195 with 119.0 pixels 
+time_rand:  2.56399893761 0.418660879135 102 0.9091796875
+time_nn_cegis:  3.29039430618 11.8690319061 121 6.42791891098 0.9560546875 120
+===================================== number 196 with 224.0 pixels 
+time_rand:  2.67945194244 13.3677279949 102 0.880859375
+time_nn_cegis:  4.56197810173 11.1668930054 181 9.1027071476 0.966796875 180
+===================================== number 197 with 151.0 pixels 
+time_rand:  2.58253288269 0.616240978241 102 0.853515625
+time_nn_cegis:  3.61237812042 4.13940000534 141 7.52077889442 0.9853515625 140
+===================================== number 198 with 237.0 pixels 
+time_rand:  2.60231518745 6.37943696976 102 0.865234375
+time_nn_cegis:  4.55990409851 2.49118685722 180 9.15948700905 1.0 180
+===================================== number 199 with 226.0 pixels 
+time_rand:  2.49593710899 4.66598796844 102 0.890625
+time_nn_cegis:  3.95128703117 1.20889687538 160 7.66810703278 1.0 160
+===================================== number 200 with 200.0 pixels 
+time_rand:  2.51552414894 1.71354293823 102 0.892578125
+time_nn_cegis:  4.08709788322 3.52331805229 160 8.54732680321 1.0 160
+===================================== number 201 with 162.0 pixels 
+time_rand:  2.51764702797 0.553580999374 102 0.8974609375
+time_nn_cegis:  3.45392107964 4.24050498009 140 7.36239480972 1.0 140
+===================================== number 202 with 239.0 pixels 
+time_rand:  2.61507105827 2.16963005066 102 0.8740234375
+time_nn_cegis:  5.27650094032 2.73866677284 202 10.4493880272 1.0 200
+===================================== number 203 with 138.0 pixels 
+time_rand:  2.48043584824 0.349039077759 102 0.923828125
+time_nn_cegis:  3.22056603432 4.9914150238 120 5.87384605408 0.9990234375 120
+===================================== number 204 with 249.0 pixels 
+time_rand:  2.55932402611 5.36840486526 102 0.87109375
+time_nn_cegis:  5.12492609024 1.05228185654 200 10.4489901066 1.0 200
+===================================== number 205 with 187.0 pixels 
+time_rand:  2.52148914337 3.07398080826 102 0.875
+time_nn_cegis:  3.58298206329 4.21200966835 141 7.45342302322 0.974609375 140
+===================================== number 206 with 176.0 pixels 
+time_rand:  2.5220708847 0.524117946625 102 0.8427734375
+time_nn_cegis:  3.75951194763 20.111312151 144 7.29201197624 0.9873046875 140
+===================================== number 207 with 157.0 pixels 
+time_rand:  2.66374111176 0.349695920944 102 0.8994140625
+time_nn_cegis:  3.52850484848 3.7960100174 140 7.51516819 0.998046875 140
+===================================== number 208 with 110.0 pixels 
+time_rand:  2.51826095581 0.41228890419 102 0.97265625
+time_nn_cegis:  3.39500498772 1.77659153938 129 5.72591090202 0.8955078125 120
+===================================== number 209 with 216.0 pixels 
+time_rand:  2.59115695953 5.15492391586 102 0.865234375
+time_nn_cegis:  4.94489097595 1.32475996017 200 10.0415079594 1.0 200
+===================================== number 210 with 215.0 pixels 
+time_rand:  2.53625106812 3.24193501472 102 0.92578125
+time_nn_cegis:  5.18605899811 2.34112119675 200 9.90523600578 1.0 200
+===================================== number 211 with 167.0 pixels 
+time_rand:  2.57221603394 0.492922067642 102 0.91796875
+time_nn_cegis:  2.83357191086 2.45486998558 112 5.44936490059 0.994140625 100
+===================================== number 212 with 133.0 pixels 
+time_rand:  2.65841197968 0.409537792206 102 0.912109375
+time_nn_cegis:  3.15088510513 6.67644667625 123 6.42723011971 0.9873046875 120
+===================================== number 213 with 100.0 pixels 
+time_rand:  2.63318181038 0.337895154953 102 0.9189453125
+time_nn_cegis:  2.55235004425 4.46541190147 100 5.5324909687 1.0 100
+===================================== number 214 with 122.0 pixels 
+time_rand:  2.56128978729 0.673446178436 102 0.9287109375
+time_nn_cegis:  3.02139186859 1.9253692627 121 5.63163709641 1.0 120
+===================================== number 215 with 128.0 pixels 
+time_rand:  2.57950305939 1.37552881241 102 0.900390625
+time_nn_cegis:  3.14953780174 9.85371208191 122 6.46987700462 0.9921875 120
+===================================== number 216 with 186.0 pixels 
+time_rand:  2.68372893333 4.37335109711 102 0.8720703125
+time_nn_cegis:  4.20921516418 24.6099727154 162 8.40590810776 0.9970703125 160
+===================================== number 217 with 222.0 pixels 
+time_rand:  2.66280794144 7.34312295914 102 0.8642578125
+time_nn_cegis:  4.44250297546 7.03324103355 181 9.30597400665 0.994140625 180
+===================================== number 218 with 100.0 pixels 
+time_rand:  2.55123114586 0.453238964081 102 0.8818359375
+time_nn_cegis:  2.59236717224 0.513818740845 102 5.19889616966 0.9658203125 100
+===================================== number 219 with 154.0 pixels 
+time_rand:  2.52579212189 0.753093004227 102 0.8642578125
+time_nn_cegis:  4.03505992889 1.87116503716 160 8.18218183517 1.0 160
+===================================== number 220 with 119.0 pixels 
+time_rand:  2.63061594963 0.407963991165 102 0.89453125
+time_nn_cegis:  2.57747483253 10.6370072365 101 5.32677316666 1.0 100
+===================================== number 221 with 158.0 pixels 
+time_rand:  2.5776488781 0.445330142975 102 0.912109375
+time_nn_cegis:  3.69724488258 2.71163606644 141 7.09192895889 1.0 140
+===================================== number 222 with 117.0 pixels 
+time_rand:  2.63977694511 0.369235038757 102 0.8779296875
+time_nn_cegis:  3.279047966 0.981784820557 120 6.48686599731 0.9375 120
+===================================== number 223 with 110.0 pixels 
+time_rand:  2.56638908386 0.388463973999 102 0.919921875
+time_nn_cegis:  3.17028927803 2.00518894196 122 6.34969210625 0.97265625 120
+===================================== number 224 with 202.0 pixels 
+time_rand:  2.68059206009 0.656160116196 102 0.8759765625
+time_nn_cegis:  4.43526101112 1.38917899132 180 8.63654899597 1.0 180
+===================================== number 225 with 213.0 pixels 
+time_rand:  2.57289099693 1.98533010483 102 0.9150390625
+time_nn_cegis:  4.56878113747 3.10251283646 180 8.75481104851 1.0 180
+===================================== number 226 with 105.0 pixels 
+time_rand:  2.57606697083 0.633627891541 102 0.91015625
+time_nn_cegis:  3.0990550518 5.96038484573 121 6.41905879974 0.994140625 120
+===================================== number 227 with 214.0 pixels 
+time_rand:  2.5836250782 6.18726801872 102 0.861328125
+time_nn_cegis:  4.18485116959 3.14052677155 160 8.30689907074 1.0 160
+===================================== number 228 with 100.0 pixels 
+time_rand:  2.59382486343 0.36555314064 102 0.9462890625
+time_nn_cegis:  2.96770143509 1.1407930851 115 4.9914689064 0.9453125 100
+===================================== number 229 with 185.0 pixels 
+time_rand:  2.65989589691 0.516553878784 102 0.9169921875
+time_nn_cegis:  4.3503100872 5.0622177124 164 9.40043210983 0.9892578125 160
+===================================== number 230 with 153.0 pixels 
+time_rand:  2.63828086853 6.18895196915 102 0.9306640625
+time_nn_cegis:  4.0815820694 1.31248092651 160 8.22108507156 1.0 160
+===================================== number 231 with 284.0 pixels 
+time_rand:  2.55874109268 1.13073801994 102 0.9599609375
+time_nn_cegis:  6.42494511604 3.76377081871 261 12.8334209919 1.0 260
+===================================== number 232 with 108.0 pixels 
+time_rand:  2.57869291306 0.318527936935 102 0.91015625
+time_nn_cegis:  3.05968308449 2.90894794464 123 5.71859192848 0.99609375 120
+===================================== number 233 with 125.0 pixels 
+time_rand:  2.46758198738 0.361660003662 102 0.9091796875
+time_nn_cegis:  3.91959691048 2.15429496765 140 6.75764894485 1.0 140
+===================================== number 234 with 118.0 pixels 
+time_rand:  2.73130011559 0.557755947113 102 0.9033203125
+time_nn_cegis:  3.0979719162 2.31464409828 120 6.59194993973 0.9892578125 120
+===================================== number 235 with 110.0 pixels 
+time_rand:  2.61766004562 0.56592798233 102 0.8740234375
+time_nn_cegis:  3.10114812851 1.67350506783 122 5.82834410667 0.896484375 120
+===================================== number 236 with 194.0 pixels 
+time_rand:  2.57893896103 9.85291099548 102 0.9541015625
+time_nn_cegis:  4.33584094048 3.77241301537 161 7.99627590179 0.99609375 160
+===================================== number 237 with 160.0 pixels 
+time_rand:  2.53131985664 0.530815124512 102 0.8642578125
+time_nn_cegis:  3.59323096275 7.92616701126 140 7.56357312202 1.0 140
+===================================== number 238 with 240.0 pixels 
+time_rand:  2.6570110321 2.74248313904 102 0.9580078125
+time_nn_cegis:  5.61287617683 1.70553779602 221 11.6474270821 0.9921875 220
+===================================== number 239 with 206.0 pixels 
+time_rand:  2.63859391212 1.90620017052 102 0.841796875
+time_nn_cegis:  4.01299405098 2.20108890533 160 8.53752112389 1.0 160
+===================================== number 240 with 139.0 pixels 
+time_rand:  2.64079499245 0.477993011475 102 0.904296875
+time_nn_cegis:  3.56026911736 5.73073101044 140 7.43974590302 0.9990234375 140
+===================================== number 241 with 114.0 pixels 
+time_rand:  2.52916312218 0.653728961945 102 0.94140625
+time_nn_cegis:  2.5115981102 1.00295782089 101 4.867208004 0.9892578125 100
+===================================== number 242 with 100.0 pixels 
+time_rand:  2.55821299553 0.718137979507 102 0.8759765625
+time_nn_cegis:  2.03361773491 1.86811232567 83 3.8183400631 0.9921875 80
+===================================== number 243 with 113.0 pixels 
+time_rand:  2.58321499825 0.716566801071 102 0.845703125
+time_nn_cegis:  3.55822396278 11.6184971333 140 6.75961399078 1.0 140
+===================================== number 244 with 117.0 pixels 
+time_rand:  2.56532692909 3.57723903656 102 0.93359375
+time_nn_cegis:  3.04454803467 4.59926986694 121 6.22092986107 1.0 120
+===================================== number 245 with 216.0 pixels 
+time_rand:  2.50758290291 6.88108491898 102 0.8232421875
+time_nn_cegis:  3.90084195137 1.20115303993 160 8.39226484299 1.0 160
+===================================== number 246 with 175.0 pixels 
+time_rand:  2.60499596596 1.18741512299 102 0.904296875
+time_nn_cegis:  4.67237401009 2.19407582283 180 9.19469404221 1.0 180
+===================================== number 247 with 188.0 pixels 
+time_rand:  2.62374901772 1.72449398041 102 0.8603515625
+time_nn_cegis:  4.2063100338 1.22478890419 160 7.88699698448 1.0 160
+===================================== number 248 with 155.0 pixels 
+time_rand:  2.66659092903 0.441458940506 102 0.9033203125
+time_nn_cegis:  3.37238740921 9.46727252007 131 6.28391814232 0.9609375 120
+===================================== number 249 with 114.0 pixels 
+time_rand:  2.64753389359 0.46880698204 102 0.9638671875
+time_nn_cegis:  3.1130900383 0.990598917007 120 6.31575298309 0.9892578125 120
+===================================== number 250 with 178.0 pixels 
+time_rand:  2.75625801086 1.31951999664 102 0.89453125
+time_nn_cegis:  3.56817698479 22.9140250683 142 7.37771010399 0.994140625 140
+===================================== number 251 with 168.0 pixels 
+time_rand:  2.55643010139 0.918765068054 102 0.896484375
+time_nn_cegis:  4.63898205757 2.02916288376 180 9.46209907532 1.0 180
+===================================== number 252 with 151.0 pixels 
+time_rand:  2.56638097763 0.450932025909 102 0.9013671875
+time_nn_cegis:  3.91726326942 6.98883605003 141 6.93747615814 0.998046875 140
+===================================== number 253 with 105.0 pixels 
+time_rand:  2.60908603668 0.500888109207 102 0.8701171875
+time_nn_cegis:  3.03188920021 3.8463177681 121 6.48195290565 0.9931640625 120
+===================================== number 254 with 133.0 pixels 
+time_rand:  2.67556190491 1.55187702179 102 0.869140625
+time_nn_cegis:  3.96328997612 5.65468096733 141 7.35525894165 0.9921875 140
+===================================== number 255 with 189.0 pixels 
+time_rand:  2.59751605988 11.5843420029 102 0.85546875
+time_nn_cegis:  4.10472631454 34.3473677635 161 7.9144718647 0.9970703125 160
+===================================== number 256 with 193.0 pixels 
+time_rand:  2.65182113647 0.678261041641 102 0.8662109375
+time_nn_cegis:  3.61735391617 8.71197104454 141 6.98236894608 0.9990234375 140
+===================================== number 257 with 106.0 pixels 
+time_rand:  2.67063999176 0.510887145996 102 0.90234375
+time_nn_cegis:  2.65335774422 1.84316587448 104 5.35976910591 0.947265625 100
+===================================== number 258 with 187.0 pixels 
+time_rand:  2.58449292183 0.384891033173 102 0.9189453125
+time_nn_cegis:  4.65029883385 1.24258708954 180 9.40418291092 1.0 180
+===================================== number 259 with 217.0 pixels 
+time_rand:  2.71527814865 3.4279718399 102 0.8984375
+time_nn_cegis:  4.7900428772 2.36117720604 181 9.65741801262 0.984375 180
+===================================== number 260 with 140.0 pixels 
+time_rand:  2.74692106247 1.0120549202 102 0.923828125
+time_nn_cegis:  4.02702498436 8.95353603363 160 8.08289885521 1.0 160
+===================================== number 261 with 100.0 pixels 
+time_rand:  2.61697006226 0.336628913879 102 0.9384765625
+time_nn_cegis:  2.64465117455 0.563762903214 101 5.65153098106 0.904296875 100
+===================================== number 262 with 142.0 pixels 
+time_rand:  2.69875097275 0.646577835083 102 0.859375
+time_nn_cegis:  4.27215218544 4.65952396393 162 8.37025499344 0.99609375 160
+===================================== number 263 with 171.0 pixels 
+time_rand:  2.8838570118 0.525528907776 102 0.82421875
+time_nn_cegis:  3.45467185974 5.81883001328 142 7.3050570488 0.9921875 140
+===================================== number 264 with 121.0 pixels 
+time_rand:  2.48944115639 0.310793876648 102 0.876953125
+time_nn_cegis:  3.53931999207 1.39013695717 141 6.4426419735 0.998046875 140
+===================================== number 265 with 184.0 pixels 
+time_rand:  2.52012610435 0.666563987732 102 0.8447265625
+time_nn_cegis:  3.50355315208 15.568169117 141 7.24975395203 1.0 140
+===================================== number 266 with 207.0 pixels 
+time_rand:  2.51514196396 8.77185916901 102 0.8564453125
+time_nn_cegis:  4.5669798851 9.23689508438 182 9.20052981377 0.98828125 180
+===================================== number 267 with 112.0 pixels 
+time_rand:  2.56906795502 0.54204416275 102 0.9306640625
+time_nn_cegis:  2.91698002815 2.30400896072 120 6.17822980881 1.0 120
+===================================== number 268 with 150.0 pixels 
+time_rand:  2.51901197433 2.56908798218 102 0.8896484375
+time_nn_cegis:  3.04186010361 5.69786405563 121 5.52515101433 1.0 120
+===================================== number 269 with 148.0 pixels 
+time_rand:  2.56293392181 0.9161901474 102 0.8603515625
+time_nn_cegis:  3.49528312683 14.617816925 141 7.04558682442 0.9931640625 140
+===================================== number 270 with 133.0 pixels 
+time_rand:  2.48692798615 0.336539030075 102 0.8798828125
+time_nn_cegis:  3.88331198692 1.99421000481 160 8.00488209724 0.9990234375 160
+===================================== number 271 with 122.0 pixels 
+time_rand:  2.49116611481 0.292439937592 102 0.94140625
+time_nn_cegis:  3.19611954689 1.51437616348 125 5.75456213951 0.9775390625 120
+===================================== number 272 with 115.0 pixels 
+time_rand:  2.53124403954 0.642362833023 102 0.97265625
+time_nn_cegis:  2.57915687561 33.489014864 106 4.75489115715 0.9873046875 100
+===================================== number 273 with 205.0 pixels 
+time_rand:  2.52645087242 3.16073799133 102 0.892578125
+time_nn_cegis:  3.93938016891 4.71261501312 163 8.07415604591 0.9765625 160
+===================================== number 274 with 177.0 pixels 
+time_rand:  2.47709703445 2.6034309864 102 0.873046875
+time_nn_cegis:  3.48545002937 3.05117797852 140 6.97303891182 1.0 140
+===================================== number 275 with 151.0 pixels 
+time_rand:  2.57907509804 0.44507598877 102 0.931640625
+time_nn_cegis:  3.45420694351 3.26600408554 140 7.21177697182 0.98046875 140
+===================================== number 276 with 106.0 pixels 
+time_rand:  2.48744010925 0.448101997375 102 0.896484375
+time_nn_cegis:  2.56930017471 1.79179787636 102 4.76977109909 0.99609375 100
+===================================== number 277 with 154.0 pixels 
+time_rand:  2.53652310371 8.12232398987 102 0.9052734375
+time_nn_cegis:  3.98174381256 3.47682499886 160 8.21178889275 1.0 160
+===================================== number 278 with 134.0 pixels 
+time_rand:  2.55963206291 0.800024986267 102 0.83984375
+time_nn_cegis:  3.59183883667 4.39445638657 141 6.95675301552 1.0 140
+===================================== number 279 with 113.0 pixels 
+time_rand:  2.54133796692 0.433413028717 102 0.9228515625
+time_nn_cegis:  2.5830321312 1.65640187263 101 4.69628405571 0.998046875 100
+===================================== number 280 with 112.0 pixels 
+time_rand:  2.52396082878 0.415965080261 102 0.9501953125
+time_nn_cegis:  3.45278811455 1.10029983521 140 7.04755091667 1.0 140
+===================================== number 281 with 180.0 pixels 
+time_rand:  2.51828312874 1.91254806519 102 0.923828125
+time_nn_cegis:  4.98784399033 3.03203105927 200 9.98252415657 1.0 200
+===================================== number 282 with 148.0 pixels 
+time_rand:  2.47050499916 0.68232011795 102 0.9228515625
+time_nn_cegis:  3.95900201797 2.14916610718 161 8.09451389313 0.970703125 160
+===================================== number 283 with 177.0 pixels 
+time_rand:  2.60782814026 0.452309846878 102 0.91015625
+time_nn_cegis:  3.49634408951 5.51112508774 142 6.5985429287 0.9833984375 140
+===================================== number 284 with 120.0 pixels 
+time_rand:  2.50165295601 0.383995056152 102 0.9326171875
+time_nn_cegis:  2.5227599144 0.587755203247 101 5.29757809639 0.978515625 100
+===================================== number 285 with 278.0 pixels 
+time_rand:  2.5626809597 22.5798990726 102 0.9921875
+time_nn_cegis:  5.32827997208 1.6830060482 220 11.012928009 1.0 220
+===================================== number 286 with 243.0 pixels 
+time_rand:  2.52839207649 0.782876968384 102 0.9423828125
+time_nn_cegis:  4.38504099846 2.63893604279 181 8.95245504379 1.0 180
+===================================== number 287 with 181.0 pixels 
+time_rand:  2.47251701355 0.481275081635 102 0.875
+time_nn_cegis:  3.42721986771 3.69052004814 140 7.04639720917 1.0 140
+===================================== number 288 with 243.0 pixels 
+time_rand:  2.46583008766 10.0135819912 102 0.951171875
+time_nn_cegis:  5.29206204414 1.12368798256 220 10.8071911335 1.0 220
+===================================== number 289 with 204.0 pixels 
+time_rand:  2.55915403366 0.735301017761 102 0.85546875
+time_nn_cegis:  3.94920110703 3.79289603233 161 7.58180189133 0.986328125 160
+===================================== number 290 with 124.0 pixels 
+time_rand:  2.53168320656 0.817698001862 102 0.951171875
+time_nn_cegis:  2.67401003838 1.19964790344 105 4.91883111 0.98046875 100
+===================================== number 291 with 119.0 pixels 
+time_rand:  2.53076696396 0.538970947266 102 0.9619140625
+time_nn_cegis:  2.95211482048 1.35886621475 121 6.24473881721 0.916015625 120
+===================================== number 292 with 171.0 pixels 
+time_rand:  2.47599697113 1.26953196526 102 0.8955078125
+time_nn_cegis:  4.32294178009 1.70454311371 180 8.81307291985 1.0 180
+===================================== number 293 with 106.0 pixels 
+time_rand:  2.4781229496 0.414006948471 102 0.94140625
+time_nn_cegis:  2.51848363876 2.71114325523 102 4.8074901104 0.9765625 100
+===================================== number 294 with 109.0 pixels 
+time_rand:  2.47718095779 1.67344498634 102 0.923828125
+time_nn_cegis:  3.00274014473 0.389293909073 120 6.13727498055 1.0 120
+===================================== number 295 with 188.0 pixels 
+time_rand:  2.53635001183 0.736387014389 102 0.8525390625
+time_nn_cegis:  3.89233016968 1.65999770164 161 8.07236599922 0.994140625 160
+===================================== number 296 with 103.0 pixels 
+time_rand:  2.44817614555 1.2134308815 102 0.966796875
+time_nn_cegis:  2.97152209282 1.13406300545 121 5.62925601006 0.888671875 120
+===================================== number 297 with 171.0 pixels 
+time_rand:  2.52106499672 0.621387004852 102 0.865234375
+time_nn_cegis:  4.48126292229 4.75127005577 180 8.94564890862 1.0 180
+===================================== number 298 with 177.0 pixels 
+time_rand:  2.551664114 1.19767689705 102 0.9267578125
+time_nn_cegis:  4.33648896217 0.971346139908 180 9.00112199783 0.9990234375 180
+===================================== number 299 with 204.0 pixels 
+time_rand:  2.48205590248 0.972435951233 102 0.9638671875
+time_nn_cegis:  4.36500310898 1.48818802834 180 9.0720500946 1.0 180
+===================================== number 300 with 109.0 pixels 
+time_rand:  2.450330019 0.357737064362 102 0.90234375
+time_nn_cegis:  2.97705984116 1.91123795509 120 6.06105113029 1.0 120
+===================================== number 301 with 129.0 pixels 
+time_rand:  2.53214502335 0.428086042404 102 0.865234375
+time_nn_cegis:  3.08807873726 6.315564394 122 5.5376560688 0.9912109375 120
+===================================== number 302 with 152.0 pixels 
+time_rand:  2.57769179344 4.04034614563 102 0.955078125
+time_nn_cegis:  3.97264504433 0.835485935211 160 7.85974502563 1.0 160
+===================================== number 303 with 110.0 pixels 
+time_rand:  2.5263440609 0.341969966888 102 0.9287109375
+time_nn_cegis:  2.44481921196 1.66882586479 101 4.78307580948 0.9755859375 100
+===================================== number 304 with 245.0 pixels 
+time_rand:  2.48448896408 25.8068261147 102 0.904296875
+time_nn_cegis:  4.84735989571 1.54579520226 200 9.40495705605 1.0 200
+===================================== number 305 with 137.0 pixels 
+time_rand:  2.50368094444 3.21223807335 102 0.888671875
+time_nn_cegis:  3.52151489258 0.876632928848 140 6.57716012001 0.998046875 140
+===================================== number 306 with 233.0 pixels 
+time_rand:  2.61391496658 53.0936918259 102 0.90234375
+time_nn_cegis:  4.97999119759 5.2243449688 201 9.84702301025 0.984375 200
+===================================== number 307 with 100.0 pixels 
+time_rand:  2.55141401291 1.6454179287 102 0.810546875
+time_nn_cegis:  2.94602203369 0.3739798069 120 6.19487190247 1.0 120
+===================================== number 308 with 194.0 pixels 
+time_rand:  2.48699593544 3.84149098396 102 0.98828125
+time_nn_cegis:  4.4098739624 1.24957513809 180 8.89673089981 1.0 180
+===================================== number 309 with 167.0 pixels 
+time_rand:  2.62882781029 0.447218179703 102 0.9306640625
+time_nn_cegis:  3.91705918312 19.7017059326 160 7.39073896408 1.0 160
+===================================== number 310 with 211.0 pixels 
+time_rand:  2.5030579567 0.439100980759 102 0.8486328125
+time_nn_cegis:  4.40057516098 3.3832719326 181 8.85916304588 0.9931640625 180
+===================================== number 311 with 177.0 pixels 
+time_rand:  2.49624800682 0.806221961975 102 0.8720703125
+time_nn_cegis:  3.45024180412 2.9346511364 140 7.20104193687 1.0 140
+===================================== number 312 with 174.0 pixels 
+time_rand:  2.55426001549 0.677099943161 102 0.8974609375
+time_nn_cegis:  3.60105872154 10.7208907604 142 7.3219871521 0.98046875 140
+===================================== number 313 with 111.0 pixels 
+time_rand:  2.51953101158 0.444525957108 102 0.8994140625
+time_nn_cegis:  2.60640096664 1.98386907578 104 4.70456290245 0.9072265625 100
+===================================== number 314 with 231.0 pixels 
+time_rand:  2.52710199356 40.6475858688 102 0.9404296875
+time_nn_cegis:  4.42432403564 2.01981306076 180 9.04269814491 1.0 180
+===================================== number 315 with 111.0 pixels 
+time_rand:  2.4750790596 1.49899196625 102 0.8798828125
+time_nn_cegis:  3.44820904732 1.74331617355 141 6.95054101944 0.994140625 140
+===================================== number 316 with 113.0 pixels 
+time_rand:  2.47636294365 0.427719116211 102 0.9091796875
+time_nn_cegis:  3.02345705032 0.609887838364 120 6.10363698006 0.982421875 120
+===================================== number 317 with 177.0 pixels 
+time_rand:  2.57660079002 24.3610780239 102 0.91015625
+time_nn_cegis:  4.46248912811 3.07975792885 180 8.60885882378 1.0 180
+===================================== number 318 with 126.0 pixels 
+time_rand:  2.52657914162 0.655840873718 102 0.900390625
+time_nn_cegis:  3.03685808182 10.4373247623 123 6.04883098602 0.955078125 120
+===================================== number 319 with 101.0 pixels 
+time_rand:  2.50823402405 0.586835861206 102 0.9169921875
+time_nn_cegis:  2.4952878952 1.25587391853 101 5.28180289268 0.99609375 100
+===================================== number 320 with 218.0 pixels 
+time_rand:  2.50585103035 1.90658307076 102 0.943359375
+time_nn_cegis:  3.88108992577 3.70188999176 160 7.40346288681 1.0 160
+===================================== number 321 with 222.0 pixels 
+time_rand:  2.54884409904 8.50345492363 102 0.8486328125
+time_nn_cegis:  4.4757900238 2.26834988594 180 8.56890797615 1.0 180
+===================================== number 322 with 157.0 pixels 
+time_rand:  2.53448104858 11.0862648487 102 0.9091796875
+time_nn_cegis:  3.41090703011 5.66767501831 141 7.25431084633 0.9921875 140
+===================================== number 323 with 176.0 pixels 
+time_rand:  2.47955107689 0.856774091721 102 0.849609375
+time_nn_cegis:  3.99459195137 4.32819509506 160 8.213504076 0.9921875 160
+===================================== number 324 with 111.0 pixels 
+time_rand:  2.54525494576 0.360192060471 102 0.9375
+time_nn_cegis:  2.97510695457 1.04934501648 120 5.7120680809 0.96875 120
+===================================== number 325 with 101.0 pixels 
+time_rand:  2.49559116364 0.35475897789 102 0.904296875
+time_nn_cegis:  2.5822789669 4.49527287483 102 4.74006390572 0.9765625 100
+===================================== number 326 with 179.0 pixels 
+time_rand:  2.5539829731 1.07134008408 102 0.9248046875
+time_nn_cegis:  2.92229604721 3.92919611931 120 6.26718616486 1.0 120
+===================================== number 327 with 101.0 pixels 
+time_rand:  2.52920508385 0.339370965958 102 0.8828125
+time_nn_cegis:  3.0260488987 0.952798128128 120 5.82027983665 1.0 120
+===================================== number 328 with 204.0 pixels 
+time_rand:  2.56408405304 2.55349802971 102 0.912109375
+time_nn_cegis:  3.93461298943 15.5318489075 161 8.13351106644 0.990234375 160
+===================================== number 329 with 174.0 pixels 
+time_rand:  2.49626302719 0.435369968414 102 0.8896484375
+time_nn_cegis:  2.94969201088 3.08594894409 121 6.2404229641 0.9931640625 120
+===================================== number 330 with 162.0 pixels 
+time_rand:  2.49588990211 0.384766101837 102 0.8623046875
+time_nn_cegis:  3.50127196312 4.56420993805 141 6.57781791687 0.984375 140
+===================================== number 331 with 157.0 pixels 
+time_rand:  2.46906590462 0.399682998657 102 0.9365234375
+time_nn_cegis:  2.95566797256 2.40807795525 120 6.24640798569 1.0 120
+===================================== number 332 with 206.0 pixels 
+time_rand:  3.42476010323 3.8057448864 102 0.8857421875
+time_nn_cegis:  4.07161593437 8.59942626953 161 8.09787082672 0.9921875 160
+===================================== number 333 with 100.0 pixels 
+time_rand:  2.55535793304 0.327006101608 102 0.9287109375
+time_nn_cegis:  2.96772694588 1.49697899818 121 5.6781539917 0.908203125 120
+===================================== number 334 with 126.0 pixels 
+time_rand:  2.55621004105 0.365190982819 102 0.89453125
+time_nn_cegis:  3.02823090553 2.20520615578 121 5.67562007904 0.9970703125 120
+===================================== number 335 with 110.0 pixels 
+time_rand:  2.48564100266 0.372252941132 102 0.955078125
+time_nn_cegis:  3.09633779526 1.89236760139 126 6.13982009888 0.9794921875 120
+===================================== number 336 with 108.0 pixels 
+time_rand:  2.54105305672 0.585439920425 102 0.888671875
+time_nn_cegis:  2.90437316895 1.46276879311 120 6.10429883003 1.0 120
+===================================== number 337 with 100.0 pixels 
+time_rand:  2.57587313652 0.366197824478 102 0.916015625
+time_nn_cegis:  2.46661996841 0.283143997192 100 4.77463889122 1.0 100
+===================================== number 338 with 108.0 pixels 
+time_rand:  2.47866201401 0.462393045425 102 0.931640625
+time_nn_cegis:  2.74845409393 1.43376874924 110 5.19039082527 0.896484375 100
+===================================== number 339 with 113.0 pixels 
+time_rand:  2.48983693123 0.327649116516 102 0.9130859375
+time_nn_cegis:  2.96253705025 1.81440782547 119 4.67516899109 0.98046875 100
+===================================== number 340 with 265.0 pixels 
+time_rand:  2.51528501511 0.756515979767 102 0.943359375
+time_nn_cegis:  4.93650603294 2.59742498398 200 9.99303984642 1.0 200
+===================================== number 341 with 100.0 pixels 
+time_rand:  2.46856689453 1.01387095451 102 0.935546875
+time_nn_cegis:  2.67313551903 5.47308254242 106 5.19183206558 0.9814453125 100
+===================================== number 342 with 177.0 pixels 
+time_rand:  2.55029296875 1.22780418396 102 0.8671875
+time_nn_cegis:  3.51821804047 9.29767012596 141 7.239331007 0.982421875 140
+===================================== number 343 with 213.0 pixels 
+time_rand:  2.54345703125 23.7753989697 102 0.9052734375
+time_nn_cegis:  4.07752680779 5.25578713417 162 7.55279803276 0.98046875 160
+===================================== number 344 with 182.0 pixels 
+time_rand:  2.51986098289 3.91508507729 102 0.8359375
+time_nn_cegis:  4.01217794418 2.23927998543 160 8.09603309631 1.0 160
+===================================== number 345 with 161.0 pixels 
+time_rand:  2.54866409302 0.675668001175 102 0.89453125
+time_nn_cegis:  3.46242690086 3.82155394554 141 7.04961895943 1.0 140
+===================================== number 346 with 254.0 pixels 
+time_rand:  2.53559088707 4.63829398155 102 0.970703125
+time_nn_cegis:  5.33567786217 1.390625 220 11.0079269409 1.0 220
+===================================== number 347 with 126.0 pixels 
+time_rand:  2.56080889702 0.492197036743 102 0.8466796875
+time_nn_cegis:  3.3989238739 1.14274907112 140 7.14528512955 1.0 140
+===================================== number 348 with 104.0 pixels 
+time_rand:  2.51030683517 0.394205093384 102 0.939453125
+time_nn_cegis:  2.71693992615 1.25870585442 103 4.66639208794 0.8818359375 100
+===================================== number 349 with 200.0 pixels 
+time_rand:  2.54465985298 0.777177095413 102 0.818359375
+time_nn_cegis:  4.06588697433 2.12513208389 161 7.96823716164 0.99609375 160
+===================================== number 350 with 114.0 pixels 
+time_rand:  2.52562904358 0.921211957932 102 0.8974609375
+time_nn_cegis:  2.96299004555 0.943855047226 120 6.1993701458 0.9951171875 120
+===================================== number 351 with 153.0 pixels 
+time_rand:  2.54523396492 0.375298023224 102 0.859375
+time_nn_cegis:  3.51788711548 11.488694191 143 6.69260001183 0.9892578125 140
+===================================== number 352 with 132.0 pixels 
+time_rand:  2.48825502396 12.52866292 102 0.86328125
+time_nn_cegis:  4.0640809536 2.43503594398 160 7.44785499573 1.0 160
+===================================== number 353 with 100.0 pixels 
+time_rand:  2.61593794823 0.767159938812 102 0.91796875
+time_nn_cegis:  2.43158984184 1.85177516937 100 5.10231494904 0.99609375 100
+===================================== number 354 with 139.0 pixels 
+time_rand:  2.5667090416 0.362250089645 102 0.798828125
+time_nn_cegis:  3.5806748867 3.11177897453 143 6.68947196007 1.0 140
+===================================== number 355 with 167.0 pixels 
+time_rand:  2.58853983879 0.723148107529 102 0.896484375
+time_nn_cegis:  2.9952750206 37.9016919136 121 5.60824799538 1.0 120
+===================================== number 356 with 217.0 pixels 
+time_rand:  2.53804588318 5.04584217072 102 0.833984375
+time_nn_cegis:  4.49479484558 1.56627106667 180 8.99077391624 1.0 180
+===================================== number 357 with 185.0 pixels 
+time_rand:  2.53610706329 2.15623784065 102 0.9619140625
+time_nn_cegis:  3.88271689415 2.54774713516 160 8.01405692101 1.0 160
+===================================== number 358 with 100.0 pixels 
+time_rand:  2.51756000519 0.379594087601 102 0.8740234375
+time_nn_cegis:  2.48105692863 0.321161031723 100 4.84654211998 1.0 100
+===================================== number 359 with 100.0 pixels 
+time_rand:  2.51668214798 0.330060958862 102 0.951171875
+time_nn_cegis:  2.47142195702 0.330851078033 100 5.10742115974 1.0 100
+===================================== number 360 with 117.0 pixels 
+time_rand:  2.47424697876 0.729074001312 102 0.9326171875
+time_nn_cegis:  2.91501402855 3.3686311245 120 6.29770278931 1.0 120
+===================================== number 361 with 123.0 pixels 
+time_rand:  2.52255821228 2.7086789608 102 0.916015625
+time_nn_cegis:  3.49875497818 2.50484395027 141 6.59151291847 0.994140625 140
+===================================== number 362 with 117.0 pixels 
+time_rand:  2.52821111679 0.590359926224 102 0.912109375
+time_nn_cegis:  2.57159996033 2.20291185379 101 5.17635393143 0.9638671875 100
+===================================== number 363 with 208.0 pixels 
+time_rand:  2.55886697769 0.470679998398 102 0.8388671875
+time_nn_cegis:  3.95138597488 3.61920714378 160 8.14908695221 1.0 160
+===================================== number 364 with 100.0 pixels 
+time_rand:  2.50328993797 0.329830169678 102 0.880859375
+time_nn_cegis:  2.61893320084 1.86545681953 104 4.83219099045 0.998046875 100
+===================================== number 365 with 112.0 pixels 
+time_rand:  2.56598305702 0.516024827957 102 0.9638671875
+time_nn_cegis:  3.42994689941 0.772775173187 140 7.36063313484 1.0 140
+===================================== number 366 with 229.0 pixels 
+time_rand:  2.47878813744 0.343730926514 102 0.8955078125
+time_nn_cegis:  4.89940285683 1.55358219147 200 9.92636799812 1.0 200
+===================================== number 367 with 162.0 pixels 
+time_rand:  2.48468518257 0.538200855255 102 0.892578125
+time_nn_cegis:  3.13407492638 6.79485273361 124 5.69755387306 0.9521484375 120
+===================================== number 368 with 257.0 pixels 
+time_rand:  2.48927402496 9.94659614563 102 0.8583984375
+time_nn_cegis:  4.93859601021 2.38348293304 201 10.350894928 0.998046875 200
+===================================== number 369 with 112.0 pixels 
+time_rand:  2.56328296661 0.673867940903 102 0.904296875
+time_nn_cegis:  2.97257399559 4.97432780266 121 5.62013292313 1.0 120
+===================================== number 370 with 175.0 pixels 
+time_rand:  2.50594520569 2.54587697983 102 0.876953125
+time_nn_cegis:  3.98927021027 9.39906477928 161 8.39523601532 0.984375 160
+===================================== number 371 with 120.0 pixels 
+time_rand:  2.52815008163 0.675670862198 102 0.90234375
+time_nn_cegis:  3.34011077881 1.25588011742 131 6.24807405472 1.0 120
+===================================== number 372 with 125.0 pixels 
+time_rand:  2.55328202248 0.440398931503 102 0.8837890625
+time_nn_cegis:  3.07211399078 2.2605881691 122 6.16433405876 1.0 120
+===================================== number 373 with 197.0 pixels 
+time_rand:  2.55720019341 1.12321686745 102 0.92578125
+time_nn_cegis:  4.14362072945 5.79232025146 167 7.97192287445 0.998046875 160
+===================================== number 374 with 207.0 pixels 
+time_rand:  2.51106595993 0.365195989609 102 0.8740234375
+time_nn_cegis:  4.48077917099 5.3620288372 181 8.91129493713 0.96875 180
+===================================== number 375 with 198.0 pixels 
+time_rand:  2.55358195305 0.962007045746 102 0.818359375
+time_nn_cegis:  4.45887899399 2.81125307083 180 8.93491888046 1.0 180
+===================================== number 376 with 108.0 pixels 
+time_rand:  2.56171703339 0.339492082596 102 0.8984375
+time_nn_cegis:  3.05824780464 1.31108808517 123 5.63382601738 0.94140625 120
+===================================== number 377 with 259.0 pixels 
+time_rand:  2.47724795341 0.472010135651 102 0.86328125
+time_nn_cegis:  5.55337882042 0.857114076614 220 10.8667149544 1.0 220
+===================================== number 378 with 205.0 pixels 
+time_rand:  2.56263709068 1.00554895401 102 0.826171875
+time_nn_cegis:  4.15730977058 31.3044581413 162 8.12012290955 1.0 160
+===================================== number 379 with 113.0 pixels 
+time_rand:  2.52175116539 0.532432794571 102 0.9228515625
+time_nn_cegis:  3.03482103348 0.790369033813 120 6.15651106834 0.9990234375 120
+===================================== number 380 with 143.0 pixels 
+time_rand:  2.53565597534 0.384973049164 102 0.890625
+time_nn_cegis:  3.54043102264 3.58744597435 140 6.56019711494 1.0 140
+===================================== number 381 with 218.0 pixels 
+time_rand:  2.50259280205 2.6528441906 102 0.9130859375
+time_nn_cegis:  4.51719808578 2.05644798279 180 8.43648099899 1.0 180
+===================================== number 382 with 200.0 pixels 
+time_rand:  2.54103302956 4.19830393791 102 0.8466796875
+time_nn_cegis:  3.92449402809 4.16988492012 160 7.99695706367 1.0 160
+===================================== number 383 with 104.0 pixels 
+time_rand:  2.53649687767 0.327073097229 102 0.958984375
+time_nn_cegis:  2.56960296631 1.1705467701 102 5.20177793503 0.896484375 100
+===================================== number 384 with 208.0 pixels 
+time_rand:  2.57473897934 2.3298459053 102 0.9453125
+time_nn_cegis:  3.93599891663 5.71445322037 162 8.08399796486 0.990234375 160
+===================================== number 385 with 215.0 pixels 
+time_rand:  2.45686483383 1.53375601768 102 0.7880859375
+time_nn_cegis:  4.45425391197 4.40725255013 184 8.66978597641 0.994140625 180
+===================================== number 386 with 100.0 pixels 
+time_rand:  2.52141499519 0.412702083588 102 0.884765625
+time_nn_cegis:  2.42014694214 0.33284497261 100 4.7109849453 1.0 100
+===================================== number 387 with 132.0 pixels 
+time_rand:  2.47729110718 2.04598093033 102 0.880859375
+time_nn_cegis:  2.96073889732 1.79845309258 121 6.06266999245 0.9951171875 120
+===================================== number 388 with 201.0 pixels 
+time_rand:  2.55310893059 1.17588615417 102 0.96875
+time_nn_cegis:  4.48459792137 2.13979625702 181 8.9276099205 0.98828125 180
+===================================== number 389 with 156.0 pixels 
+time_rand:  2.47540998459 0.702284812927 102 0.87890625
+time_nn_cegis:  3.49542188644 3.38682103157 140 6.71008205414 1.0 140
+===================================== number 390 with 190.0 pixels 
+time_rand:  2.51844716072 1.0176358223 102 0.8759765625
+time_nn_cegis:  3.93300199509 6.30660605431 161 8.01938605309 1.0 160
+===================================== number 391 with 169.0 pixels 
+time_rand:  2.54400897026 0.875559091568 102 0.8974609375
+time_nn_cegis:  4.0091381073 5.13136982918 160 7.9479739666 1.0 160
+===================================== number 392 with 227.0 pixels 
+time_rand:  2.57055306435 0.819287061691 102 0.88671875
+time_nn_cegis:  5.44308900833 1.49344301224 220 11.119312048 1.0 220
+===================================== number 393 with 193.0 pixels 
+time_rand:  2.51877999306 0.429229021072 102 0.88671875
+time_nn_cegis:  3.85619688034 1.59266805649 160 8.0959379673 0.9775390625 160
+===================================== number 394 with 159.0 pixels 
+time_rand:  2.47818303108 0.639940023422 102 0.89453125
+time_nn_cegis:  3.52762818336 5.17868471146 143 6.5612950325 0.9921875 140
+===================================== number 395 with 190.0 pixels 
+time_rand:  2.53200006485 0.69464302063 102 0.935546875
+time_nn_cegis:  4.42697000504 5.35237193108 180 8.55071783066 1.0 180
+===================================== number 396 with 172.0 pixels 
+time_rand:  2.53489804268 0.601191997528 102 0.90234375
+time_nn_cegis:  3.50877285004 3.77151608467 143 6.5400018692 0.98828125 140
+===================================== number 397 with 205.0 pixels 
+time_rand:  2.4864180088 0.999759912491 102 0.9296875
+time_nn_cegis:  3.52907514572 8.20373463631 143 7.13021302223 0.96484375 140
+===================================== number 398 with 118.0 pixels 
+time_rand:  2.5539598465 0.880797147751 102 0.861328125
+time_nn_cegis:  2.91867184639 2.65986800194 120 6.09309911728 0.9462890625 120
+===================================== number 399 with 184.0 pixels 
+time_rand:  2.53243589401 5.46314716339 102 0.9091796875
+time_nn_cegis:  3.50102806091 83.6047070026 143 6.46595692635 0.98828125 140
+===================================== number 400 with 100.0 pixels 
+time_rand:  2.48477005959 0.506994962692 102 0.9150390625
+time_nn_cegis:  2.52117609978 0.449424982071 100 5.24862098694 0.994140625 100
+===================================== number 401 with 117.0 pixels 
+time_rand:  2.55015993118 2.41362094879 102 0.830078125
+time_nn_cegis:  3.04661512375 3.48351979256 121 6.3315050602 0.9033203125 120
+===================================== number 402 with 216.0 pixels 
+time_rand:  2.62386918068 2.37969183922 102 0.8095703125
+time_nn_cegis:  4.83983516693 2.33195400238 180 8.88208794594 1.0 180
+===================================== number 403 with 214.0 pixels 
+time_rand:  2.5691921711 2.89396882057 102 0.880859375
+time_nn_cegis:  4.42493391037 1.98662304878 180 8.92295312881 1.0 180
