@@ -4,6 +4,7 @@ import sys
 from graphix_solver import *
 import random
 import time
+import hashlib
 
 def obs_to_constraints(trace, render):
   trace_coords = [x[0] for x in trace]
@@ -28,12 +29,13 @@ class Inverter:
     self.s = DrawingSolver()
 
   def pick_arbitrary(self, ces):
-    ces_ordered = [(hash(x),x) for x in ces]
+    ces_ordered = [(int(hashlib.sha1(str(x)).hexdigest(),16),x) for x in ces]
     return min(ces_ordered)[1]
 
   def invert_cegis(self, constraints, render, method="cegis", sub_constraints=None):
-    b_time = 0
-    s_time = 0
+    b_time = 0.0
+    s_time = 0.0
+    c_time = 0.0
     # print method
     assert method in ["cegis", "r_cegis", 'a_cegis',]
     i = 0
@@ -66,10 +68,13 @@ class Inverter:
       b_time += paras['building_time']
       s_time += paras['solving_time']
       # counter example in idx space
+      stime = time.time()
       ces = check(paras, render, i)
+      c_time += time.time() - stime # add check time
       if ces == None:
         paras['building_time'] = b_time
         paras['solving_time'] = s_time
+        paras['checking_time'] = c_time
         paras['ce_size'] = len(sub_constraints)
         return paras
       else:

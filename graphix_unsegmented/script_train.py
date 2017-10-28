@@ -32,5 +32,5 @@ def train_model(impnet, epoch=3000):
       impnet.save()
 
 impnet = Implynet(tf.Session())
-train_model(impnet, 10000)
+train_model(impnet, 20000)
 

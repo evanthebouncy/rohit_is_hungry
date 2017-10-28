@@ -25,7 +25,7 @@ def conv2d(x, W):
 
 def embed_cnn_layer(input_var):
 
-  W_conv = weight_variable([9, 9, 2, n_hidden])
+  W_conv = weight_variable([7, 7, 2, n_hidden])
   b_conv = bias_variable([n_hidden])
 
   xxx_R17 = conv2d(input_var, W_conv)
@@ -112,7 +112,7 @@ class Implynet:
       self.cost_query_pred = sum(self.query_pred_costs)
 
       # ------------------------------------------------------------------------ training steps
-      optimizer = tf.train.AdagradOptimizer(0.01)
+      optimizer = tf.train.AdamOptimizer(0.001)
 
 
       print "computing gradient "
@@ -163,7 +163,7 @@ class Implynet:
       xx, yy = cord
       _obs[xx][yy] = lab
 
-    draw_allob(_obs, "hand_drawings/cur_obs.png",[])
+    # draw_allob(_obs, "hand_drawings/cur_obs.png",[])
     
     obss = np.array([_obs for i in range(N_BATCH)])
 
@@ -202,7 +202,7 @@ class Implynet:
     sub_constraints = optional_xform(sub_constraints)
 
     all_preds = self.get_all_preds(sub_constraints)
-    draw_allob(all_preds, "hand_drawings/pred_{}.png".format(i),[])
+    # draw_allob(all_preds, "hand_drawings/pred_{}.png".format(i),[])
 
     constraint_probs = np.sum(all_preds * constraints, axis=2)
     
@@ -235,7 +235,7 @@ class Implynet:
         obs.append((chosen_qry, query(chosen_qry)))
 
       all_preds = self.get_all_preds(obs)
-      draw_allob(all_preds, "drawings/pred{0}.png".format(i), [])
+      # draw_allob(all_preds, "drawings/pred{0}.png".format(i), [])
 
       # constraints = 
       # constraint_probs = np.sum(all_preds * constraints, axis=2)

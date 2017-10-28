@@ -301,8 +301,8 @@ def check(params, true_render, i):
   rendered = render(squares + lines)
 
   grid_constraints = img_2_labels(rendered)
-  draw_allob(grid_constraints, "hand_drawings/cur_ceigs.png",[])
-  draw_allob(grid_constraints, "hand_drawings/recovered_{}.png".format(i), [])
+  # draw_allob(grid_constraints, "hand_drawings/cur_ceigs.png",[])
+  # draw_allob(grid_constraints, "hand_drawings/recovered_{}.png".format(i), [])
 
   diff = rendered - true_render
 
