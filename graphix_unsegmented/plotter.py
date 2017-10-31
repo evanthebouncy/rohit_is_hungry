@@ -12,11 +12,13 @@ import matplotlib.pyplot as plt
 
 
 categories = ['time_full', 'time_rand', 'time_nn', 'time_cegis', 'time_rcegis', 'time_acegis', 'time_rand_cegis', 'time_nn_cegis']
-# cat_trimmed = ['time_full', 'time_cegis', 'time_rcegis', 'time_rand_cegis', 'time_nn_cegis']
-cat_trimmed = categories
+cat_trimmed = ['time_full', 'time_cegis', 'time_rcegis', 'time_acegis', 'time_rand_cegis', 'time_nn_cegis']
 labels = [cat[5:] for cat in categories]
+labels_trimmed = [cat[5:] for cat in cat_trimmed]
 # labels[3] = 'rand+cegis'
 labels[-1] = 'ours'
+labels_trimmed[-2] = 'rand+cegis'
+labels_trimmed[-1] = 'ours'
 
 
 def load_results(fname):
@@ -70,8 +72,25 @@ def make_time_boxplots(results):
         data.append(points)
 
     fig, ax = plt.subplots()
-    plt.boxplot(data[::-1], 0, '', vert=False)
-    ax.set_yticklabels(labels[::-1])
+    box = plt.boxplot(data[::-1], 0, '', vert=False)
+    xtop = 40
+    ax.set_xlim(0, xtop)
+
+    medians = [item.get_xdata() for i, item in enumerate(box['medians'])]
+
+    whiskers = [item.get_xdata()[0] for i, item in enumerate(box['whiskers']) if i % 2 == 1]
+    caps = [item.get_xdata()[0] for i, item in enumerate(box['caps']) if i % 2 == 1]
+    # print len(whiskers, caps)
+    vals = zip(whiskers, caps)
+
+    # write overflow labels
+    for i,(whisker, cap) in zip(range(len(labels_trimmed)),vals):
+        if whisker > xtop:
+            ax.annotate('{}, {}'.format(int(whisker), int(cap)), xy=(xtop, i+0.9))
+        elif cap > xtop:
+            ax.annotate(str(int(cap)), xy=(xtop, i+1.1))
+
+    ax.set_yticklabels(labels_trimmed[::-1])
     plt.title('Distribution of Time to Complete Synthesis')
     plt.xlabel('time (s)')
     plt.show()
@@ -98,21 +117,31 @@ def stacked_avg_times(results):
         # else:
         #     nn_times2.append(0)
 
-
     build_times = np.array(build_times)
     solve_times = np.array(solve_times)
     nn_times = np.array(nn_times)
+    total = build_times+solve_times+nn_times
     # nn_times2 = np.array(nn_times2)
-    ind = np.arange(len(labels))
+    ind = np.arange(len(labels_trimmed))
     fig, ax = plt.subplots()
+
     # p0 = plt.bar(ind, nn_times2, color='red')
-    p1 = plt.bar(ind, nn_times, color='#f2f2f2', hatch='|')
-    p2 = plt.bar(ind, build_times, color='#bfbfbf', bottom=nn_times)
-    p3 = plt.bar(ind, solve_times, color='#e6e6e6', bottom=build_times+nn_times, hatch='//')
+    p1 = plt.bar(ind, nn_times, color='#000000')
+    p2 = plt.bar(ind, build_times, color='#bfbfbf', bottom=nn_times, hatch='//')
+    p3 = plt.bar(ind, solve_times, color='#a6a6a6', bottom=build_times+nn_times)#, hatch='//')
     plt.legend((p1[0], p2[0], p3[0]), ('NN Phase', 'Build Phase', 'Solve Phase'))
+    ytop = 40
+    ax.set_ylim(0, ytop)
+
+    for i,j in zip(range(len(labels_trimmed)),total):
+        if j > ytop:
+            ax.annotate(str(round(j, 1)),xy=(i-.3, ytop-2))
+            # offset += 1.5
+
+
     plt.title('Average Time to Complete Synthesis')
     plt.ylabel('time (s)')
-    plt.xticks(ind, labels)
+    plt.xticks(ind, labels_trimmed)
     plt.show()
 
 
@@ -137,8 +166,8 @@ def sizes_plots(results):
     ind = np.arange(len(l2))
     fig, ax = plt.subplots()
 
-    sizes[2] = 141.7910447761194
-    sizes[5] = 143.24875621890547
+    # sizes[2] = 141.7910447761194
+    # sizes[5] = 143.24875621890547
 
     s1 = np.array([0, 0, 0, sizes[1], sizes2[-1]])
     s2 = np.array([sizes[3], sizes[4], sizes[5], sizes[6]-sizes[1], sizes[-1]])
