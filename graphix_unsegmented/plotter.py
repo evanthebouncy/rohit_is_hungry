@@ -1,6 +1,7 @@
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
-
+matplotlib.rcParams.update({'font.size': 16})
 # time_full:  20.3801050186 8.56738305092 1024
 # time_rand:  4.11032700539 8.76360487938 204 0.01171875
 # time_nn:  2.42858314514 4.01715779305 120 1.72694206238
