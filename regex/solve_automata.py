@@ -19,24 +19,30 @@ def solve(s):
     s = Solver()
     
     start = Bool('start')
+
+    # create all possible states for the automata
     end = Bool('end')
     states = [[Bool('0_{}'.format(j)), Bool('1_{}'.format(j))] for j in xrange(len(arr))]
 
+    # needs to start and end
     s.add(start == True)
     s.add(end == True)
 
-    # add transitions
+    # add transitions between states
     s.add(Implies(start, states[0][0]))
+    s.add(And(states[-1][1], end))
     for j in xrange(len(arr)-1):
         old_states = states[j]
         next_states = states[j+1]
 
+        # being in a 0 means you can move to a 1
         s.add(Implies(old_states[0], next_states[1]))
+
+        # being in a 1 means you can move to a 0
         s.add(Implies(old_states[1], next_states[0]))
 
-    s.add(And(states[-1][1], end))
 
-    # add matching constraints
+    # add constraints for each step of the automata to match the string
     for j in xrange(len(arr)):
         if arr[j] == 0:
             s.add(states[j][0] == True)
