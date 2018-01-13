@@ -90,8 +90,9 @@ def apply_transform(x, transform):
   replaced_subs = [apply_substitution(x[0],x[1]) for x in sub_reps]
   return reduce(lambda x,y:x+y, replaced_subs)
 
+
 if __name__ == "__main__":
-  # msg = get_message(L)
+  msg = get_message(L)
   # start_end1 = [[1,2],[3,4]]
   # start_end2 = [[5,6],[7,8]]
   # print msg, start_end1, start_end2
