@@ -6,10 +6,10 @@ BIG_CONSTANT = 200000000
 def min2(x, y):
     return If(x < y, x, y)
 
-def sbarcalc(sx_list, x, y):
+def sbarcalc(sx_list, x, y_start):
     sbar = If(sx_list[0], 0, BIG_CONSTANT)
     for i in xrange(1, len(sx_list)):
-        sbar = If(And(i < sbar, sx_list[i], x[i] == y[0]), i, sbar)
+        sbar = If(And(i < sbar, sx_list[i], x[i] == y_start), i, sbar)
     return sbar
 
 def tbarcalc(tx_list, sbar):
@@ -26,7 +26,11 @@ def solve():
 
     constraints = []
 
-    constraints += solve_one(x, y)
+    subconstraints, last_y_ind = solve_one(x, y)
+    constraints += subconstraints
+
+    # subconstraints, last_y_ind = solve_one(x, y, y_start_ind=last_y_ind)
+    # constraints += subconstraints
 
     solver.add(constraints)
 
@@ -36,7 +40,7 @@ def solve():
     else:
         print "UNSAT"
 
-def solve_one(x, y, num=1):
+def solve_one(x, y, num=1, y_start_ind=-1):
     constraints = []    
 
     s = (Int('s_0_{}'.format(num)), Int('s_1_{}'.format(num)))
@@ -46,8 +50,15 @@ def solve_one(x, y, num=1):
     # constraints.append(t[0] == 6)
     # constraints.append(t[1] == 1)
     last_y_ind = Int('last_y_ind_{}'.format(num))
+    y_start = Int('y_start_{}'.format(num))
 
-    # 0) find last_y
+    # 0) find y_start and last_y_ind
+    y_start_constraint = And(y_start == y[0], 0 == y_start_ind+1)
+    for i in xrange(1, len(y)):
+        y_start_constraint = Xor(y_start_constraint, And(y_start == y[i], i == y_start_ind+1))
+    constraints.append(y_start_constraint)
+
+
     last_y_constraint = If(True, 0, 0)
     for i in xrange(1, len(y)):
         last_y_constraint = If(y[i] != -1, i, last_y_constraint)
@@ -79,10 +90,10 @@ def solve_one(x, y, num=1):
     # finding s_bar and t_bar constraints
     s_bar = Int('s_bar_{}'.format(num))
     t_bar = Int('t_bar_{}'.format(num))
-    constraints.append(And(s_bar == sbarcalc(sxs, x, y), s_bar != BIG_CONSTANT))
+    constraints.append(And(s_bar == sbarcalc(sxs, x, y_start), s_bar != BIG_CONSTANT))
     constraints.append(And(t_bar == tbarcalc(txs, s_bar), t_bar != BIG_CONSTANT))
     constraints.append(t_bar-s_bar == last_y_ind)
-    return constraints
+    return constraints, last_y_ind
 
     
 
