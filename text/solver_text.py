@@ -24,30 +24,45 @@ def solve():
     y = [4, 3, 2, 4, 6, -1]
     assert len(x) == len(y)
 
-    s = (Int('s_0'), Int('s_1'))
-    # solver.add(s[0] == 4)
-    # solver.add(s[1] == 3)
-    t = (Int('t_0'), Int('t_1'))
-    solver.add(t[0] == 6)
-    solver.add(t[1] == 1)
-    last_y_ind = Int('last_y_ind')
+    constraints = []
+
+    constraints += solve_one(x, y)
+
+    solver.add(constraints)
+
+    if solver.check() == sat:
+        model = solver.model()
+        print model
+    else:
+        print "UNSAT"
+
+def solve_one(x, y, num=1):
+    constraints = []    
+
+    s = (Int('s_0_{}'.format(num)), Int('s_1_{}'.format(num)))
+    # constraints.append(s[0] == 4)
+    # constraints.append(s[1] == 3)
+    t = (Int('t_0_{}'.format(num)), Int('t_1_{}'.format(num)))
+    # constraints.append(t[0] == 6)
+    # constraints.append(t[1] == 1)
+    last_y_ind = Int('last_y_ind_{}'.format(num))
 
     # 0) find last_y
     last_y_constraint = If(True, 0, 0)
     for i in xrange(1, len(y)):
         last_y_constraint = If(y[i] != -1, i, last_y_constraint)
-    solver.add(last_y_ind == last_y_constraint)
+    constraints.append(last_y_ind == last_y_constraint)
 
     # 1) truth value constraints
-    sxs = [Bool('sx_{}'.format(i)) for i in xrange(len(x))]
-    txs = [Bool('tx_{}'.format(i)) for i in xrange(len(x))]
+    sxs = [Bool('sx_{}_{}'.format(i, num)) for i in xrange(len(x))]
+    txs = [Bool('tx_{}_{}'.format(i, num)) for i in xrange(len(x))]
 
     for i in xrange(len(x)):
-        solver.add(sxs[i] == Or(s[0] == x[i], s[1] == x[i]))
-        solver.add(txs[i] == Or(t[0] == x[i], t[1] == x[i]))
+        constraints.append(sxs[i] == Or(s[0] == x[i], s[1] == x[i]))
+        constraints.append(txs[i] == Or(t[0] == x[i], t[1] == x[i]))
 
     # 2) Index constraints
-    indexes = [Int('i_{}'.format(i)) for i in xrange(len(x))]
+    indexes = [Int('i_{}_{}'.format(i, num)) for i in xrange(len(x))]
 
     # initial i constraint
     for i in xrange(len(indexes)):
@@ -55,24 +70,21 @@ def solve():
         for j in xrange(1, len(x)):
             i_constraint = Xor(i_constraint, And(indexes[i] == j, x[j] == y[i]))
         i_constraint = Or(i_constraint, And(indexes[i] == -1, y[i] == -1))
-        solver.add(i_constraint)
+        constraints.append(i_constraint)
 
     # i ordering constraint
     for i in xrange(len(indexes)-1):
-        solver.add(Or(indexes[i] < indexes[i+1], indexes[i+1] == -1))
+        constraints.append(Or(indexes[i] < indexes[i+1], indexes[i+1] == -1))
 
     # finding s_bar and t_bar constraints
-    s_bar = Int('s_bar')
-    t_bar = Int('t_bar')
-    solver.add(And(s_bar == sbarcalc(sxs, x, y), s_bar != BIG_CONSTANT))
-    solver.add(And(t_bar == tbarcalc(txs, s_bar), t_bar != BIG_CONSTANT))
-    solver.add(t_bar-s_bar == last_y_ind)
+    s_bar = Int('s_bar_{}'.format(num))
+    t_bar = Int('t_bar_{}'.format(num))
+    constraints.append(And(s_bar == sbarcalc(sxs, x, y), s_bar != BIG_CONSTANT))
+    constraints.append(And(t_bar == tbarcalc(txs, s_bar), t_bar != BIG_CONSTANT))
+    constraints.append(t_bar-s_bar == last_y_ind)
+    return constraints
 
-    if solver.check() == sat:
-        model = solver.model()
-        print model
-    else:
-        print "UNSAT"
+    
 
 
 if __name__ == '__main__':
