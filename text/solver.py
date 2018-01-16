@@ -52,8 +52,9 @@ def solve_y(x, s, t):
         model = solver.model()
         y_ans = []
         for y_i in y:
-            if model[y_i] != NONSENSE_CONSTANT:
-                y_ans.append(model[y_i])
+            y_val = int(str(model[y_i]))
+            if y_val != NONSENSE_CONSTANT:
+                y_ans.append(y_val)
         return y_ans
     else:
         print "UNSAT"
