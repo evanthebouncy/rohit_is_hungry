@@ -4,13 +4,14 @@ from z3 import *
 NONSENSE_CONSTANT = 100
 
 
-def solve_st(x, y):
+def solve_st(pairs):
     '''
     Solves for s and t given x and y
 
     Args:
-        x: list of ints
-        y: list of ints gotten after transforming x
+        pairs: list of (x, y) tuples
+            x: list of ints
+            y: list of ints gotten after transforming x
     Returns:
         (s0, s1) and (t0, t1)
     '''
@@ -20,7 +21,8 @@ def solve_st(x, y):
     s = (Int('s_0'), Int('s_1'))
     t = (Int('t_0'), Int('t_1'))
 
-    solver.add(solve_one(x, y, s, t, num=0))
+    for (x,y) in pairs:
+        solver.add(solve_one(x, y, s, t, num=0))
 
     if solver.check() == sat:
         model = solver.model()
@@ -124,7 +126,8 @@ def solve_one(x, y, s, t, num=1):
     # y_min_helper = [[Int('y_min_helper_{}_{}|{}'.format(i, j, num)) for j in xrange(len(x)+1)] for i in xrange(len(x))]
 
     # copy_idxs find the index in y of each index in x
-    constraints.append(copy_idxs[0] == s_bar)
+    start_copy_index = If(Or(s_bar == NONSENSE_CONSTANT, t_bar == NONSENSE_CONSTANT), NONSENSE_CONSTANT, s_bar)
+    constraints.append(copy_idxs[0] == start_copy_index)
     for i in xrange(1, len(copy_idxs)):
         constraints.append(copy_idxs[i] == If(copy_idxs[i-1]+1 <= t_bar, copy_idxs[i-1]+1, NONSENSE_CONSTANT))
 
@@ -145,8 +148,6 @@ def solve_one(x, y, s, t, num=1):
 
     return constraints
 
-    
-
 
 if __name__ == '__main__':
     # x = [1, 4, 3, 2, 4, 6]
@@ -155,4 +156,4 @@ if __name__ == '__main__':
     y = [9, 9, 2, 7, 0, 3]
     #((3, 9), (3, 8))
 
-    print solve_st(x, y)
+    print solve_st([(x, y)])

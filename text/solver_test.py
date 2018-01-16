@@ -14,7 +14,7 @@ def test_solve_st():
         xform[0] = (xform[0][0], (0,0))
         y = apply_transform(x, xform)
         print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, xform[0][0])
-        s, t = solve_st(x, y)
+        s, t = solve_st([(x,y)])
         if s is None or t is None:
             print x
             print xform
@@ -25,9 +25,12 @@ def test_solve_st():
             print "Wrong y value!", synthesized_y
             failed.append(i+1)
     if len(failed) == 0:
-        print "All test cases passed!"
+        print "Passed solving for s and t..."
+        return True
     else:
         print "Failed:", failed
+        return False
+
 
 def test_solve_y():
     print "Testing solving for y..."
@@ -45,16 +48,15 @@ def test_solve_y():
             print "Wrong y value!", solved_y
             failed.append(i+1)
     if len(failed) == 0:
-        print "All test cases passed!"
+        print "Passed solving for y..."
+        return True
     else:
-        print "Failed:", failed    
-
-
+        print "Failed:", failed
+        return False
 
 
 if __name__ == '__main__':
-    # test_solve_y()
-    x = [2, 4, 4, 7, 5, 3, 9, 6, 9, 7, 6, 6, 3, 5, 8, 2, 6]
-    xform = [(((8, 8), (5, 5)), (0,0))]
-    y = apply_transform(x, xform)
-    print y
+    st = test_solve_st()
+    y = test_solve_y()
+    if st and y:
+        print "Passed!"
