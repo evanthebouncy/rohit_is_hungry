@@ -4,33 +4,60 @@ from z3 import *
 NONSENSE_CONSTANT = 100
 
 
-def solve(x, y):
-    '''returns (s0, s1) and (t0, t1)'''
+def solve_st(x, y):
+    '''
+    Solves for s and t given x and y
+
+    Args:
+        x: list of ints
+        y: list of ints gotten after transforming x
+    Returns:
+        (s0, s1) and (t0, t1)
+    '''
     solver = Solver()
     constraints = []
 
     s = (Int('s_0'), Int('s_1'))
-    # constraints.append(s[0] == 0)
-    # constraints.append(s[1] == 0)
     t = (Int('t_0'), Int('t_1'))
-    # constraints.append(t[0] == 3)
-    # constraints.append(t[1] == 7)
 
-    # y = [Int('y_{}'.format(i)) for i in xrange(len(x))]
-
-    subconstraints = solve_one(x, y, s, t, num=0)
-    constraints += subconstraints
-
-    solver.add(constraints)
+    solver.add(solve_one(x, y, s, t, num=0))
 
     if solver.check() == sat:
         model = solver.model()
-        # for y_i in y:
-        #     print model[y_i]
-        # print model
         return (model[s[0]], model[s[1]]), (model[t[0]], model[t[1]])
     else:
         print "UNSAT"
+        return None, None
+
+
+def solve_y(x, s, t):
+    '''
+    Solves for y given x, s, and t
+
+    Args:
+        x: list of ints
+        s: starting transformation tuple of two ints
+        t: ending transformation tuple of two ints
+    Returns:
+        list of ints resulting from applying transformation
+    '''
+    solver = Solver()
+    constraints = []
+
+    y = [Int('y_{}'.format(i)) for i in xrange(len(x))]
+
+    solver.add(solve_one(x, y, s, t, num=1))
+
+    if solver.check() == sat:
+        model = solver.model()
+        y_ans = []
+        for y_i in y:
+            if model[y_i] != NONSENSE_CONSTANT:
+                y_ans.append(model[y_i])
+        return y_ans
+    else:
+        print "UNSAT"
+        return None
 
 
 def solve_one(x, y, s, t, num=1):
@@ -123,5 +150,8 @@ def solve_one(x, y, s, t, num=1):
 if __name__ == '__main__':
     # x = [1, 4, 3, 2, 4, 6]
     # y = [4, 3, 2, 4, 6]
+    x = [9, 9, 2, 7, 0, 3]
+    y = [9, 9, 2, 7, 0, 3]
+    #((3, 9), (3, 8))
 
-    print solve(x, y)
+    print solve_st(x, y)
