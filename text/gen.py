@@ -92,7 +92,7 @@ def apply_transform(x, transform):
 
 
 if __name__ == "__main__":
-  msg = get_message(L)
+  msg = get_message(10)
   # start_end1 = [[1,2],[3,4]]
   # start_end2 = [[5,6],[7,8]]
   # print msg, start_end1, start_end2
@@ -103,7 +103,11 @@ if __name__ == "__main__":
   # replace_with = [1,9]
   # print apply_substitution(msg, replace_with)
 
-  xform = sample_transform(3)
+  xform = sample_transform(2)
+  # print xform
+  xform[0] = (xform[0][0], (0,0))
+  xform[1] = (xform[1][0], (0,0))
+  xform = [(((0, 3), (1, 6)), (0, 0)), (((7, 9), (1, 3)), (0, 0))]
   print "a transformation ", xform
   print "a message ", msg
   print "transformed message ", apply_transform(msg, xform)
