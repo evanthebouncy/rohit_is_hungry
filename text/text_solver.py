@@ -21,12 +21,14 @@ def solve_st(pairs):
     s = (Int('s_0'), Int('s_1'))
     t = (Int('t_0'), Int('t_1'))
 
-    for (x,y) in pairs:
-        solver.add(solve_one(x, y, s, t, num=0))
+    for i, (x,y) in enumerate(pairs):
+        solver.add(solve_one(x, y, s, t, num=i))
 
     if solver.check() == sat:
         model = solver.model()
-        return (model[s[0]], model[s[1]]), (model[t[0]], model[t[1]])
+        solved_s = (int(str(model[s[0]])), int(str(model[s[1]])))
+        solved_t = (int(str(model[t[0]])), int(str(model[t[1]])))
+        return solved_s, solved_t
     else:
         print "UNSAT"
         return None, None
@@ -150,10 +152,11 @@ def solve_one(x, y, s, t, num=1):
 
 
 if __name__ == '__main__':
-    # x = [1, 4, 3, 2, 4, 6]
-    # y = [4, 3, 2, 4, 6]
-    x = [9, 9, 2, 7, 0, 3]
-    y = [9, 9, 2, 7, 0, 3]
-    #((3, 9), (3, 8))
+    x = [1, 4, 3, 2, 4, 6]
+    y = [4, 3, 2, 4, 6]
+    x2 = [3, 1, 6]
+    y2 = [3, 1]
+    # should print something equivalent to ((4, 3), (6, 1))
+    print solve_st([(x, y), (x2, y2)])
 
-    print solve_st([(x, y)])
+

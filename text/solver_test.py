@@ -1,4 +1,4 @@
-from solver import solve_st, solve_y
+from text_solver import solve_st, solve_y
 from gen import *
 import random
 
