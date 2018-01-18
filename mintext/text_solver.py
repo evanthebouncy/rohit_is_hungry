@@ -9,13 +9,24 @@ class CEGIS_Solver(object):
     def __init__(self, num_params=1):
         super(CEGIS_Solver, self).__init__()
         self.solver = Solver()
-        self.solver.set("timeout", 15*60*1000)
+        self.solver.set("timeout", 100*1000)
         self.params = [
             (((Int('s_0|{}'.format(i)), Int('s_1|{}'.format(i))),
             (Int('t_0|{}'.format(i)), Int('t_1|{}'.format(i)))),
             (Int('r_0|{}'.format(i)), Int('r_1|{}'.format(i))))
             for i in xrange(num_params)
         ]
+        self.size = Int('size')
+
+        all_nums = []
+        # size constraint
+        for param in self.params:
+            grab, r = param
+            s, t = grab
+            all_nums += [s[0], s[1], t[0], t[1], r[0], r[1]]
+
+        self.solver.add(self.size == Sum(all_nums))        
+        self.current_size = 0
         self.counter = 0
 
     def add(self, x, y):
@@ -27,8 +38,6 @@ class CEGIS_Solver(object):
             model = self.solver.model()
             solved = []
 
-            num = 0
-
             for (grab, r) in self.params:
                 s, t = grab
                 solved_s = (int(str(model[s[0]])), int(str(model[s[1]])))
@@ -39,6 +48,33 @@ class CEGIS_Solver(object):
         else:
             print "UNSAT"
             return None
+
+    def exist_program_less_than(self, num=30):
+        self.solver.push()
+        self.solver.add(self.size <= num)
+        ans = None
+        solved = [(((-1, -1), (-1, -1)), (-1, -1))]
+        if self.solver.check() == sat:
+            model = self.solver.model()
+            ans = model[self.size]
+            solved = []
+
+            for (grab, r) in self.params:
+                s, t = grab
+                solved_s = (int(str(model[s[0]])), int(str(model[s[1]])))
+                solved_t = (int(str(model[t[0]])), int(str(model[t[1]])))
+                solved_r = (int(str(model[r[0]])), int(str(model[r[1]])))
+                solved.append(((solved_s, solved_t), solved_r))
+        self.solver.pop()
+        return ans, solved
+
+    def find_minimal_program(self):
+        for i in range(self.current_size, 1000):
+            print 'trying ', i
+            ans, solved = self.exist_program_less_than(i)
+            if ans is not None:
+                self.current_size = i
+                return solved
 
 
 def solve_st(pairs, num_params=1):

@@ -136,5 +136,77 @@ def cegis(M=1000, num_params=1, fname='output', xform=None, all_xs=None):
     with open(fname, 'a') as f:
         f.write(result_str)
 
+def min_cegis(M=1000, num_params=3):
+    result_str = ''
+    xform = sample_transform(num_params)
+    print 'trying to find', xform
+    print 'with min of', get_len(xform)
+    all_xs = [get_message(10) for i in xrange(M)]
+    all_pairs = [(x, apply_transform(x, xform)) for x in all_xs]
+
+    xform_synth = [(((-1, -1), (-1, -1)), (-1, -1))]
+    examples = []
+
+    solver = CEGIS_Solver(num_params)
+    build_time = 0
+    solve_time = 0
+
+    while True:
+        print 'trying solver with length:', len(examples)
+        x,y = check_solved(xform_synth, all_pairs)
+        if x is None:
+            break
+        examples.append((x, y))
+        start_build = time.time()
+        solver.add(x, y)
+        build_time += time.time()-start_build
+
+        start_solve = time.time()
+        xform_synth = solver.find_minimal_program()
+        solve_time += time.time()-start_solve
+        if xform_synth is None:
+            raise Exception('UNSAT')
+
+    solver = CEGIS_Solver(num_params)
+    xform_synth = [(((-1, -1), (-1, -1)), (-1, -1))]
+    build_time2 = 0
+    solve_time2 = 0
+
+    # TODO get rid of hack
+    examples = [random.choice(all_pairs) for i in xrange(20)]
+    for (x, y) in examples:
+        solver.add(x, y)
+
+    while True:
+        print 'trying solver with length:', len(examples)
+        x,y = check_solved(xform_synth, all_pairs)
+        if x is None:
+            break
+        examples.append((x, y))
+        start_build = time.time()
+        solver.add(x, y)
+        build_time2 += time.time()-start_build
+
+        start_solve = time.time()
+        xform_synth = solver.find_minimal_program()
+        print time.time()-start_solve
+        solve_time2 += time.time()-start_solve
+        if xform_synth is None:
+            raise Exception('UNSAT')
+
+    print 'first took', build_time, solve_time
+    print 'second took', build_time2, solve_time2
+
+def get_len(ar):
+    ar = str(ar)
+    total = 0
+    for i in ar:
+        try:
+            total += int(i)
+        except:
+            pass
+    print total
+
+
 if __name__ == '__main__':
-    run_experiment(4)
+    min_cegis(num_params=3)
