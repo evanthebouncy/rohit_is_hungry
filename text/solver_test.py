@@ -11,17 +11,16 @@ def test_solve_st():
         x = get_message(L)
         num_params = random.randint(1, 5)
         xform = sample_transform(num_params)
-        xform = map(lambda x: (x[0], (0, 0)), xform)
+        # xform = map(lambda x: (x[0], (0, 0)), xform)
         # set the replacement to (0, 0) for now
-        ideal_params = map(lambda x: x[0], xform)
+        # ideal_params = map(lambda x: x[0], xform)
         y = apply_transform(x, xform)
-        print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, ideal_params)
-        xform_synth = solve_st([(x,y)], num_params=len(ideal_params))
+        print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, xform)
+        xform_synth = solve_st([(x,y)], num_params=len(xform))
         if xform_synth is None:
             print "Failed to synth"
             failed.append(i+1)
             continue
-        xform_synth = map(lambda x: (x, (0, 0)), xform_synth)
         synthesized_y = apply_transform(x, xform_synth)
         if y != synthesized_y:
             print "Wrong y value!", synthesized_y
@@ -42,12 +41,9 @@ def test_solve_y():
         x = get_message(L)
         num_params = random.randint(1, 5)
         xform = sample_transform(num_params)
-        # set the replacement to (0, 0) for now
-        xform = map(lambda x: (x[0], (0, 0)), xform)
-        params = map(lambda x: x[0], xform)
         y = apply_transform(x, xform)
-        print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, params)
-        solved_y = solve_y(x, params)
+        print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, xform)
+        solved_y = solve_y(x, xform)
         if y != solved_y:
             print "Wrong y value!", solved_y
             failed.append(i+1)

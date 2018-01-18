@@ -15,14 +15,15 @@ def solve_st(pairs, num_params=1):
             y: list of ints gotten after transforming x
         num_params: number of (s,t) pairs
     Returns:
-        list of (s,t) tuples
+        list of ((s,t), r) tuples
     '''
     solver = Solver()
     constraints = []
 
     params = [
-        ((Int('s_0|{}'.format(i)), Int('s_1|{}'.format(i))),
-        (Int('t_0|{}'.format(i)), Int('t_1|{}'.format(i))))
+        (((Int('s_0|{}'.format(i)), Int('s_1|{}'.format(i))),
+        (Int('t_0|{}'.format(i)), Int('t_1|{}'.format(i)))),
+        (Int('r_0|{}'.format(i)), Int('r_1|{}'.format(i))))
         for i in xrange(num_params)
     ]
 
@@ -35,10 +36,12 @@ def solve_st(pairs, num_params=1):
 
         num = 0
 
-        for (s,t) in params:
+        for (grab, r) in params:
+            s, t = grab
             solved_s = (int(str(model[s[0]])), int(str(model[s[1]])))
             solved_t = (int(str(model[t[0]])), int(str(model[t[1]])))
-            solved.append((solved_s, solved_t))
+            solved_r = (int(str(model[r[0]])), int(str(model[r[1]])))
+            solved.append(((solved_s, solved_t), solved_r))
         return solved
     else:
         print "UNSAT"
@@ -87,6 +90,7 @@ def solve_one(x, y, params, num=1):
     Returns:
         list of constraints relating x, y, s, and t
     '''
+    # FIRST: WORRY ABOUT GRABBING STRINGS OUT
     num_params = len(params)
     # pad y so it's the same length as x
     if len(y) == 0 or (len(y) < len(x) and type(y[0]) == int):
@@ -94,12 +98,20 @@ def solve_one(x, y, params, num=1):
         assert len(x) == len(y)
     constraints = []
 
+    for param in params:
+        grab, r = param
+        s, t = grab
+        constraints.append(And(s[0] != NONSENSE_CONSTANT, s[1] != NONSENSE_CONSTANT))
+        constraints.append(And(t[0] != NONSENSE_CONSTANT, t[1] != NONSENSE_CONSTANT))
+        constraints.append(And(r[0] != NONSENSE_CONSTANT, r[1] != NONSENSE_CONSTANT))
+
     # 1) values in x that match s (sx) or match t (tx)
     sx_arr = [[Bool('sx_{}|{}|{}'.format(k, k2, num)) for k in xrange(len(x))] for k2 in xrange(num_params)]
     tx_arr = [[Bool('tx_{}|{}|{}'.format(k, k2, num)) for k in xrange(len(x))] for k2 in xrange(num_params)]
 
     for i in xrange(num_params):
-        s, t = params[i]
+        grab, r = params[i]
+        s, t = grab
         for j in xrange(len(x)):
             constraints.append(sx_arr[i][j] == Or(s[0] == x[j], s[1] == x[j]))
             constraints.append(tx_arr[i][j] == Or(t[0] == x[j], t[1] == x[j]))
@@ -142,9 +154,10 @@ def solve_one(x, y, params, num=1):
         prev_t_bar = prev_t_bars[i+1]
         constraints.append(prev_t_bar == If(t_bar != NONSENSE_CONSTANT, t_bar, prev_t_bars[i]))
 
-    # 4) use s and t to map x to y
+    # 4) use s and t to map x to pre_y (y before transformation)
     copy_idxs = [Int('copy_idxs_{}|{}'.format(k, num)) for k in xrange(len(x))]
     m = [[Int('M_{}_{}|{}'.format(k, k2, num)) for k in xrange(len(x))] for k2 in xrange(len(x))]
+    pre_y = [Int('pre_y_{}|{}'.format(k, num)) for k in xrange(len(x))]
 
     # copy_idxs is a list of indices that say where in x each value of y comes from
     prev_c = -1
@@ -160,13 +173,32 @@ def solve_one(x, y, params, num=1):
 
     # now use m to map y to the min values of rows in the matrix
 
-    for i in xrange(len(y)):
+    for i in xrange(len(pre_y)):
         # least_y_i_value keeps track of the least value that we've seen so far
         valid_y_value = If(m[i][0] != NONSENSE_CONSTANT, m[i][j], NONSENSE_CONSTANT)
-        for j in xrange(len(y)):
+        for j in xrange(len(pre_y)):
             valid_y_value = If(m[i][j] != NONSENSE_CONSTANT, m[i][j], valid_y_value)
 
-        constraints.append(y[i] == valid_y_value)
+        constraints.append(pre_y[i] == valid_y_value)
+
+    # NOW WORRY ABOUT REPLACEMENT
+    param_mask = [Int('param_mask_{}|{}'.format(k, num)) for k in xrange(len(x))]
+    
+    # find which param is responsible for each index
+    for i in xrange(len(param_mask)):
+        param_mask_val = If(True, NONSENSE_CONSTANT, NONSENSE_CONSTANT)
+        for j, (s_bar, t_bar) in enumerate(grabs[::-1]):
+            k = len(grabs) - j - 1
+            param_mask_val = If(And(copy_idxs[i] >= s_bar, copy_idxs[i] <= t_bar, s_bar != NONSENSE_CONSTANT, t_bar != NONSENSE_CONSTANT), k, param_mask_val)
+        constraints.append(param_mask[i] == param_mask_val)
+
+    # now map it to y
+    for i, y_i in enumerate(y):
+        valid_y_value = If(True, pre_y[i], pre_y[i])
+        for j in xrange(num_params):
+            _, r = params[j]
+            valid_y_value = If(And(param_mask[i] == j, r[0] == pre_y[i]), r[1], valid_y_value)
+        constraints.append(y_i == valid_y_value)
 
     return constraints
 
@@ -180,29 +212,42 @@ def _get_next(c_i, grabs):
 
 
 if __name__ == '__main__':
-    x = [1, 4, 3, 2, 4, 6]
-    y = [4, 3, 2, 4, 6]
-    x2 = [3, 1, 6]
-    y2 = [3, 1]
-    # should print something equivalent to ((4, 3), (6, 1))
-    print solve_st([(x, y), (x2, y2)])
+    from gen import *
+    # x = [1, 4, 3, 2, 4, 6]
+    # y = [4, 3, 2, 4, 6]
+    # x2 = [3, 1, 6]
+    # y2 = [3, 1]
+    # # should print something equivalent to ((4, 3), (6, 1))
+    # print solve_st([(x, y), (x2, y2)])
 
-    x = [2, 5, 1, 7, 8, 10]
-    y = [2, 1, 7, 10]
-    # ((9, 2), (7, 9))
-    print solve_st([(x, y)], num_params=3)
+    # x = [2, 5, 1, 7, 8, 9]
+    # y = [2, 1, 7, 9]
+    # y_transformed = [5, 1, 3, 18]
+    # # ((9, 2), (7, 9))
+    # result = solve_st([(x, y_transformed)], num_params=3)
+    # print result
+    # print apply_transform(x, result)
 
-    x = [6, 4, 0, 9, 0, 1, 2, 3, 8, 2, 1, 2, 2, 2, 4]
-    y = [9, 0]
-    params = [((5, 7), (7, 3)), ((9, 8), (4, 0))]
-    synth_y = solve_y(x, params)
-    print y, synth_y
+    x = [2, 9, 4]
+    y = []
+    params = [(((5, 7), (4, 2)), (1, 0)), (((1, 7), (5, 3)), (9, 9)), (((8, 5), (4, 1)), (4, 8)), (((5, 9), (8, 0)), (6, 5))]
+
+    print solve_y(x, params)
+    result = solve_st([(x, y)], num_params=len(params))
+    print result
+    print apply_transform(x, result)
+
+    # x = [6, 4, 0, 9, 0, 1, 2, 3, 8, 2, 1, 2, 2, 2, 4]
+    # y = [9, 0]
+    # params = [(((5, 7), (7, 3)), (0, 0)), (((9, 8), (4, 0)), (0, 0))]
+    # synth_y = solve_y(x, params)
+    # print y, synth_y
     
-    x = [7, 1, 9, 8, 6, 5, 7, 4, 6]
-    y = [9, 8, 6, 5, 7]
+    # x = [7, 1, 9, 8, 6, 5, 7, 4, 6]
+    # y = [9, 8, 6, 5, 7]
 
-    ideal = [((0, 0), (0, 8)), ((9, 2), (5, 6)), ((5, 1), (1, 7))]
+    # ideal = [(((0, 0), (0, 8)), (0, 0)), (((9, 2), (5, 6)), (0, 0)), (((5, 1), (1, 7)), (0, 0))]
 
 
-    pairs = [(x,y)]
-    print solve_st(pairs, num_params=len(ideal))
+    # pairs = [(x,y)]
+    # print solve_st(pairs, num_params=len(ideal))
