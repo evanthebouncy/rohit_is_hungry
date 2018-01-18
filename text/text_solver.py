@@ -4,58 +4,62 @@ from z3 import *
 NONSENSE_CONSTANT = 100
 
 
-def solve_st(pairs):
+def solve_st(pairs, num_params=1):
     '''
-    Solves for s and t given x and y
+    Solves for s and t given x and y.
+    WARNING: the solver gets finicky when len(x) get too large (like > 40)
 
     Args:
         pairs: list of (x, y) tuples
             x: list of ints
             y: list of ints gotten after transforming x
+        num_params: number of (s,t) pairs
     Returns:
-        (s0, s1) and (t0, t1)
+        list of (s,t) tuples
     '''
     solver = Solver()
     constraints = []
 
-    s = (Int('s_0'), Int('s_1'))
-    t = (Int('t_0'), Int('t_1'))
-
-    params = [(s,t)]
+    params = [
+        ((Int('s_0|{}'.format(i)), Int('s_1|{}'.format(i))),
+        (Int('t_0|{}'.format(i)), Int('t_1|{}'.format(i))))
+        for i in xrange(num_params)
+    ]
 
     for i, (x,y) in enumerate(pairs):
         solver.add(solve_one(x, y, params, num=i))
 
     if solver.check() == sat:
         model = solver.model()
+        solved = []
+
+        num = 0
+
         for (s,t) in params:
             solved_s = (int(str(model[s[0]])), int(str(model[s[1]])))
             solved_t = (int(str(model[t[0]])), int(str(model[t[1]])))
-            return solved_s, solved_t
+            solved.append((solved_s, solved_t))
+        return solved
     else:
         print "UNSAT"
-        return None, None
+        return None
 
 
-def solve_y(x, s, t):
+def solve_y(x, params):
     '''
     Solves for y given x, s, and t
 
     Args:
         x: list of ints
-        s: starting transformation tuple of two ints
-        t: ending transformation tuple of two ints
+        params: list of (s,t) pairs
     Returns:
         list of ints resulting from applying transformation
     '''
     solver = Solver()
     constraints = []
 
-    params = [(s,t)]
-
     y = [Int('y_{}'.format(i)) for i in xrange(len(x))]
-
-    solver.add(solve_one(x, y, params, num=1))
+    solver.add(solve_one(x, y, params, num=0))
 
     if solver.check() == sat:
         model = solver.model()
@@ -103,7 +107,9 @@ def solve_one(x, y, params, num=1):
 
     # 2) s_bar constraints, lowest index matching a value in s
     grabs = [(Int('s_bar|{}|{}'.format(k, num)), Int('t_bar|{}|{}'.format(k, num))) for k in xrange(num_params)]
-    # s_bar = Int('s_bar|{}'.format(num))
+    prev_t_bars = [Int('prev_t_bar|{}|{}'.format(k, num)) for k in xrange(num_params+1)]
+    prev_t_bar = prev_t_bars[0]
+    constraints.append(prev_t_bar == -1)
     for i in xrange(num_params):
         s_bar = grabs[i][0]
         s_all_false = Bool('s_all_false|{}|{}'.format(i, num))
@@ -115,13 +121,12 @@ def solve_one(x, y, params, num=1):
 
         for j in xrange(1, len(s_bar_intermediates)):
             k = len(sx_arr[i])-j  # i counts len(sx_arr)-1 ... 0
-            constraints.append(s_bar_intermediates[j] == If(sx_arr[i][k], k, s_bar_intermediates[j-1]))
+            constraints.append(s_bar_intermediates[j] == If(And(sx_arr[i][k], k > prev_t_bar), k, s_bar_intermediates[j-1]))
 
         # if all false then return bad, otherwise lowest found index
         constraints.append(s_bar == If(s_all_false, NONSENSE_CONSTANT, s_bar_intermediates[-1]))
 
         # 3) t_bar constraints, lowest index matching a value in t that is >= s_bar
-        # t_bar = Int('t_bar|{}'.format(num))
         t_bar = grabs[i][1]
         t_bar_intermediates = [Int('t_bar_{}|{}|{}'.format(k, i, num)) for k in xrange(len(x)+1)]
 
@@ -132,6 +137,10 @@ def solve_one(x, y, params, num=1):
 
         # if s_bar failed then t_bar failed, otherwise lowest found index
         constraints.append(t_bar == If(s_bar == NONSENSE_CONSTANT, NONSENSE_CONSTANT, t_bar_intermediates[-1]))
+        
+        # prepare previous t_bar for next iteration
+        prev_t_bar = prev_t_bars[i+1]
+        constraints.append(prev_t_bar == If(t_bar != NONSENSE_CONSTANT, t_bar, prev_t_bars[i]))
 
     # 4) use s and t to map x to y
     copy_idxs = [Int('copy_idxs_{}|{}'.format(k, num)) for k in xrange(len(x))]
@@ -166,8 +175,8 @@ def _get_next(c_i, grabs):
     '''creates a constraint for the next copyidx'''
     else_condition = If(True, NONSENSE_CONSTANT, NONSENSE_CONSTANT)
     for (s,t) in grabs[::-1]:
-        else_condition = If(And(s!= NONSENSE_CONSTANT, t!= NONSENSE_CONSTANT, c_i+1<=s), s, else_condition)
-    return If(Or([And(s <= c_i+1, c_i+1 <=t, s!= NONSENSE_CONSTANT, t!= NONSENSE_CONSTANT) for (s,t) in grabs]), c_i+1, else_condition)
+        else_condition = If(And(s != NONSENSE_CONSTANT, t != NONSENSE_CONSTANT, c_i+1 <= s), s, else_condition)
+    return If(Or([And(s <= c_i+1, c_i+1 <= t, s != NONSENSE_CONSTANT, t != NONSENSE_CONSTANT) for (s,t) in grabs]), c_i+1, else_condition)
 
 
 if __name__ == '__main__':
@@ -178,11 +187,22 @@ if __name__ == '__main__':
     # should print something equivalent to ((4, 3), (6, 1))
     print solve_st([(x, y), (x2, y2)])
 
-    x = [2, 5, 1, 7]
-    y = [2, 5, 1, 7]
+    x = [2, 5, 1, 7, 8, 10]
+    y = [2, 1, 7, 10]
     # ((9, 2), (7, 9))
-    print solve_st([(x, y)])
+    print solve_st([(x, y)], num_params=3)
+
+    x = [6, 4, 0, 9, 0, 1, 2, 3, 8, 2, 1, 2, 2, 2, 4]
+    y = [9, 0]
+    params = [((5, 7), (7, 3)), ((9, 8), (4, 0))]
+    synth_y = solve_y(x, params)
+    print y, synth_y
     
-    
+    x = [7, 1, 9, 8, 6, 5, 7, 4, 6]
+    y = [9, 8, 6, 5, 7]
+
+    ideal = [((0, 0), (0, 8)), ((9, 2), (5, 6)), ((5, 1), (1, 7))]
 
 
+    pairs = [(x,y)]
+    print solve_st(pairs, num_params=len(ideal))

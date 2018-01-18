@@ -7,19 +7,21 @@ def test_solve_st():
     print "Testing solving for s and t..."
     failed = []
     for i in xrange(100):
-        L = random.randint(1, 50)
+        L = random.randint(1, 25)
         x = get_message(L)
-        xform = sample_transform(1)
+        num_params = random.randint(1, 5)
+        xform = sample_transform(num_params)
+        xform = map(lambda x: (x[0], (0, 0)), xform)
         # set the replacement to (0, 0) for now
-        xform[0] = (xform[0][0], (0,0))
+        ideal_params = map(lambda x: x[0], xform)
         y = apply_transform(x, xform)
-        print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, xform[0][0])
-        s, t = solve_st([(x,y)])
-        if s is None or t is None:
-            print x
-            print xform
-            print y
-        xform_synth = [((s, t), (0, 0))]
+        print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, ideal_params)
+        xform_synth = solve_st([(x,y)], num_params=len(ideal_params))
+        if xform_synth is None:
+            print "Failed to synth"
+            failed.append(i+1)
+            continue
+        xform_synth = map(lambda x: (x, (0, 0)), xform_synth)
         synthesized_y = apply_transform(x, xform_synth)
         if y != synthesized_y:
             print "Wrong y value!", synthesized_y
@@ -36,14 +38,16 @@ def test_solve_y():
     print "Testing solving for y..."
     failed = []
     for i in xrange(100):
-        L = random.randint(1, 50)
+        L = random.randint(1, 25)
         x = get_message(L)
-        xform = sample_transform(1)
+        num_params = random.randint(1, 5)
+        xform = sample_transform(num_params)
         # set the replacement to (0, 0) for now
-        xform[0] = (xform[0][0], (0,0))
+        xform = map(lambda x: (x[0], (0, 0)), xform)
+        params = map(lambda x: x[0], xform)
         y = apply_transform(x, xform)
-        print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, xform[0][0])
-        solved_y = solve_y(x, xform[0][0][0], xform[0][0][1])
+        print '\n{}) Solving for {}->{} with {}'.format(i+1, x, y, params)
+        solved_y = solve_y(x, params)
         if y != solved_y:
             print "Wrong y value!", solved_y
             failed.append(i+1)
