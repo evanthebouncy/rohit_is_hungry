@@ -1,9 +1,9 @@
 import random
 from random import randint
 
-N_CHAR = 3
-L = 10
-N_STATES = 5
+N_CHAR = 15
+L = 20
+N_STATES = 3
 
 def get_letter():
   return randint(0, N_CHAR-1)
@@ -22,9 +22,15 @@ def sample_matrix():
 # now cur_state is 1
 def execute_dfa(matrix, input_string):
   cur_state = 0
-  for x in input_string:
-    cur_state = matrix[cur_state][x]
-  return cur_state
+  # print matrix
+  try:
+    for x in input_string:
+      cur_state = matrix[cur_state][x]
+    # print x, cur_state
+    return cur_state
+  except:
+    # might get IndexError: string index out of range if doesn't exist, so clearly wrong
+    return -1
 
 # generate n input output examples
 def generate_examples(matrix, n):
@@ -40,6 +46,6 @@ def accept_state(state):
 
 if __name__ == "__main__":
   m = sample_matrix()
-  examples = generate_examples(m, 100)
+  examples = generate_examples(m, 1)
   for e in examples:
     print e

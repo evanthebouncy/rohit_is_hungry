@@ -10,6 +10,9 @@ class DFA_Solver:
   def __init__(self, n_states=5, n_chars=3, T=None):  
     self.solver = Solver()
 
+    # 10 minute timeout
+    self.solver.set("timeout", 10*60*1000)
+
     self.n_states = n_states
     self.n_chars = n_chars
 
@@ -36,6 +39,19 @@ class DFA_Solver:
     if self.solver.check() == sat:
       model = self.solver.model()
       return model
+    else:
+      return "UNSAT"
+
+  def get_matrix(self):
+    if self.solver.check() == sat:
+      model = self.solver.model()
+      matrix = [[0 for i in xrange(len(self.T[0]))] for j in xrange(len(self.T))]
+
+      for i in xrange(len(self.T)):
+        for j in xrange(len(self.T[0])):
+          matrix[i][j] = model[self.T[i][j]].as_long()
+
+      return matrix
     else:
       return "UNSAT"
 
@@ -69,37 +85,44 @@ class DFA_Solver:
           
 if __name__ == "__main__":
   from gen import *
+  import time
 
-  for i in range(10):
-    print "checking forward execution ", i
-    T_sample = sample_matrix()
-    sample_str = get_input_string(10)
-    print T_sample
-    print sample_str
-    last_state_gen_py = execute_dfa(T_sample, sample_str)
+  # for i in range(10):
+  #   print "checking forward execution ", i
+  #   T_sample = sample_matrix()
+  #   sample_str = get_input_string(10)
+  #   print T_sample
+  #   print sample_str
+  #   last_state_gen_py = execute_dfa(T_sample, sample_str)
 
-    dfa_solver = DFA_Solver(T=T_sample)
-    last_state = dfa_solver.forward_execution(1, sample_str)
-    model = dfa_solver.get_model()
-    last_state_solver = model[last_state].as_long()
-    print "executing sample_str on T_sample produced [python] ", last_state_gen_py, " [solver]", last_state_solver
-    assert last_state_gen_py == last_state_solver, "python and solver didnt match cyka debil"
+  #   dfa_solver = DFA_Solver(T=T_sample)
+  #   last_state = dfa_solver.forward_execution(1, sample_str)
+  #   model = dfa_solver.get_model()
+  #   last_state_solver = model[last_state].as_long()
+  #   print "executing sample_str on T_sample produced [python] ", last_state_gen_py, " [solver]", last_state_solver
+  #   assert last_state_gen_py == last_state_solver, "python and solver didnt match cyka debil"
 
   for i in range(10):
     print "checking maybe ? synthesis ", i
     T_sample = sample_matrix()
     print T_sample
-    examples = generate_examples(T_sample, 50)
+    examples = generate_examples(T_sample, 5000)
     # we keep the matrix implicit here with T=None, so hopefully solver will solve it
     dfa_solver = DFA_Solver(T=None)
+    start = time.time()
     print "adding {} examples . . .".format(len(examples))
     for idx, e in enumerate(examples):
       input_str, accept = e
       dfa_solver.add_example(idx, input_str, accept)
+    print 'took', time.time()-start, 'seconds'
+    start = time.time()
     print "solving . . . "
+
     solved_model = dfa_solver.get_model()
-    print solved_model
+    # print solved_model
+    print dfa_solver.get_matrix()
     assert solved_model != "UNSAT", "you got unsat urod blyat!"
+    print 'took', time.time()-start, 'seconds'
 
 
 
