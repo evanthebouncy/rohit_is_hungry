@@ -158,6 +158,14 @@ def run_experiments(num=1, num_samples=2500, fname='output'):
         examples = generate_examples(T_sample, num_samples)
         log_goal(i, T_sample, num_samples, fname=fname)
 
+        solver_name = 'Add10'
+        results = AddN().solve(examples, 10)
+        log_trial(solver_name, *results, fname=fname)
+
+        solver_name = 'AddAll'
+        results = AddN().solve(examples, len(examples))
+        log_trial(solver_name, *results, fname=fname)
+
         solver_name = 'CEGIS'
         results = DFA_CEGIS().solve(examples)
         log_trial(solver_name, *results, fname=fname)
@@ -168,21 +176,14 @@ def run_experiments(num=1, num_samples=2500, fname='output'):
         results = Oracle().solve(cegis_examples, examples)
         log_trial(solver_name, *results, fname=fname)
 
-        solver_name = 'Add50'
-        results = AddN().solve(examples, 50)
-        log_trial(solver_name, *results, fname=fname)
-
-        solver_name = 'Add200'
-        results = AddN().solve(examples, 200)
-        log_trial(solver_name, *results, fname=fname)
 
 
 
 
 if __name__ == '__main__':
-    num = 5
-    num_samples = 2500
-    fname = 'exp6'
+    num = 100
+    num_samples = 1000
+    fname = 'exp7'
     run_experiments(num=num, num_samples=num_samples, fname=fname)
 
 

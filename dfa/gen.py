@@ -1,9 +1,9 @@
 import random
 from random import randint
 
-N_CHAR = 15
-L = 20
-N_STATES = 3
+N_CHAR = 2
+L = 10
+N_STATES = 6
 
 def get_letter():
   return randint(0, N_CHAR-1)
