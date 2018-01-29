@@ -6,9 +6,9 @@ import numpy as np
 # L = 10
 # N_STATES = 6
 
-N_CHAR = 3
+N_CHAR = 2
 L = 10
-N_STATES = 5
+N_STATES = 6
 
 def get_letter():
   return randint(0, N_CHAR-1)
@@ -93,7 +93,7 @@ def examples_to_numpy(examples):
     ret_in.append(xx_np)
     ret_out.append(outt_np)
 
-  return ret_in, ret_out
+  return np.array(ret_in), np.array(ret_out)
 
 def gen_train_data(n=100):
   m = sample_matrix()
