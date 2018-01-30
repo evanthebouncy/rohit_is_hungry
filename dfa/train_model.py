@@ -2,9 +2,11 @@ from model import *
 from gen import *
 import pickle
 
+VAL_LOC = "./data/data_vallidation.p"
+
 def make_test_data():
-  to_store = [gen_train_data() for _ in range(100)]
-  pickle.dump( to_store, open( "./data/data_test_model.p", "wb" ) )
+  to_store = [gen_train_data(500) for _ in range(1000)]
+  pickle.dump( to_store, open( VAL_LOC, "wb" ) )
 
 def compute_accuracy(oracle, test_data):
   acc = 0.0
@@ -19,13 +21,25 @@ def compute_accuracy(oracle, test_data):
   return acc / len(test_data)
 
 if __name__ == "__main__":
+  # make the test data
   # make_test_data()
-  test_data = pickle.load( open( "./data/data_test_model.p", "rb" ) )
-  oracle = Oracle()
+  # assert 0
 
-  for i in range(10000):
+  test_data = pickle.load( open( VAL_LOC, "rb" ) )
+
+  from gen import *
+  oracle = Oracle("oracle")
+  oracle.restore_model("./models/oracle.ckpt")
+  best_acc = 0.0
+
+  # for a long ass time
+  for i in range(1000000):
+    # do some learning 
+    oracle.learn(*gen_train_data(n=500))
     if i % 100 == 1:
       acc = compute_accuracy(oracle, test_data)
-      print acc
+      if acc > best_acc:
+        print "acc improved to : ", acc
+        best_acc = acc
+        oracle.save()
 
-    oracle.learn(*gen_train_data())
