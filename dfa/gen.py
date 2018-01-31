@@ -58,9 +58,31 @@ def execute_dfa(matrix, input_string):
 def accept_state(state):
   return state == (N_STATES - 1)
 
+def dedup(data):
+  ahem = set()
+  for d in data:
+    ahem.add(repr(d))
+  ret = []
+  for d in ahem:
+    ret.append(eval(d))
+  return ret
+
 
 # generate n input output examples
 def generate_examples(matrix, n):
+  return generate_balanced_examples(matrix, n)
+  ret = []
+
+  while len(ret) < n:
+    input_str = get_input_string(L)
+    output_TF = accept_state( execute_dfa(matrix, input_str) )
+    ret.append( (input_str, output_TF) )
+
+  random.shuffle(ret)
+  return ret
+
+# generate n input output examples
+def generate_balanced_examples(matrix, n):
   pos = []
   neg = []
 
@@ -95,9 +117,9 @@ def examples_to_numpy(examples):
 
   return np.array(ret_in), np.array(ret_out)
 
-def gen_train_data(n=100):
+def gen_train_data(n=100, together=False):
   m = sample_matrix()
-  examples = generate_examples(m, n)
+  examples = generate_balanced_examples(m, n)
   np_in, np_out = examples_to_numpy(examples)
 
   all_idxs = [i for i in range(n)]
@@ -110,10 +132,13 @@ def gen_train_data(n=100):
   seen_in, seen_out = [np_in[i] for i in observed_idxs], [np_out[i] for i in observed_idxs]
   unseen_in, unseen_out = [np_in[i] for i in unobserved_idxs], [np_out[i] for i in unobserved_idxs]
 
-  return np.array(seen_in),\
-         np.array(seen_out),\
-         np.array(unseen_in),\
-         np.array(unseen_out)
+  if not together:
+    return np.array(seen_in),\
+           np.array(seen_out),\
+           np.array(unseen_in),\
+           np.array(unseen_out)
+  else:
+    return np_in, np_out
 
 
 def gen_exam():
