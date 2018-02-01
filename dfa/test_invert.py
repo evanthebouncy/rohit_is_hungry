@@ -31,13 +31,13 @@ def data_ratio(data):
 
 
 if __name__ == "__main__":
-  make_test_data()
-  assert 0
+#  make_test_data()
+#  assert 0
 
   invert = Inverter()
   test_data = pickle.load( open( TEST_LOC, "rb" ) )
 
-  full_result, rand_cegis_result, cegis_result, nn_cegis_result = [],[],[],[]
+  full_result, rand_cegis_result, h1_result = [],[], []
   
   for idx, all_data in enumerate(test_data):
     all_data = dedup(all_data)
@@ -45,17 +45,15 @@ if __name__ == "__main__":
     print "testing iteration ", idx, " balance ", data_ratio(all_data)
     inv_full_ans = invert.invert_full(all_data, "full")
     inv_rand_cegis_ans = invert.invert_full(all_data, "rand+cegis")
-    inv_cegis_ans = invert.invert_cegis(all_data, [], 'cegis')
-    inv_nn_cegis_ans = invert.invert_full(all_data, "nn+cegis", confidence=0.8)
+    inv_h1_ans = invert.invert_full(all_data, "h1+cegis")
 
     full_result.append(inv_full_ans)
     rand_cegis_result.append(inv_rand_cegis_ans)
-    cegis_result.append(inv_cegis_ans)
-    nn_cegis_result.append(inv_nn_cegis_ans)
+    h1_result.append(inv_h1_ans)
 
     if idx % 10 == 0:
       print "dumping pickle "
-      pickle.dump( (full_result, rand_cegis_result, cegis_result, nn_cegis_result), 
+      pickle.dump( (full_result, rand_cegis_result, h1_result), 
                    open( "_time_exp_result.p", "wb" ) )
 
 

@@ -1,5 +1,6 @@
 import re
 import numpy as np
+import pickle
 import matplotlib.pyplot as plt
 
 fname = 'exp1'
@@ -93,12 +94,65 @@ def percent_correct(data):
     plt.xticks(ind, names)
     plt.title('Percentage of Correct Examples')
     plt.show()
+
+def graph_from_pickle(TEST_LOC='_time_exp_result.p'):
+    data = pickle.load( open( TEST_LOC, "rb" ) )
+
+    build_times = []
+    solve_times = []
+    num_examples = []
+
+    build_times_all = []
+    solve_times_all = []
+    total_times = []
+    names = [d[0]['method'] for d in data]
+
+    for method in data:
+        builds = [d['build_time'] for d in method]
+        build_times_all.append(builds)
+        solves = [d['solve_time'] for d in method]
+        solve_times_all.append(solves)
+
+        total_time = [builds[i] + solves[i] for i in xrange(len(builds))]
+        total_times.append(total_time)
+
+        numexs = [d['n_examples'] for d in method]
+
+
+        build_times.append(np.mean(builds))
+        solve_times.append(np.mean(solves))
+        num_examples.append(np.mean(numexs))
+
+    width = 0.35
+    ind = np.arange(len(data))
+    p1 = plt.bar(ind, build_times, width, color='#d62728')
+    p2 = plt.bar(ind, solve_times, width, bottom=build_times)
+    plt.xticks(ind, names)
+    plt.title('Average Total Time Taken')
+    plt.legend((p1[0], p2[0]), ('Build', 'Solve'))
+    plt.show()
+
+    width = 0.35
+    ind = np.arange(len(data))
+    p2 = plt.bar(ind, num_examples, width)
+    plt.xticks(ind, names)
+    plt.title('Avg Number of Examples Used')
+    plt.show()
+
+    plt.boxplot(build_times_all, labels=names)
+    plt.title('Build Times')
+    plt.show()
+
+    # ignores outliers since ruins plot
+    plt.boxplot(solve_times_all, labels=names, showfliers=False)
+    plt.title('Solve Times')
+    plt.show()
+
+    # ignores outliers since ruins plot
+    plt.boxplot(total_times, labels=names, showfliers=False)
+    plt.title('Total Times')
+    plt.show()
             
 if __name__ == '__main__':
-    data = extract_data('exp9')
-    plot_boxes(data)
-    stacked_time(data)
-    bar_examples(data)
-    percent_correct(data)
-
+    graph_from_pickle()
 

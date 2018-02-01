@@ -2,6 +2,7 @@ from model import *
 import sys
 from dfa_solver import *
 from gen import *
+from h1 import *
 import random
 import time
 import hashlib
@@ -27,11 +28,26 @@ def check_solved(synth, all_pairs):
       wrong.append((x,y))
   return wrong
 
+
+def choose_h1(data):
+  # try to get as diverse of endings as possible
+  stuffs = [(i, (''.join(map(str, x[0][::-1]))), x[1]) for i, x in enumerate(data)]
+
+  tree = H1Tree()
+  # print
+  # print sorted(data1, key=lambda x: x[1])
+  for (index, s, yes) in stuffs:
+    tree.add_example(s, yes, index)
+
+  example_indices = tree.get_top_examples()
+  data1 = [data[i] for i in example_indices]
+  return data1
+
 class Inverter:
 
   def __init__(self):
-    self.oracle = Oracle("oracle")
-    self.oracle.restore_model("./models/oracle.ckpt")
+    # self.oracle = Oracle("oracle")
+    # self.oracle.restore_model("./models/oracle.ckpt")
     self.clear_solver()
 
   def clear_solver(self):
@@ -96,7 +112,7 @@ class Inverter:
 
   def invert_full(self, all_data, method, confidence=0.9):
     fraction = 0.2
-    assert method in ["full", "rand", "nn", "nn+cegis", "rand+cegis", "nn_experiment"]
+    assert method in ["full", "rand", "nn", "nn+cegis", "rand+cegis", "nn_experiment", 'h1+cegis']
 
     if method == "full":
       self.clear_solver()
@@ -218,6 +234,18 @@ class Inverter:
       params['orig_subset_size'] = orig_size
       return params
 
+    if method == 'h1+cegis':
+      print "[h1+cegis] . . . "
+      self.clear_solver()
+      ret = dict()
+      sub_data = choose_h1(all_data)
+      orig_len = len(sub_data)
+
+      to_ret = self.invert_cegis(all_data, sub_data, "cegis")
+      to_ret['method'] = method
+      to_ret['n_examples_orig'] = orig_len
+      return to_ret
+
 if __name__ == "__main__":
   invert = Inverter()
 
@@ -231,14 +259,16 @@ if __name__ == "__main__":
 
   #inv_full_ans = invert.invert_full(all_data, "full")
   inv_rand_ans = invert.invert_full(all_data, "rand+cegis")
+  inv_h1_ans = invert.invert_full(all_data, "h1+cegis")
   #inv_nn_ans = invert.invert_full(all_data, "nn", confidence=0.8)
-  inv_nn_cegis_ans = invert.invert_full(all_data, "nn+cegis", confidence=0.9)
+  # inv_nn_cegis_ans = invert.invert_full(all_data, "nn+cegis", confidence=0.9)
   #inv_cegis_ans = invert.invert_cegis(all_data, [], 'cegis')
 
   #print inv_full_ans
   print inv_rand_ans
+  print inv_h1_ans
   #print inv_nn_ans
-  print inv_nn_cegis_ans
+  # print inv_nn_cegis_ans
   #print inv_cegis_ans
 
 
