@@ -100,11 +100,13 @@ def graph_from_pickle(TEST_LOC='_time_exp_result.p'):
 
     build_times = []
     solve_times = []
+    nn_times = []
     num_examples = []
 
     build_times_all = []
     solve_times_all = []
     total_times = []
+    
     names = [d[0]['method'] for d in data]
 
     for method in data:
@@ -112,24 +114,32 @@ def graph_from_pickle(TEST_LOC='_time_exp_result.p'):
         build_times_all.append(builds)
         solves = [d['solve_time'] for d in method]
         solve_times_all.append(solves)
+        try:
+            nns = [d['nn_time'] for d in method]
+        except:
+            nns = [0 for d in method]
 
-        total_time = [builds[i] + solves[i] for i in xrange(len(builds))]
+        total_time = [builds[i] + solves[i] + nns[i] for i in xrange(len(builds))]
         total_times.append(total_time)
 
         numexs = [d['n_examples'] for d in method]
 
-
+        nn_times.append(np.mean(nns))        
         build_times.append(np.mean(builds))
         solve_times.append(np.mean(solves))
         num_examples.append(np.mean(numexs))
 
     width = 0.35
     ind = np.arange(len(data))
-    p1 = plt.bar(ind, build_times, width, color='#d62728')
-    p2 = plt.bar(ind, solve_times, width, bottom=build_times)
+    nn_times = np.array(nn_times)
+    build_times = np.array(build_times)
+    solve_times = np.array(solve_times)
+    p0 = plt.bar(ind, nn_times, width, color='#00e600')
+    p1 = plt.bar(ind, build_times, width, color='#d62728', bottom=nn_times)
+    p2 = plt.bar(ind, solve_times, width, bottom=build_times+nn_times)
     plt.xticks(ind, names)
     plt.title('Average Total Time Taken')
-    plt.legend((p1[0], p2[0]), ('Build', 'Solve'))
+    plt.legend((p0[0], p1[0], p2[0]), ('NN', 'Build', 'Solve'))
     plt.show()
 
     width = 0.35
@@ -149,7 +159,7 @@ def graph_from_pickle(TEST_LOC='_time_exp_result.p'):
     plt.show()
 
     # ignores outliers since ruins plot
-    plt.boxplot(total_times, labels=names, showfliers=False)
+    plt.boxplot(total_times, labels=names, showfliers=True)
     plt.title('Total Times')
     plt.show()
             
