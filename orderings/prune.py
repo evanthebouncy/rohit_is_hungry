@@ -1,3 +1,4 @@
+from solver import *
 
 num_nodes = 10
 
@@ -83,6 +84,23 @@ class OrderingGraph(object):
                     to_explore.append(longer_path)
         return paths
 
+
+def check_representative(small, big):
+    '''checks if the smaller set of examples is representative of the bigger set'''
+    missing = []
+    for example in big:
+        if not example in small:
+            missing.append(example)
+    s = OrderSolver()
+    for example in small:
+        s.add_example(example)
+
+    for example in big:
+        if s.check_ambiguous(example):
+            return False
+    return True
+
+
 if __name__ == '__main__':
     from gen import *
     ordering = gen_ordering()
@@ -92,8 +110,11 @@ if __name__ == '__main__':
     o = OrderingGraph()
     smallest_possible = o.find_smallest_set(all_examples)
     assert len(smallest_possible) == 9
+    print 'smallest possible is representative:', check_representative(smallest_possible, all_examples)
 
-    sample_examples = get_data(ordering)
-    smaller = o.find_smallest_set(sample_examples)
-    print len(sample_examples), len(smaller)
-    print smaller
+    for _ in xrange(10):
+        sample_examples = get_data(ordering)
+        smaller = o.find_smallest_set(sample_examples)
+        print len(sample_examples), len(smaller)
+        # print smaller
+        print 'smallest of sample is representative:', check_representative(smaller, sample_examples)
