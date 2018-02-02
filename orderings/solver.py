@@ -50,6 +50,14 @@ class OrderSolver(object):
         self.solver.pop()
         return is_sat
 
+    def check_ambiguous(self, example):
+        '''returns true if example is ambiguous'''
+        nums, truth = example
+        example2 = (nums, not truth)
+        is_sat1 = self.add_temp(example)
+        is_sat2 = self.add_temp(example2)
+        return is_sat1 and is_sat2
+
 
 if __name__ == '__main__':
     # check if solver works
@@ -69,6 +77,9 @@ if __name__ == '__main__':
         s.reset_solver()
 
     # reset solver and check an "ambiguous" example
-    print 'Trying 2 ambiguous examples...'
-    print s.add_temp(((5, 1), True))
-    print s.add_temp(((5, 1), False))
+    print 'Trying ambiguous example...'
+    example = ((5, 1), False)
+    print 'is ambiguous:', s.check_ambiguous(example)
+    print 'Checking non-ambiguous example...'
+    s.add_example(example)
+    print 'is ambiguous:', s.check_ambiguous(example)
