@@ -110,11 +110,24 @@ if __name__ == '__main__':
     o = OrderingGraph()
     smallest_possible = o.find_smallest_set(all_examples)
     assert len(smallest_possible) == 9
-    print 'smallest possible is representative:', check_representative(smallest_possible, all_examples)
+    is_rep = check_representative(smallest_possible, all_examples)
+    print 'smallest possible is representative:', is_rep
+    assert is_rep
 
-    for _ in xrange(10):
+    largest_size = 9
+    sizes = []
+    for _ in xrange(100):
         sample_examples = get_data(ordering)
         smaller = o.find_smallest_set(sample_examples)
         print len(sample_examples), len(smaller)
         # print smaller
-        print 'smallest of sample is representative:', check_representative(smaller, sample_examples)
+        is_rep = check_representative(smaller, sample_examples)
+        print 'smallest of sample is representative:', is_rep
+        assert is_rep
+        sizes.append(len(smaller))
+    print 'largest size subset found:', max(sizes)
+
+    import matplotlib.pyplot as plt
+    plt.title('Sizes of Subsets')
+    plt.boxplot(sizes)
+    plt.show()
