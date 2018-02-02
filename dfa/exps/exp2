@@ -1,6 +1,0 @@
-Trial 1: [[4, 1, 3], [3, 0, 3], [2, 1, 4], [2, 4, 1], [3, 1, 4]] with 1 samples
-CEGIS got [[0, 0, 4], [0, 0, 0], [0, 0, 0], [0, 0, 0], [4, 1, 4]] in (0.0503211021423 build, 0.0139269828796 solve): 0.064248085022 total time. Was Solved: True. Used 1 examples.
-Oracle got [[0, 0, 4], [0, 0, 0], [0, 0, 0], [0, 0, 0], [4, 1, 4]] in (0.0501918792725 build, 0.0134689807892 solve): 0.0636608600616 total time. Was Solved: True. Used 1 examples.
-Add50 got [[0, 0, 4], [0, 0, 0], [0, 0, 0], [0, 0, 0], [4, 1, 4]] in (0.0507228374481 build, 0.012345790863 solve): 0.0630686283112 total time. Was Solved: True. Used 1 examples.
-Add100 got [[0, 0, 4], [0, 0, 0], [0, 0, 0], [0, 0, 0], [4, 1, 4]] in (0.0550198554993 build, 0.0136740207672 solve): 0.0686938762665 total time. Was Solved: True. Used 1 examples.
-Trial 1: [[4, 4, 3, 1, 1, 3, 2, 3, 3, 4], [4, 0, 0, 3, 3, 1, 1, 4, 0, 3], [0, 4, 3, 0, 4, 0, 1, 1, 0, 4], [4, 2, 1, 1, 4, 2, 1, 0, 0, 3], [3, 2, 2, 3, 2, 2, 1, 3, 2, 1]] with 100 samples
