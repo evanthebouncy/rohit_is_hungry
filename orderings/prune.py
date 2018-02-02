@@ -88,6 +88,7 @@ class OrderingGraph(object):
 def check_representative(small, big):
     '''checks if the smaller set of examples is representative of the bigger set'''
     missing = []
+    small = set(small)
     for example in big:
         if not example in small:
             missing.append(example)
@@ -95,7 +96,7 @@ def check_representative(small, big):
     for example in small:
         s.add_example(example)
 
-    for example in big:
+    for example in missing:
         if s.check_ambiguous(example):
             return False
     return True
