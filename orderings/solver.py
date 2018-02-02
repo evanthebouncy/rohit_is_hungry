@@ -1,6 +1,6 @@
 from z3 import *
-
-L = 10
+from gen import L
+import random
 
 class OrderSolver(object):
 
@@ -13,7 +13,7 @@ class OrderSolver(object):
         self.ordering = [Int('ans_{}'.format(i)) for i in xrange(L)]
         
         for o in self.ordering:
-            self.solver.add(And(0 <= o, o <= 9))
+            self.solver.add(And(0 <= o, o <= L-1))
 
         self.solver.add(Distinct(self.ordering))
 
@@ -54,32 +54,77 @@ class OrderSolver(object):
         '''returns true if example is ambiguous'''
         nums, truth = example
         example2 = (nums, not truth)
-        is_sat1 = self.add_temp(example)
+        # is_sat1 = self.add_temp(example)
         is_sat2 = self.add_temp(example2)
-        return is_sat1 and is_sat2
+        return is_sat2
+
+
+def check_solved(soln, examples):
+    incorrect = []
+    for example in examples:
+        nums, truth = example
+        num1, num2 = nums
+
+        ind1 = soln.index(num1)
+        ind2 = soln.index(num2)
+
+        if (ind1 < ind2) != truth:
+            incorrect.append(example)
+    return incorrect
+
+
+class OrderCEGIS(object):
+
+    def __init__(self):
+        self.solver = OrderSolver()
+
+    def _reset(self):
+        self.solver.reset_solver()
+
+    def solve(self, examples):
+        example = random.choice(examples)
+        used_examples = [example]
+
+        while True:
+            self.solver.add_example(example)
+            synth = self.solver.solve()
+            incorrect = check_solved(synth, examples)
+
+            if len(incorrect) == 0:
+                return used_examples
+            else:
+                example = random.choice(incorrect)
+                used_examples.append(example)
 
 
 if __name__ == '__main__':
     # check if solver works
     from gen import *
 
-    s = OrderSolver()
+    # s = OrderSolver()
 
-    for _ in xrange(100):
-        truth = gen_ordering()
-        examples = get_data(truth)
-        for e in examples:
-            s.add_example(e)
-        synth = s.solve()
-        print 'truth:', truth
-        print 'synth:', synth
-        assert synth
-        s.reset_solver()
+    # for _ in xrange(100):
+    #     truth = gen_ordering()
+    #     examples = get_data(truth)
+    #     for e in examples:
+    #         s.add_example(e)
+    #     synth = s.solve()
+    #     print 'truth:', truth
+    #     print 'synth:', synth
+    #     assert synth
+    #     s.reset_solver()
 
-    # reset solver and check an "ambiguous" example
-    print 'Trying ambiguous example...'
-    example = ((5, 1), False)
-    print 'is ambiguous:', s.check_ambiguous(example)
-    print 'Checking non-ambiguous example...'
-    s.add_example(example)
-    print 'is ambiguous:', s.check_ambiguous(example)
+    # # reset solver and check an "ambiguous" example
+    # print 'Trying ambiguous example...'
+    # example = ((5, 1), False)
+    # print 'is ambiguous:', s.check_ambiguous(example)
+    # print 'Checking non-ambiguous example...'
+    # s.add_example(example)
+    # print 'is ambiguous:', s.check_ambiguous(example)
+
+    truth = gen_ordering()
+    examples = get_data(truth)
+    c = OrderCEGIS()
+    print truth
+    print examples
+    print c.solve(examples)
