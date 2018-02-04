@@ -13,7 +13,7 @@ if __name__ == "__main__":
   print ord1
   print data
 
-  data_subset = oracle.get_until_confident(data, confidence=0.7)
+  data_subset = oracle.get_until_confident(data, confidence=0.9)
   print data_subset
 
   print "wolololo"
