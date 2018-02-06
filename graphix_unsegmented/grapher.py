@@ -1,14 +1,15 @@
-import re
-import numpy as np
 import pickle
 import matplotlib.pyplot as plt
+import numpy as np
 
-def gen_graphs(TEST_LOC='_time_exp_result.p'):
+
+def gen_graphs(TEST_LOC='icml_result.p'):
     data = pickle.load( open( TEST_LOC, "rb" ) )
 
     build_times = []
     solve_times = []
     nn_times = []
+    check_times = []
     num_examples = []
     orig_examples = []
 
@@ -16,34 +17,42 @@ def gen_graphs(TEST_LOC='_time_exp_result.p'):
     solve_times_all = []
     total_times = []
 
+    # for d in data:
+    #     print d[0]
+    
     names = [d[0]['method'] for d in data]
 
     for method in data:
-        builds = [d['build_time'] for d in method]
+        builds = [d['building_time'] for d in method]
         build_times_all.append(builds)
-        solves = [d['solve_time'] for d in method]
+        solves = [d['solving_time'] for d in method]
         solve_times_all.append(solves)
         try:
             nns = [d['nn_time'] for d in method]
         except:
             nns = [0 for d in method]
 
+        try:
+            checks = [d['checking_time'] for d in method]
+        except:
+            checks = [0 for d in method]
+
         total_time = [builds[i] + solves[i] + nns[i] for i in xrange(len(builds))]
         total_times.append(total_time)
 
-        numexs = [d['n_examples'] for d in method]
-        if method[0]['method'] == 'full':
-            orig_size = numexs
-        elif method[0]['method'] == 'cegis':
-            orig_size = [0 for d in method]
+        numexs = [d['ce_size'] for d in method]
+        if method[0]['method'] != 'full':
+            orig_size = [d['orig_subset_size'] for d in method]
         else:
-            orig_size = [d['n_examples_orig'] for d in method]
+            orig_size = numexs
+        
 
         nn_times.append(np.mean(nns))        
         build_times.append(np.mean(builds))
         solve_times.append(np.mean(solves))
         orig_examples.append(np.mean(orig_size))
         num_examples.append(np.mean(numexs))
+
 
     names2 = names
     names = []
@@ -93,13 +102,12 @@ def gen_graphs(TEST_LOC='_time_exp_result.p'):
 
     # ignores outliers since ruins plot
     fig1, ax1 = plt.subplots(figsize=figsize)
-    plt.boxplot(total_times, labels=names, showfliers=True, vert=False)
+    plt.boxplot(total_times, labels=names, showfliers=False, vert=False)
     # plt.title('Distribution of Total Times')
     
     # ax1.set_xscale('log')
     plt.tight_layout()
     plt.show()
-            
-if __name__ == '__main__':
-    gen_graphs('../dfa_factorized/_time_exp_final_result.p')
 
+if __name__ == '__main__':
+    gen_graphs()

@@ -23,6 +23,16 @@ def graph_stuff(TEST_LOC='results.p'):
                 is_rep[name].append(stats['is_rep'])
                 p_rep[name].append(stats['p_rep'])
 
+    names2 = names
+    names = []
+    for name in names2:
+        if name == 'nn':
+            # names.append('ours')
+            pass
+        else:
+            names.append(name)
+    names.append('nn')
+
     ind = np.arange(len(names))
     num_examples = [num_examples[name] for name in names]
     is_rep = [1.0*sum(is_rep[name])/len(num_examples[0]) for name in names]
@@ -30,27 +40,39 @@ def graph_stuff(TEST_LOC='results.p'):
 
     avg_sizes = [np.mean(nums) for nums in num_examples]
 
+    names[-1] = 'ours'
+
     width = 0.35
-    print avg_sizes
-    plt.bar(ind, avg_sizes, width)
-    plt.xticks(ind, names)
-    plt.title('Average Percentage of Examples Used')
+    figsize = (4,3)
+    plt.figure(figsize=figsize)
+    # print avg_sizes
+    plt.barh(ind, avg_sizes, width, color='#bfbfbf')
+    plt.yticks(ind, names)
+    plt.tight_layout()
+    # plt.title('Average Percentage of Examples Used')
     plt.show()
 
-    plt.boxplot(num_examples, labels=names)
-    plt.title('Distribution of Percentage of Examples Used')
+    # plt.boxplot(num_examples, labels=names)
+    # plt.title('Distribution of Percentage of Examples Used')
+    # plt.show()
+
+    plt.figure(figsize=figsize)
+    plt.xlim(xmax=1.0)
+    print is_rep
+    plt.barh(ind, is_rep, width, color='#bfbfbf')
+    plt.yticks(ind, names)
+    plt.tight_layout()
+    # plt.title('Percent Is Completely Representative')
     plt.show()
 
-    plt.bar(ind, is_rep, width)
-    plt.xticks(ind, names)
-    plt.title('Percent Is Completely Representative Set')
-    plt.show()
-
-    print p_rep, names
-    plt.bar(ind, p_rep, width)
-    plt.xticks(ind, names)
-    plt.title('Percent of Set Represented')
-    plt.show()
+    # plt.figure(figsize=figsize)
+    # plt.xlim(xmax=1.0)
+    # # print p_rep, names
+    # plt.barh(ind, p_rep, width, color='#bfbfbf')
+    # plt.yticks(ind, names)
+    # plt.tight_layout()
+    # # plt.title('Percent of Set Represented')
+    # plt.show()
 
 
 if __name__ == '__main__':
