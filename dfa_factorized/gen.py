@@ -156,7 +156,7 @@ def gen_skewed_number(n=2000):
   for i in range(bnd):
     for j in range(i):
       ret.append((bnd-i) * N_CLOSE)
-  return ret
+  return ret + [1000]
 
 
 def gen_train_data(n=200):
@@ -172,7 +172,8 @@ def gen_train_data(n=200):
   to_be_decided = examples[-1]
   # print to_be_decided
   data_input = examples[:-1]
-  # print len(data_input)
+  if len(data_input) < 11:
+    return gen_train_data(n)
   front, back = get_close(data_input, to_be_decided)
   return [x[1] for x in front], [x[1] for x in back], to_be_decided
 
@@ -212,7 +213,6 @@ def gen_batch_data(n_batch=20):
 #           np.array(unseen_out)
 #  else:
 #    return np_in, np_out
-
 
 def gen_exam():
   m = sample_matrix()

@@ -1,0 +1,315 @@
+Trial 1: [[4, 0], [2, 2], [3, 1], [1, 5], [2, 0], [5, 5]] with 1000 samples
+Add10 got [[2, 1], [1, 1], [3, 5], [4, 0], [5, 3], [0, 5]] in (0.232143163681 build, 0.0320980548859 solve): 0.264241218567 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 0], [3, 3], [3, 0], [4, 1], [1, 5], [5, 5]] in (23.4808831215 build, 1.99139499664 solve): 25.4722781181 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 0], [2, 0], [3, 4], [4, 5], [2, 2], [5, 5]] in (0.393626451492 build, 12.9251582623 solve): 13.3187847137 total time. Was Solved: True. Used 16 examples.
+Oracle got [[1, 2], [3, 0], [4, 5], [2, 4], [3, 3], [5, 5]] in (0.368725061417 build, 1.21603512764 solve): 1.58476018906 total time. Was Solved: False. Used 16 examples.
+
+Trial 2: [[1, 5], [3, 0], [0, 2], [2, 4], [0, 2], [0, 3]] with 1000 samples
+Add10 got [[2, 5], [2, 1], [5, 2], [1, 0], [0, 3], [3, 4]] in (0.236578941345 build, 0.0435020923615 solve): 0.280081033707 total time. Was Solved: False. Used 10 examples.
+AddAll got [[3, 5], [4, 4], [3, 5], [1, 0], [0, 4], [2, 1]] in (23.1885569096 build, 2.29983997345 solve): 25.488396883 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 5], [3, 4], [4, 2], [2, 2], [1, 5], [0, 3]] in (0.638329267502 build, 9.57881951332 solve): 10.2171487808 total time. Was Solved: True. Used 26 examples.
+Oracle got [[2, 5], [1, 3], [4, 0], [0, 2], [0, 1], [0, 1]] in (0.604173898697 build, 4.14816188812 solve): 4.75233578682 total time. Was Solved: False. Used 26 examples.
+
+Trial 3: [[0, 1], [3, 1], [5, 4], [5, 2], [5, 3], [4, 0]] with 1000 samples
+Add10 got [[5, 4], [0, 2], [5, 1], [0, 0], [1, 0], [3, 1]] in (0.231178045273 build, 0.0493659973145 solve): 0.280544042587 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 1], [2, 4], [5, 2], [5, 2], [3, 1], [3, 0]] in (23.0541009903 build, 2.51176786423 solve): 25.5658688545 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[3, 2], [5, 1], [1, 4], [3, 2], [1, 2], [1, 0]] in (0.444417715073 build, 3.74814367294 solve): 4.19256138802 total time. Was Solved: True. Used 18 examples.
+Oracle got [[1, 4], [5, 4], [0, 1], [5, 1], [3, 5], [3, 2]] in (0.416272163391 build, 1.37373995781 solve): 1.7900121212 total time. Was Solved: False. Used 18 examples.
+
+Trial 4: [[0, 5], [5, 3], [4, 1], [2, 5], [2, 1], [5, 1]] with 1000 samples
+Add10 got [[4, 4], [5, 4], [0, 2], [5, 2], [3, 1], [4, 0]] in (0.233261823654 build, 0.0490279197693 solve): 0.282289743423 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 3], [1, 2], [5, 4], [5, 2], [1, 5], [5, 2]] in (23.433396101 build, 1.12661290169 solve): 24.5600090027 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[3, 5], [4, 5], [5, 1], [3, 5], [4, 2], [5, 2]] in (0.464506626129 build, 9.91286373138 solve): 10.3773703575 total time. Was Solved: True. Used 19 examples.
+Oracle got [[4, 2], [4, 5], [3, 2], [5, 4], [1, 5], [5, 3]] in (0.450994968414 build, 0.0817189216614 solve): 0.532713890076 total time. Was Solved: False. Used 19 examples.
+
+Trial 5: [[3, 1], [5, 1], [1, 3], [1, 3], [4, 2], [2, 0]] with 1000 samples
+Add10 got [[4, 4], [3, 1], [5, 5], [1, 2], [4, 1], [5, 1]] in (0.228986978531 build, 0.0195021629333 solve): 0.248489141464 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 4], [4, 1], [4, 2], [2, 4], [5, 4], [1, 3]] in (23.0440680981 build, 1.72731018066 solve): 24.7713782787 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 2], [5, 2], [5, 1], [1, 4], [2, 3], [3, 0]] in (0.416630029678 build, 1.45548200607 solve): 1.87211203575 total time. Was Solved: True. Used 17 examples.
+Oracle got [[2, 4], [5, 4], [3, 2], [4, 1], [2, 5], [5, 3]] in (0.391195058823 build, 0.501569986343 solve): 0.892765045166 total time. Was Solved: False. Used 17 examples.
+
+Trial 6: [[5, 1], [0, 3], [0, 0], [4, 0], [2, 3], [5, 2]] with 1000 samples
+Add10 got [[5, 2], [5, 5], [4, 0], [3, 4], [1, 3], [0, 3]] in (0.233061075211 build, 0.0687239170074 solve): 0.301784992218 total time. Was Solved: False. Used 10 examples.
+AddAll got [[5, 3], [2, 0], [4, 1], [0, 1], [0, 0], [5, 4]] in (23.2277390957 build, 14.7870090008 solve): 38.0147480965 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 1], [0, 2], [3, 0], [4, 2], [0, 0], [5, 4]] in (0.568236589432 build, 89.2172131538 solve): 89.7854497433 total time. Was Solved: True. Used 23 examples.
+Oracle got [[5, 1], [0, 4], [4, 4], [0, 0], [2, 0], [5, 3]] in (0.531378984451 build, 73.680948019 solve): 74.2123270035 total time. Was Solved: False. Used 23 examples.
+
+Trial 7: [[2, 3], [4, 1], [0, 3], [5, 4], [3, 1], [5, 2]] with 1000 samples
+Add10 got [[4, 5], [5, 5], [0, 3], [2, 4], [1, 0], [5, 2]] in (0.237186908722 build, 0.0651168823242 solve): 0.302303791046 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 4], [3, 1], [5, 3], [2, 1], [5, 3], [5, 0]] in (23.1704828739 build, 7.44581794739 solve): 30.6163008213 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 4], [3, 1], [2, 4], [4, 1], [5, 3], [5, 2]] in (0.540834903717 build, 34.3959991932 solve): 34.9368340969 total time. Was Solved: True. Used 22 examples.
+Oracle got [[0, 4], [4, 3], [4, 1], [2, 3], [5, 1], [5, 0]] in (0.519464015961 build, 21.8468580246 solve): 22.3663220406 total time. Was Solved: False. Used 22 examples.
+
+Trial 8: [[1, 5], [3, 4], [3, 5], [1, 1], [1, 0], [0, 2]] with 1000 samples
+Add10 got [[4, 3], [0, 5], [2, 2], [0, 2], [1, 0], [1, 5]] in (0.229382991791 build, 0.0319061279297 solve): 0.26128911972 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 5], [3, 5], [4, 0], [4, 4], [3, 2], [0, 1]] in (23.1229100227 build, 3.20394706726 solve): 26.32685709 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 5], [2, 2], [1, 4], [1, 5], [2, 0], [0, 3]] in (0.593235015869 build, 37.7577497959 solve): 38.3509848118 total time. Was Solved: True. Used 24 examples.
+Oracle got [[2, 5], [0, 0], [3, 1], [2, 2], [1, 5], [0, 4]] in (0.553826093674 build, 9.37637209892 solve): 9.9301981926 total time. Was Solved: False. Used 24 examples.
+
+Trial 9: [[0, 4], [0, 0], [2, 4], [1, 2], [2, 3], [2, 1]] with 1000 samples
+Add10 got [[3, 5], [4, 2], [2, 1], [5, 1], [3, 5], [3, 0]] in (0.231203079224 build, 0.0395519733429 solve): 0.270755052567 total time. Was Solved: False. Used 10 examples.
+AddAll got [[3, 5], [2, 3], [2, 2], [1, 4], [2, 5], [0, 1]] in (23.0788509846 build, 0.73810005188 solve): 23.8169510365 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 4], [2, 3], [2, 4], [1, 4], [4, 4], [1, 3]] in (0.364568471909 build, 0.145223617554 solve): 0.509792089462 total time. Was Solved: True. Used 15 examples.
+Oracle got [[1, 5], [4, 4], [0, 2], [2, 5], [4, 3], [5, 1]] in (0.346013069153 build, 0.0568730831146 solve): 0.402886152267 total time. Was Solved: False. Used 15 examples.
+
+Trial 10: [[4, 0], [2, 0], [1, 2], [4, 0], [1, 5], [3, 4]] with 1000 samples
+Add10 got [[3, 1], [5, 3], [0, 5], [2, 5], [3, 3], [4, 3]] in (0.232137203217 build, 0.0343871116638 solve): 0.26652431488 total time. Was Solved: False. Used 10 examples.
+AddAll got [[1, 3], [2, 5], [4, 3], [1, 3], [2, 4], [0, 1]] in (24.401777029 build, 229.897354126 solve): 254.299131155 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[3, 4], [2, 1], [1, 4], [2, 5], [3, 4], [4, 3]] in (0.741803646088 build, 16.2456049919 solve): 16.987408638 total time. Was Solved: True. Used 30 examples.
+Oracle got [[5, 3], [4, 1], [1, 2], [2, 1], [3, 5], [3, 4]] in (0.689388036728 build, 2.5769867897 solve): 3.26637482643 total time. Was Solved: False. Used 30 examples.
+
+Trial 11: [[4, 1], [3, 1], [3, 0], [3, 2], [0, 5], [0, 4]] with 1000 samples
+Add10 got [[5, 2], [4, 3], [3, 5], [2, 0], [4, 5], [1, 0]] in (0.228802204132 build, 0.022304058075 solve): 0.251106262207 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 3], [1, 4], [0, 5], [1, 3], [1, 0], [0, 2]] in (22.820360899 build, 7.41292500496 solve): 30.2332859039 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 1], [3, 1], [3, 0], [3, 2], [0, 5], [0, 4]] in (0.724609136581 build, 156.485180378 solve): 157.209789515 total time. Was Solved: True. Used 30 examples.
+Oracle got [[1, 4], [0, 5], [2, 3], [2, 0], [2, 4], [0, 1]] in (0.67967414856 build, 90.777009964 solve): 91.4566841125 total time. Was Solved: True. Used 30 examples.
+
+Trial 12: [[2, 5], [5, 0], [4, 0], [2, 3], [2, 5], [3, 1]] with 1000 samples
+Add10 got [[3, 5], [4, 3], [1, 2], [2, 5], [3, 3], [1, 2]] in (0.225745916367 build, 0.0349040031433 solve): 0.26064991951 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 5], [5, 0], [4, 2], [4, 5], [3, 0], [2, 1]] in (22.3424479961 build, 7.6197040081 solve): 29.9621520042 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 5], [4, 5], [5, 0], [4, 3], [0, 1], [3, 2]] in (0.570923089981 build, 34.9005386829 solve): 35.4714617729 total time. Was Solved: True. Used 24 examples.
+Oracle got [[3, 5], [3, 1], [5, 0], [0, 0], [3, 1], [4, 2]] in (0.5341360569 build, 4.55867505074 solve): 5.09281110764 total time. Was Solved: True. Used 24 examples.
+
+Trial 13: [[0, 2], [0, 4], [1, 2], [5, 2], [2, 5], [2, 5]] with 1000 samples
+Add10 got [[5, 2], [5, 3], [0, 4], [5, 5], [1, 0], [4, 3]] in (0.231868028641 build, 0.0359499454498 solve): 0.267817974091 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 1], [2, 3], [0, 4], [2, 1], [3, 5], [1, 5]] in (22.4820890427 build, 3.23334693909 solve): 25.7154359818 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[0, 2], [5, 5], [3, 2], [0, 4], [2, 5], [2, 5]] in (0.72069978714 build, 13.3849351406 solve): 14.1056349277 total time. Was Solved: True. Used 30 examples.
+Oracle got [[4, 1], [2, 1], [0, 3], [1, 5], [4, 1], [1, 5]] in (0.667850017548 build, 23.841258049 solve): 24.5091080666 total time. Was Solved: True. Used 30 examples.
+
+Trial 14: [[1, 2], [1, 4], [3, 4], [2, 4], [0, 5], [3, 4]] with 1000 samples
+Add10 got [[4, 5], [4, 2], [3, 3], [5, 5], [0, 3], [1, 5]] in (0.225116968155 build, 0.0822019577026 solve): 0.307318925858 total time. Was Solved: False. Used 10 examples.
+AddAll got [[5, 5], [3, 3], [2, 2], [3, 4], [1, 5], [3, 4]] in (22.3061499596 build, 1.8791539669 solve): 24.1853039265 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 1], [1, 4], [1, 1], [2, 5], [2, 5], [1, 3]] in (0.624123811722 build, 7.01302957535 solve): 7.63715338707 total time. Was Solved: True. Used 26 examples.
+Oracle got [[3, 3], [0, 5], [0, 5], [4, 1], [4, 2], [4, 1]] in (0.575881958008 build, 0.190410852432 solve): 0.76629281044 total time. Was Solved: True. Used 26 examples.
+
+Trial 15: [[4, 1], [5, 0], [1, 4], [4, 3], [0, 0], [2, 4]] with 1000 samples
+Add10 got [[3, 1], [5, 0], [4, 4], [2, 4], [2, 1], [5, 0]] in (0.225027084351 build, 0.0382471084595 solve): 0.26327419281 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 1], [5, 0], [1, 4], [4, 1], [3, 0], [2, 4]] in (23.3679919243 build, 4.89899897575 solve): 28.2669909 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 3], [0, 0], [5, 2], [5, 0], [3, 1], [4, 1]] in (0.720194101334 build, 43.7651138306 solve): 44.4853079319 total time. Was Solved: True. Used 30 examples.
+Oracle got [[2, 1], [5, 0], [0, 0], [1, 5], [1, 2], [4, 2]] in (0.681698083878 build, 23.3278641701 solve): 24.009562254 total time. Was Solved: True. Used 30 examples.
+
+Trial 16: [[0, 2], [1, 3], [2, 0], [2, 3], [0, 1], [1, 4]] with 1000 samples
+Add10 got [[0, 2], [1, 5], [1, 2], [3, 3], [5, 3], [2, 4]] in (0.224197149277 build, 0.041491985321 solve): 0.265689134598 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 1], [5, 3], [1, 4], [0, 0], [5, 5], [2, 0]] in (22.5078408718 build, 1.03190493584 solve): 23.5397458076 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 3], [4, 4], [3, 3], [1, 1], [5, 5], [2, 2]] in (0.1945977211 build, 0.0638210773468 solve): 0.258418798447 total time. Was Solved: True. Used 8 examples.
+Oracle got [[5, 1], [3, 5], [0, 3], [4, 4], [2, 0], [5, 3]] in (0.193356990814 build, 0.0196530818939 solve): 0.213010072708 total time. Was Solved: False. Used 8 examples.
+
+Trial 17: [[0, 4], [1, 1], [3, 3], [0, 3], [3, 1], [0, 2]] with 1000 samples
+Add10 got [[5, 3], [3, 0], [5, 4], [4, 2], [1, 5], [0, 1]] in (0.228496074677 build, 0.0171291828156 solve): 0.245625257492 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 5], [5, 3], [1, 4], [0, 1], [2, 2], [4, 1]] in (22.4456410408 build, 0.903270959854 solve): 23.3489120007 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 5], [4, 4], [2, 2], [5, 2], [5, 5], [0, 3]] in (0.0940828323364 build, 0.0345420837402 solve): 0.128624916077 total time. Was Solved: True. Used 4 examples.
+Oracle got [[1, 3], [3, 3], [5, 5], [2, 2], [4, 1], [5, 1]] in (0.0919499397278 build, 0.0203490257263 solve): 0.112298965454 total time. Was Solved: False. Used 4 examples.
+
+Trial 18: [[0, 2], [1, 0], [2, 5], [1, 1], [3, 1], [5, 2]] with 1000 samples
+Add10 got [[5, 3], [1, 4], [2, 5], [4, 1], [3, 0], [5, 2]] in (0.235157966614 build, 0.0237939357758 solve): 0.25895190239 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 3], [5, 1], [3, 1], [2, 5], [0, 2], [1, 5]] in (22.580121994 build, 0.672353029251 solve): 23.2524750233 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 4], [3, 2], [2, 5], [1, 2], [2, 1], [5, 2]] in (0.431321382523 build, 1.89597010612 solve): 2.32729148865 total time. Was Solved: True. Used 18 examples.
+Oracle got [[1, 4], [0, 2], [4, 0], [4, 5], [3, 5], [5, 3]] in (0.398066997528 build, 0.190379142761 solve): 0.588446140289 total time. Was Solved: False. Used 18 examples.
+
+Trial 19: [[4, 4], [2, 1], [3, 0], [1, 4], [2, 3], [3, 5]] with 1000 samples
+Add10 got [[4, 3], [1, 4], [4, 5], [5, 5], [2, 1], [3, 4]] in (0.221246957779 build, 0.0512518882751 solve): 0.272498846054 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 2], [2, 5], [3, 1], [5, 4], [0, 1], [3, 3]] in (26.2345368862 build, 0.71418595314 solve): 26.9487228394 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[3, 3], [5, 2], [0, 1], [1, 4], [3, 5], [4, 1]] in (0.161472320557 build, 0.0587728023529 solve): 0.22024512291 total time. Was Solved: True. Used 7 examples.
+Oracle got [[4, 5], [3, 3], [1, 0], [2, 2], [5, 1], [3, 0]] in (0.167642116547 build, 0.0201570987701 solve): 0.187799215317 total time. Was Solved: False. Used 7 examples.
+
+Trial 20: [[1, 1], [2, 2], [3, 4], [4, 4], [2, 5], [4, 2]] with 1000 samples
+Add10 got [[5, 3], [4, 4], [5, 2], [3, 1], [0, 5], [0, 1]] in (0.219954967499 build, 0.031327009201 solve): 0.2512819767 total time. Was Solved: False. Used 10 examples.
+AddAll got [[1, 1], [2, 2], [3, 4], [4, 4], [2, 5], [4, 2]] in (22.5021519661 build, 5.32652187347 solve): 27.8286738396 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 2], [4, 5], [4, 4], [1, 1], [3, 1], [1, 4]] in (0.426299571991 build, 14.2205452919 solve): 14.6468448639 total time. Was Solved: True. Used 18 examples.
+Oracle got [[2, 2], [0, 2], [1, 5], [3, 5], [4, 2], [3, 4]] in (0.401156902313 build, 3.94273400307 solve): 4.34389090538 total time. Was Solved: False. Used 18 examples.
+
+Trial 21: [[1, 3], [5, 5], [5, 4], [4, 2], [5, 5], [2, 4]] with 1000 samples
+Add10 got [[0, 4], [2, 5], [0, 3], [5, 5], [1, 4], [5, 2]] in (0.224874019623 build, 0.0385549068451 solve): 0.263428926468 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 1], [4, 3], [5, 5], [5, 4], [5, 5], [3, 2]] in (22.4438569546 build, 1.37284493446 solve): 23.816701889 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 1], [4, 3], [5, 5], [5, 4], [5, 5], [3, 4]] in (0.355691432953 build, 0.914436340332 solve): 1.27012777328 total time. Was Solved: True. Used 15 examples.
+Oracle got [[0, 4], [5, 3], [2, 5], [4, 5], [5, 1], [5, 2]] in (0.333711862564 build, 0.219130992889 solve): 0.552842855453 total time. Was Solved: False. Used 15 examples.
+
+Trial 22: [[4, 2], [0, 3], [3, 4], [3, 3], [1, 0], [1, 4]] with 1000 samples
+Add10 got [[4, 2], [2, 2], [5, 3], [1, 1], [4, 4], [5, 0]] in (0.2224650383 build, 0.0344059467316 solve): 0.256870985031 total time. Was Solved: False. Used 10 examples.
+AddAll got [[3, 4], [5, 5], [3, 4], [1, 2], [2, 0], [1, 1]] in (22.3011989594 build, 0.897424936295 solve): 23.1986238956 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 1], [4, 4], [5, 5], [1, 5], [5, 5], [3, 2]] in (0.282273292542 build, 0.133444309235 solve): 0.415717601776 total time. Was Solved: True. Used 12 examples.
+Oracle got [[2, 5], [1, 3], [1, 1], [3, 4], [4, 0], [2, 0]] in (0.265696048737 build, 0.0529720783234 solve): 0.31866812706 total time. Was Solved: False. Used 12 examples.
+
+Trial 23: [[5, 0], [2, 5], [0, 1], [3, 1], [1, 5], [4, 4]] with 1000 samples
+Add10 got [[3, 0], [4, 2], [1, 0], [3, 1], [4, 5], [5, 4]] in (0.221644878387 build, 0.0474560260773 solve): 0.269100904465 total time. Was Solved: False. Used 10 examples.
+AddAll got [[5, 4], [0, 3], [3, 5], [1, 5], [5, 4], [2, 2]] in (22.396198988 build, 2.20316004753 solve): 24.5993590355 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 0], [3, 5], [5, 0], [4, 5], [2, 3], [1, 1]] in (0.613297939301 build, 8.96581959724 solve): 9.57911753654 total time. Was Solved: True. Used 25 examples.
+Oracle got [[5, 3], [2, 3], [5, 4], [1, 5], [3, 5], [4, 4]] in (0.561281919479 build, 18.1201138496 solve): 18.6813957691 total time. Was Solved: False. Used 25 examples.
+
+Trial 24: [[3, 5], [0, 4], [4, 3], [1, 3], [3, 3], [5, 5]] with 1000 samples
+Add10 got [[3, 5], [4, 3], [2, 0], [1, 2], [4, 5], [5, 5]] in (0.221238136292 build, 0.0271921157837 solve): 0.248430252075 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 5], [0, 2], [3, 4], [1, 4], [1, 4], [5, 5]] in (22.3651769161 build, 3.2145819664 solve): 25.5797588825 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 5], [3, 2], [4, 4], [4, 5], [1, 4], [5, 5]] in (0.496619462967 build, 11.5037324429 solve): 12.0003519058 total time. Was Solved: True. Used 21 examples.
+Oracle got [[3, 5], [5, 0], [1, 2], [4, 4], [4, 2], [5, 5]] in (0.477564096451 build, 0.232445955276 solve): 0.710010051727 total time. Was Solved: False. Used 21 examples.
+
+Trial 25: [[5, 3], [2, 3], [4, 0], [3, 4], [4, 4], [0, 4]] with 1000 samples
+Add10 got [[5, 2], [3, 2], [4, 4], [2, 4], [5, 1], [1, 0]] in (0.224707126617 build, 0.0379209518433 solve): 0.262628078461 total time. Was Solved: False. Used 10 examples.
+AddAll got [[1, 4], [1, 1], [3, 3], [0, 1], [5, 1], [2, 3]] in (22.7255020142 build, 1.13707613945 solve): 23.8625781536 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[3, 1], [0, 0], [3, 5], [4, 4], [5, 5], [4, 2]] in (0.341471910477 build, 0.134582996368 solve): 0.476054906845 total time. Was Solved: True. Used 14 examples.
+Oracle got [[5, 2], [4, 1], [3, 5], [2, 1], [5, 3], [1, 0]] in (0.322422981262 build, 0.0377259254456 solve): 0.360148906708 total time. Was Solved: False. Used 14 examples.
+
+Trial 26: [[5, 3], [4, 3], [2, 1], [3, 1], [2, 4], [4, 4]] with 1000 samples
+Add10 got [[5, 2], [2, 1], [4, 1], [5, 4], [1, 3], [1, 3]] in (0.227471113205 build, 0.0505061149597 solve): 0.277977228165 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 5], [4, 4], [4, 5], [2, 1], [1, 4], [3, 4]] in (22.60070014 build, 1.00734686852 solve): 23.6080470085 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 5], [4, 4], [1, 5], [5, 1], [5, 5], [2, 3]] in (0.235174655914 build, 0.0996809005737 solve): 0.334855556488 total time. Was Solved: True. Used 10 examples.
+Oracle got [[3, 5], [5, 1], [0, 5], [4, 4], [1, 5], [3, 2]] in (0.227111101151 build, 0.0424461364746 solve): 0.269557237625 total time. Was Solved: False. Used 10 examples.
+
+Trial 27: [[0, 3], [0, 2], [4, 5], [3, 2], [5, 0], [3, 4]] with 1000 samples
+Add10 got [[1, 5], [2, 1], [3, 5], [4, 2], [0, 3], [4, 5]] in (0.224225997925 build, 0.023864030838 solve): 0.248090028763 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 1], [1, 2], [3, 5], [5, 0], [1, 2], [4, 3]] in (22.6048588753 build, 2.85086488724 solve): 25.4557237625 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[0, 2], [2, 4], [1, 4], [5, 0], [3, 5], [1, 3]] in (0.500019073486 build, 4.23023796082 solve): 4.7302570343 total time. Was Solved: True. Used 21 examples.
+Oracle got [[0, 3], [2, 3], [5, 1], [3, 4], [2, 5], [3, 2]] in (0.466548204422 build, 0.789397001266 solve): 1.25594520569 total time. Was Solved: False. Used 21 examples.
+
+Trial 28: [[3, 4], [1, 1], [2, 5], [0, 0], [3, 4], [1, 1]] with 1000 samples
+Add10 got [[1, 5], [5, 3], [4, 2], [3, 1], [5, 4], [0, 2]] in (0.220653057098 build, 0.0252869129181 solve): 0.245939970016 total time. Was Solved: False. Used 10 examples.
+AddAll got [[3, 5], [3, 4], [5, 5], [0, 2], [5, 1], [0, 2]] in (22.8511199951 build, 0.792096853256 solve): 23.6432168484 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 5], [3, 3], [3, 4], [1, 1], [3, 0], [2, 2]] in (0.11635184288 build, 0.0328762531281 solve): 0.149228096008 total time. Was Solved: True. Used 5 examples.
+Oracle got [[3, 5], [0, 3], [1, 0], [4, 2], [5, 5], [0, 4]] in (0.112380981445 build, 0.0114421844482 solve): 0.123823165894 total time. Was Solved: False. Used 5 examples.
+
+Trial 29: [[1, 4], [3, 4], [2, 4], [2, 3], [2, 3], [5, 1]] with 1000 samples
+Add10 got [[5, 5], [4, 3], [5, 0], [1, 1], [3, 3], [2, 4]] in (0.225769042969 build, 0.0320250988007 solve): 0.257794141769 total time. Was Solved: False. Used 10 examples.
+AddAll got [[1, 5], [5, 4], [3, 0], [4, 4], [3, 3], [3, 2]] in (22.4570710659 build, 1.0751349926 solve): 23.5322060585 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 5], [0, 0], [0, 0], [5, 5], [0, 3], [0, 0]] in (0.0231351852417 build, 0.00765490531921 solve): 0.0307900905609 total time. Was Solved: True. Used 1 examples.
+Oracle got [[4, 5], [0, 0], [0, 0], [5, 5], [0, 3], [0, 0]] in (0.0230059623718 build, 0.00849604606628 solve): 0.0315020084381 total time. Was Solved: True. Used 1 examples.
+
+Trial 30: [[1, 2], [1, 3], [4, 1], [0, 4], [5, 5], [4, 1]] with 1000 samples
+Add10 got [[5, 2], [3, 5], [0, 3], [1, 0], [3, 3], [4, 3]] in (0.221935033798 build, 0.0496408939362 solve): 0.271575927734 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 3], [0, 2], [5, 5], [2, 4], [4, 1], [2, 4]] in (22.3249809742 build, 0.900521993637 solve): 23.2255029678 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 3], [0, 2], [5, 5], [2, 4], [4, 1], [2, 4]] in (0.525695085526 build, 20.525513649 solve): 21.0512087345 total time. Was Solved: True. Used 22 examples.
+Oracle got [[2, 3], [0, 4], [2, 1], [4, 2], [5, 5], [4, 2]] in (0.494875907898 build, 4.5841050148 solve): 5.0789809227 total time. Was Solved: True. Used 22 examples.
+
+Trial 31: [[0, 4], [3, 2], [5, 0], [3, 0], [1, 4], [4, 5]] with 1000 samples
+Add10 got [[5, 1], [3, 3], [4, 0], [4, 5], [1, 0], [5, 2]] in (0.221596956253 build, 0.0278580188751 solve): 0.249454975128 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 4], [5, 0], [2, 0], [2, 1], [3, 4], [4, 5]] in (22.4001340866 build, 14.2022340298 solve): 36.6023681164 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[0, 4], [5, 0], [3, 1], [3, 0], [2, 4], [4, 5]] in (0.646389007568 build, 12.1134288311 solve): 12.7598178387 total time. Was Solved: True. Used 27 examples.
+Oracle got [[2, 0], [0, 0], [1, 3], [5, 4], [1, 1], [0, 5]] in (0.598659992218 build, 7.59795808792 solve): 8.19661808014 total time. Was Solved: False. Used 27 examples.
+
+Trial 32: [[3, 1], [5, 0], [4, 4], [0, 4], [3, 4], [1, 5]] with 1000 samples
+Add10 got [[3, 3], [1, 5], [4, 1], [5, 4], [5, 1], [0, 2]] in (0.254750967026 build, 0.110213041306 solve): 0.364964008331 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 4], [2, 1], [0, 1], [2, 4], [5, 3], [4, 5]] in (23.5735480785 build, 6.96620702744 solve): 30.539755106 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 4], [3, 2], [1, 2], [1, 4], [5, 0], [4, 5]] in (0.550077438354 build, 15.7265133858 solve): 16.2765908241 total time. Was Solved: True. Used 23 examples.
+Oracle got [[2, 4], [5, 0], [0, 3], [2, 3], [5, 0], [1, 5]] in (0.528783082962 build, 5.95892214775 solve): 6.48770523071 total time. Was Solved: True. Used 23 examples.
+
+Trial 33: [[5, 5], [1, 1], [2, 2], [2, 5], [4, 4], [2, 4]] with 1000 samples
+Add10 got [[2, 4], [3, 1], [4, 4], [0, 4], [1, 5], [5, 3]] in (0.22162103653 build, 0.0223889350891 solve): 0.244009971619 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 4], [5, 5], [0, 1], [5, 2], [3, 0], [1, 3]] in (22.4832911491 build, 0.785065174103 solve): 23.2683563232 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 5], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]] in (0.023106098175 build, 0.00793504714966 solve): 0.0310411453247 total time. Was Solved: True. Used 1 examples.
+Oracle got [[1, 5], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]] in (0.0247209072113 build, 0.0081889629364 solve): 0.0329098701477 total time. Was Solved: True. Used 1 examples.
+
+Trial 34: [[4, 4], [5, 0], [2, 0], [4, 1], [2, 2], [4, 5]] with 1000 samples
+Add10 got [[5, 4], [3, 5], [0, 2], [4, 4], [4, 2], [1, 5]] in (0.237149000168 build, 0.0289959907532 solve): 0.266144990921 total time. Was Solved: False. Used 10 examples.
+AddAll got [[1, 1], [2, 4], [5, 3], [5, 5], [3, 3], [0, 0]] in (23.0448689461 build, 0.870568990707 solve): 23.9154379368 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 5], [0, 4], [4, 0], [2, 5], [1, 5], [3, 4]] in (0.180460214615 build, 0.0629909038544 solve): 0.243451118469 total time. Was Solved: True. Used 7 examples.
+Oracle got [[2, 5], [4, 4], [2, 3], [5, 1], [5, 5], [0, 1]] in (0.162447214127 build, 0.0278010368347 solve): 0.190248250961 total time. Was Solved: False. Used 7 examples.
+
+Trial 35: [[1, 5], [0, 4], [2, 5], [5, 2], [5, 1], [2, 0]] with 1000 samples
+Add10 got [[5, 2], [0, 4], [1, 3], [3, 5], [5, 1], [0, 1]] in (0.237924098969 build, 0.0352771282196 solve): 0.273201227188 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 5], [5, 2], [0, 1], [3, 5], [3, 5], [4, 0]] in (22.9476919174 build, 2.51554608345 solve): 25.4632380009 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 5], [2, 5], [0, 3], [5, 2], [4, 5], [4, 1]] in (0.605941534042 build, 50.3572423458 solve): 50.9631838799 total time. Was Solved: True. Used 25 examples.
+Oracle got [[2, 5], [0, 1], [0, 3], [5, 1], [4, 5], [4, 0]] in (0.559949874878 build, 0.889523029327 solve): 1.44947290421 total time. Was Solved: False. Used 25 examples.
+
+Trial 36: [[0, 1], [3, 3], [3, 1], [0, 3], [2, 4], [4, 3]] with 1000 samples
+Add10 got [[2, 1], [3, 1], [2, 4], [5, 0], [5, 3], [3, 1]] in (0.222227811813 build, 0.035973072052 solve): 0.258200883865 total time. Was Solved: False. Used 10 examples.
+AddAll got [[4, 5], [5, 5], [3, 4], [3, 2], [3, 4], [0, 1]] in (22.4339668751 build, 0.651660919189 solve): 23.0856277943 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 4], [3, 3], [5, 5], [4, 2], [5, 5], [0, 3]] in (0.214470386505 build, 0.10055565834 solve): 0.315026044846 total time. Was Solved: True. Used 9 examples.
+Oracle got [[5, 4], [4, 5], [4, 2], [1, 4], [1, 3], [2, 0]] in (0.208219051361 build, 0.0531852245331 solve): 0.261404275894 total time. Was Solved: False. Used 9 examples.
+
+Trial 37: [[0, 3], [5, 0], [4, 0], [2, 1], [3, 2], [4, 2]] with 1000 samples
+Add10 got [[5, 1], [4, 0], [2, 3], [3, 5], [5, 2], [4, 0]] in (0.222260951996 build, 0.0207490921021 solve): 0.243010044098 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 1], [4, 3], [1, 4], [5, 0], [2, 0], [2, 4]] in (22.6619918346 build, 1.76076698303 solve): 24.4227588177 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[0, 1], [2, 4], [3, 0], [1, 2], [5, 0], [3, 2]] in (0.772950649261 build, 135.7173419 solve): 136.490292549 total time. Was Solved: True. Used 32 examples.
+Oracle got [[0, 2], [2, 4], [4, 3], [5, 0], [1, 0], [1, 4]] in (0.736867904663 build, 42.1441559792 solve): 42.8810238838 total time. Was Solved: True. Used 32 examples.
+
+Trial 38: [[3, 1], [4, 1], [2, 5], [1, 5], [2, 5], [2, 2]] with 1000 samples
+Add10 got [[5, 1], [4, 2], [3, 3], [1, 0], [0, 5], [1, 4]] in (0.222177028656 build, 0.0375411510468 solve): 0.259718179703 total time. Was Solved: False. Used 10 examples.
+AddAll got [[5, 5], [3, 5], [4, 3], [4, 5], [4, 5], [4, 1]] in (22.5894260406 build, 1.75055813789 solve): 24.3399841785 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 0], [3, 5], [0, 4], [4, 5], [4, 5], [3, 4]] in (0.43177986145 build, 0.686732769012 solve): 1.11851263046 total time. Was Solved: True. Used 18 examples.
+Oracle got [[3, 1], [2, 5], [4, 3], [1, 5], [1, 5], [3, 1]] in (0.409084796906 build, 0.0480270385742 solve): 0.45711183548 total time. Was Solved: False. Used 18 examples.
+
+Trial 39: [[3, 4], [2, 4], [4, 0], [4, 4], [2, 3], [4, 2]] with 1000 samples
+Add10 got [[1, 5], [1, 2], [0, 0], [3, 1], [0, 2], [3, 4]] in (0.226145029068 build, 0.028146982193 solve): 0.254292011261 total time. Was Solved: False. Used 10 examples.
+AddAll got [[5, 5], [2, 4], [3, 3], [1, 0], [4, 4], [2, 2]] in (22.6493549347 build, 0.935292005539 solve): 23.5846469402 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 2], [3, 3], [1, 4], [2, 2], [5, 3], [2, 2]] in (0.356625080109 build, 0.171323537827 solve): 0.527948617935 total time. Was Solved: True. Used 14 examples.
+Oracle got [[3, 5], [0, 4], [3, 3], [4, 0], [1, 3], [1, 0]] in (0.320758104324 build, 0.0536799430847 solve): 0.374438047409 total time. Was Solved: False. Used 14 examples.
+
+Trial 40: [[1, 2], [1, 0], [1, 1], [4, 5], [3, 2], [4, 1]] with 1000 samples
+Add10 got [[5, 2], [3, 3], [0, 4], [4, 1], [5, 2], [1, 0]] in (0.22527718544 build, 0.0214309692383 solve): 0.246708154678 total time. Was Solved: True. Used 10 examples.
+AddAll got [[1, 4], [4, 4], [4, 4], [1, 2], [5, 3], [1, 1]] in (22.5324738026 build, 0.787313938141 solve): 23.3197877407 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 3], [3, 5], [0, 1], [4, 1], [2, 2], [4, 1]] in (0.338836193085 build, 0.173805713654 solve): 0.512641906738 total time. Was Solved: True. Used 14 examples.
+Oracle got [[4, 5], [5, 5], [3, 1], [5, 2], [3, 3], [0, 1]] in (0.321546077728 build, 0.0313498973846 solve): 0.352895975113 total time. Was Solved: True. Used 14 examples.
+
+Trial 41: [[5, 2], [4, 1], [0, 0], [5, 2], [4, 5], [1, 0]] with 1000 samples
+Add10 got [[1, 2], [4, 4], [4, 2], [0, 5], [5, 1], [3, 3]] in (0.233542919159 build, 0.0469498634338 solve): 0.280492782593 total time. Was Solved: False. Used 10 examples.
+AddAll got [[5, 1], [4, 0], [3, 2], [3, 5], [5, 1], [2, 4]] in (22.8549370766 build, 3.38684797287 solve): 26.2417850494 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 3], [5, 5], [4, 2], [0, 0], [4, 5], [2, 0]] in (0.419166326523 build, 30.0190701485 solve): 30.438236475 total time. Was Solved: True. Used 18 examples.
+Oracle got [[5, 3], [4, 2], [4, 4], [0, 0], [4, 5], [1, 0]] in (0.403730869293 build, 6.19680094719 solve): 6.60053181648 total time. Was Solved: False. Used 18 examples.
+
+Trial 42: [[4, 4], [2, 5], [1, 1], [1, 2], [2, 0], [5, 2]] with 1000 samples
+Add10 got [[5, 4], [2, 3], [4, 4], [0, 0], [4, 5], [2, 1]] in (0.22411108017 build, 0.0235249996185 solve): 0.247636079788 total time. Was Solved: False. Used 10 examples.
+AddAll got [[1, 1], [4, 0], [3, 3], [2, 5], [3, 3], [5, 2]] in (22.5005810261 build, 0.927453994751 solve): 23.4280350208 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[3, 1], [2, 0], [4, 4], [2, 0], [2, 5], [5, 2]] in (0.407273054123 build, 14.1093039513 solve): 14.5165770054 total time. Was Solved: True. Used 17 examples.
+Oracle got [[4, 1], [3, 0], [3, 5], [2, 2], [3, 0], [5, 3]] in (0.411729812622 build, 6.65813398361 solve): 7.06986379623 total time. Was Solved: True. Used 17 examples.
+
+Trial 43: [[5, 4], [1, 1], [5, 0], [4, 2], [1, 1], [4, 5]] with 1000 samples
+Add10 got [[4, 5], [0, 3], [3, 0], [0, 3], [3, 2], [1, 4]] in (0.224071025848 build, 0.0336410999298 solve): 0.257712125778 total time. Was Solved: False. Used 10 examples.
+AddAll got [[1, 5], [1, 1], [3, 1], [5, 1], [2, 1], [2, 4]] in (22.4948699474 build, 1.21824598312 solve): 23.7131159306 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 5], [0, 0], [0, 4], [0, 0], [5, 5], [0, 0]] in (0.0227651596069 build, 0.00811386108398 solve): 0.0308790206909 total time. Was Solved: True. Used 1 examples.
+Oracle got [[2, 5], [0, 0], [0, 4], [0, 0], [5, 5], [0, 0]] in (0.0235190391541 build, 0.00847387313843 solve): 0.0319929122925 total time. Was Solved: True. Used 1 examples.
+
+Trial 44: [[5, 4], [1, 1], [3, 5], [4, 0], [1, 4], [0, 0]] with 1000 samples
+Add10 got [[5, 0], [5, 4], [5, 2], [2, 1], [3, 0], [0, 4]] in (0.226207971573 build, 0.0370280742645 solve): 0.263236045837 total time. Was Solved: False. Used 10 examples.
+AddAll got [[1, 2], [3, 3], [1, 3], [4, 4], [5, 5], [1, 1]] in (22.513723135 build, 1.13375592232 solve): 23.6474790573 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 2], [3, 5], [1, 1], [4, 3], [4, 4], [3, 4]] in (0.310879945755 build, 0.161423206329 solve): 0.472303152084 total time. Was Solved: True. Used 13 examples.
+Oracle got [[5, 4], [4, 3], [1, 3], [2, 0], [3, 5], [0, 1]] in (0.306474924088 build, 0.0536148548126 solve): 0.3600897789 total time. Was Solved: False. Used 13 examples.
+
+Trial 45: [[0, 5], [1, 4], [4, 5], [2, 0], [3, 1], [4, 4]] with 1000 samples
+Add10 got [[3, 4], [2, 0], [4, 5], [2, 2], [0, 1], [2, 4]] in (0.231024980545 build, 0.0303490161896 solve): 0.261373996735 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 5], [2, 5], [4, 3], [3, 2], [1, 0], [2, 2]] in (22.4836390018 build, 2.49622511864 solve): 24.9798641205 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[0, 5], [2, 5], [3, 4], [1, 0], [4, 2], [2, 2]] in (0.733218669891 build, 154.624420881 solve): 155.357639551 total time. Was Solved: True. Used 30 examples.
+Oracle got [[0, 5], [3, 0], [2, 4], [4, 5], [1, 2], [4, 4]] in (0.674920082092 build, 36.8948791027 solve): 37.5697991848 total time. Was Solved: True. Used 30 examples.
+
+Trial 46: [[1, 3], [1, 2], [5, 2], [2, 5], [3, 2], [4, 3]] with 1000 samples
+Add10 got [[3, 5], [0, 0], [3, 0], [5, 0], [1, 3], [4, 2]] in (0.225088119507 build, 0.0435109138489 solve): 0.268599033356 total time. Was Solved: False. Used 10 examples.
+AddAll got [[3, 2], [5, 1], [1, 5], [3, 1], [2, 1], [4, 2]] in (22.5200891495 build, 1.91525697708 solve): 24.4353461266 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 1], [3, 5], [1, 3], [5, 3], [4, 3], [2, 1]] in (0.453547716141 build, 7.14662981033 solve): 7.60017752647 total time. Was Solved: True. Used 19 examples.
+Oracle got [[4, 1], [3, 5], [1, 3], [5, 3], [3, 3], [2, 1]] in (0.427885055542 build, 1.82773089409 solve): 2.25561594963 total time. Was Solved: False. Used 19 examples.
+
+Trial 47: [[0, 2], [3, 0], [4, 0], [4, 5], [4, 2], [2, 4]] with 1000 samples
+Add10 got [[2, 0], [5, 5], [4, 0], [4, 5], [1, 3], [2, 5]] in (0.228123188019 build, 0.023334980011 solve): 0.25145816803 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 2], [4, 4], [3, 1], [4, 4], [5, 5], [2, 2]] in (22.6252541542 build, 1.13253688812 solve): 23.7577910423 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[1, 5], [1, 2], [2, 1], [1, 1], [3, 2], [4, 5]] in (0.111207008362 build, 0.0366740226746 solve): 0.147881031036 total time. Was Solved: True. Used 4 examples.
+Oracle got [[3, 5], [4, 3], [3, 3], [3, 4], [5, 5], [2, 1]] in (0.103685855865 build, 0.0270481109619 solve): 0.130733966827 total time. Was Solved: False. Used 4 examples.
+
+Trial 48: [[2, 1], [3, 0], [4, 0], [2, 0], [0, 3], [1, 0]] with 1000 samples
+Add10 got [[5, 0], [3, 2], [4, 5], [3, 4], [2, 1], [1, 5]] in (0.231335163116 build, 0.0322451591492 solve): 0.263580322266 total time. Was Solved: False. Used 10 examples.
+AddAll got [[5, 5], [4, 3], [1, 5], [2, 0], [0, 0], [1, 1]] in (23.5275008678 build, 0.863517999649 solve): 24.3910188675 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 3], [1, 1], [4, 1], [0, 0], [2, 5], [1, 4]] in (0.459332227707 build, 0.19012761116 solve): 0.649459838867 total time. Was Solved: True. Used 19 examples.
+Oracle got [[5, 1], [4, 2], [4, 1], [3, 1], [5, 0], [5, 3]] in (0.446814060211 build, 0.0365598201752 solve): 0.483373880386 total time. Was Solved: False. Used 19 examples.
+
+Trial 49: [[1, 3], [3, 3], [5, 2], [2, 3], [2, 5], [0, 1]] with 1000 samples
+Add10 got [[2, 1], [2, 5], [5, 2], [5, 0], [0, 0], [3, 4]] in (0.228462934494 build, 0.0682799816132 solve): 0.296742916107 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 1], [4, 3], [3, 3], [4, 1], [5, 4], [0, 2]] in (22.9298689365 build, 1.64574289322 solve): 24.5756118298 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[2, 4], [5, 1], [4, 4], [2, 4], [1, 4], [3, 2]] in (0.47461605072 build, 2.20909404755 solve): 2.68371009827 total time. Was Solved: True. Used 20 examples.
+Oracle got [[4, 3], [5, 2], [5, 1], [2, 3], [3, 3], [0, 4]] in (0.448470115662 build, 6.78454399109 solve): 7.23301410675 total time. Was Solved: True. Used 20 examples.
+
+Trial 50: [[1, 4], [2, 2], [2, 2], [5, 4], [3, 2], [1, 5]] with 1000 samples
+Add10 got [[5, 3], [1, 1], [2, 0], [1, 4], [4, 5], [5, 2]] in (0.223702907562 build, 0.0901281833649 solve): 0.313831090927 total time. Was Solved: False. Used 10 examples.
+AddAll got [[3, 1], [0, 4], [3, 4], [4, 5], [4, 4], [4, 3]] in (22.5758109093 build, 7.73744702339 solve): 30.3132579327 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[3, 1], [0, 4], [2, 2], [2, 5], [5, 5], [2, 3]] in (1.15147638321 build, 4.11491155624 solve): 5.26638793945 total time. Was Solved: True. Used 48 examples.
+Oracle got [[2, 1], [5, 2], [2, 2], [0, 4], [1, 1], [3, 5]] in (1.09642195702 build, 0.325746059418 solve): 1.42216801643 total time. Was Solved: False. Used 48 examples.
+
+Trial 51: [[4, 1], [0, 0], [1, 5], [2, 4], [5, 3], [1, 5]] with 1000 samples
+Add10 got [[3, 2], [2, 5], [3, 4], [3, 5], [0, 3], [5, 1]] in (0.228137969971 build, 0.0296099185944 solve): 0.257747888565 total time. Was Solved: False. Used 10 examples.
+AddAll got [[2, 1], [0, 0], [5, 4], [1, 5], [3, 2], [1, 5]] in (22.6214869022 build, 4.7459499836 solve): 27.3674368858 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[4, 1], [0, 0], [3, 4], [1, 5], [5, 2], [1, 5]] in (0.614469528198 build, 98.2731404305 solve): 98.8876099586 total time. Was Solved: True. Used 26 examples.
+Oracle got [[4, 2], [2, 5], [0, 0], [1, 4], [5, 3], [2, 5]] in (0.598226070404 build, 20.395678997 solve): 20.9939050674 total time. Was Solved: True. Used 26 examples.
+
+Trial 52: [[5, 4], [4, 0], [0, 5], [5, 5], [4, 5], [3, 2]] with 1000 samples
+Add10 got [[5, 1], [3, 3], [0, 4], [4, 3], [4, 5], [0, 2]] in (0.227325201035 build, 0.0281541347504 solve): 0.255479335785 total time. Was Solved: False. Used 10 examples.
+AddAll got [[5, 2], [2, 3], [2, 5], [5, 5], [0, 5], [3, 4]] in (23.5030779839 build, 1.83747816086 solve): 25.3405561447 total time. Was Solved: True. Used 1000 examples.
+CEGIS got [[5, 4], [5, 5], [0, 5], [4, 5], [3, 5], [1, 2]] in (0.326409101486 build, 7.49015331268 solve): 7.81656241417 total time. Was Solved: True. Used 14 examples.
+Oracle got [[3, 1], [5, 5], [2, 4], [0, 4], [1, 5], [1, 2]] in (0.310796022415 build, 0.336756944656 solve): 0.647552967072 total time. Was Solved: False. Used 14 examples.
+
+Trial 53: [[0, 4], [0, 3], [3, 5], [1, 4], [3, 2], [3, 0]] with 1000 samples
+Add10 got [[1, 4], [2, 3], [3, 3], [4, 0], [5, 3], [1, 3]] in (0.226248979568 build, 0.0325939655304 solve): 0.258842945099 total time. Was Solved: False. Used 10 examples.
+AddAll got [[0, 3], [0, 2], [1, 3], [2, 4], [2, 5], [2, 0]] in (22.6111838818 build, 4.05438303947 solve): 26.6655669212 total time. Was Solved: True. Used 1000 examples.
