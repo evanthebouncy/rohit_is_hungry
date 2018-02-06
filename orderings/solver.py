@@ -82,7 +82,8 @@ class OrderCEGIS(object):
         self.solver.reset_solver()
 
     def solve(self, examples):
-        example = random.choice(examples)
+        # example = random.choice(examples)
+        example = examples[0]
         used_examples = [example]
 
         while True:
@@ -93,7 +94,8 @@ class OrderCEGIS(object):
             if len(incorrect) == 0:
                 return used_examples
             else:
-                example = random.choice(incorrect)
+                # example = random.choice(incorrect)
+                example = incorrect[0]
                 used_examples.append(example)
 
 

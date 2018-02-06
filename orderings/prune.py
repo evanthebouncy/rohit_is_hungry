@@ -110,31 +110,26 @@ if __name__ == '__main__':
 
     all_examples = get_all_data(ordering)
     sample_examples = get_data(ordering)
-    print all_examples
-    print
-    print sample_examples
-    print
     o = OrderingGraph()
-    print check_representative(sample_examples, all_examples)
     # smallest_possible = o.find_smallest_set(all_examples)
     # assert len(smallest_possible) == 9
     # is_rep = check_representative(smallest_possible, all_examples)
     # print 'smallest possible is representative:', is_rep
     # assert is_rep
 
-    # largest_size = 9
-    # sizes = []
-    # for _ in xrange(100):
-    #     sample_examples = get_data(ordering)
-    #     smaller = o.find_smallest_set(sample_examples)
-    #     print len(sample_examples), len(smaller)
-    #     # print smaller
-    #     is_rep = check_representative(smaller, sample_examples)
-    #     print 'smallest of sample is representative:', is_rep
-    #     assert is_rep
-    #     sizes.append(len(smaller))
-    # print 'largest size subset found:', max(sizes)
-    # print 1.*sum(sizes)/len(sizes)
+    largest_size = 9
+    sizes = []
+    for _ in xrange(100):
+        sample_examples = get_data(ordering)
+        smaller = o.find_smallest_set(sample_examples)
+        print len(sample_examples), len(smaller)
+        # print smaller
+        is_rep = check_representative(smaller, sample_examples)
+        print 'smallest of sample is representative:', is_rep
+        assert is_rep
+        sizes.append(len(smaller))
+    print 'largest size subset found:', max(sizes)
+    print 'average:', 1.*sum(sizes)/len(sizes)
 
     # import matplotlib.pyplot as plt
     # plt.title('Sizes of Subsets')
