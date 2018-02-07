@@ -18,9 +18,30 @@ def obs_to_constraints(trace, render):
     sub_constraints.append(((x,y),val))
   return sub_constraints
 
+def h1(constraints):
+  dick = dict(constraints)
+  # return a list of neighbors' values of data in dictionary d
+  def neibor(xy, dick):
+    ret = []
+    x,y = xy
+    for d1 in dick:
+      xy1, ans1 = d1, dick[d1]
+      x1,y1 = xy1
+      if abs(x1 - x) <= 2 and abs(y1-y) <= 2:
+        ret.append(ans1)
+    return ret
+
+  to_ret = []
+  for dd in dick:
+    neib = neibor(dd, dick)
+    if (True in neib) and (False in neib):
+      to_ret.append((dd, dick[dd]))
+  return to_ret
+
 class Inverter:
 
   def __init__(self):
+    # print "ignoring neural network for the time being"
     self.impnet = Implynet(tf.Session())
     self.impnet.load_model("./models/imply.ckpt")
     self.s = DrawingSolver()
@@ -33,6 +54,7 @@ class Inverter:
     return min(ces_ordered)[1]
 
   def invert_cegis(self, constraints, render, method="cegis", sub_constraints=None):
+    self.clear_solver()
     b_time = 0.0
     s_time = 0.0
     c_time = 0.0
@@ -76,6 +98,8 @@ class Inverter:
         paras['solving_time'] = s_time
         paras['checking_time'] = c_time
         paras['ce_size'] = len(sub_constraints)
+        paras['method'] = method
+        paras['orig_subset_size'] = 0
         return paras
       else:
         id1,id2 = ce_picker(ces)
@@ -84,12 +108,14 @@ class Inverter:
         sub_constraints +=    [((int(x), int(y)), val)]
 
   def invert_full(self, constraints, full_img, method="full", confidence=0.9):
+    self.clear_solver()
     fraction = 0.2
-    assert method in ["full", "rand", "nn", "nn+cegis", "rand+cegis", "nn_experiment"]
+    assert method in ["full", "rand", "nn", "nn+cegis", "rand+cegis", "h1+cegis", "nn_experiment"]
 
     if method == "full":
       params = self.s.solve(8, constraints)
       params['ce_size'] = len(constraints)
+      params['method'] = method
       return params
 
     if method == "rand":
@@ -115,7 +141,19 @@ class Inverter:
 
     if method == "rand+cegis":
       sub_constraints = random.sample(constraints, int(fraction * len(constraints)))
-      return self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)
+      orig_size = len(sub_constraints)
+      params = self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)
+      params['method'] = method
+      params['orig_subset_size'] = orig_size
+      return params
+
+    if method == "h1+cegis":
+      sub_constraints = h1(constraints)
+      orig_size = len(sub_constraints)
+      params = self.invert_cegis(constraints, full_img, "r_cegis", sub_constraints)
+      params['method'] = method
+      params['orig_subset_size'] = orig_size
+      return params
 
     if method == "nn+cegis":
       s_time = time.time()
@@ -135,6 +173,7 @@ class Inverter:
       params['nn_time'] = nn_time
       params['error'] = float(len(diff_idx1))
       params['orig_subset_size'] = orig_size
+      params['method'] = method
       return params
 
     if method == "nn_experiment":

@@ -105,7 +105,7 @@ def gen_graphs(TEST_LOC='icml_result.p'):
     plt.boxplot(total_times, labels=names, showfliers=False, vert=False)
     # plt.title('Distribution of Total Times')
     
-    # ax1.set_xscale('log')
+    ax1.set_xscale('log')
     plt.tight_layout()
     plt.show()
 
