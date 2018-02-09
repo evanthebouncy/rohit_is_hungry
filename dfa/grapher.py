@@ -75,28 +75,18 @@ def gen_graphs(TEST_LOC='_time_exp_result.p'):
     plt.figure(figsize=figsize)
     p1 = plt.barh(ind, orig_examples, width, color='#bfbfbf')
     p2 = plt.barh(ind, np.array(num_examples)-np.array(orig_examples), width, color= '#000000', left=orig_examples)
-    # p2 = plt.barh(ind, num_examples-orig_examples, width, color='#1f1f1f')
     plt.yticks(ind, names)
     plt.legend((p1[0], p2[0]), ('Base', 'CEGIS'))
     # plt.title('Avg Number of Examples Used')
     plt.tight_layout()
     plt.show()
 
-    # plt.boxplot(build_times_all, labels=names)
-    # plt.title('Build Times')
-    # plt.show()
 
-    # # ignores outliers since ruins plot
-    # plt.boxplot(solve_times_all, labels=names, showfliers=False)
-    # plt.title('Solve Times')
-    # plt.show()
-
-    # ignores outliers since ruins plot
-    fig1, ax1 = plt.subplots(figsize=figsize)
-    plt.boxplot(total_times, labels=names, showfliers=True, vert=False)
+    fig1, ax1 = plt.subplots(figsize=(8,3))
+    box = plt.boxplot(total_times, labels=names, showfliers=True, vert=False)
     # plt.title('Distribution of Total Times')
-    
-    # ax1.set_xscale('log')
+    plt.setp(box['medians'], color='black')
+    ax1.set_xscale('log')
     plt.tight_layout()
     plt.show()
             

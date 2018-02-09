@@ -27,7 +27,6 @@ def graph_stuff(TEST_LOC='results.p'):
     names = []
     for name in names2:
         if name == 'nn':
-            # names.append('ours')
             pass
         else:
             names.append(name)
@@ -45,34 +44,19 @@ def graph_stuff(TEST_LOC='results.p'):
     width = 0.35
     figsize = (4,3)
     plt.figure(figsize=figsize)
-    # print avg_sizes
     plt.barh(ind, avg_sizes, width, color='#bfbfbf')
     plt.yticks(ind, names)
     plt.tight_layout()
     # plt.title('Average Percentage of Examples Used')
     plt.show()
 
-    # plt.boxplot(num_examples, labels=names)
-    # plt.title('Distribution of Percentage of Examples Used')
-    # plt.show()
-
     plt.figure(figsize=figsize)
     plt.xlim(xmax=1.0)
-    print is_rep
     plt.barh(ind, is_rep, width, color='#bfbfbf')
     plt.yticks(ind, names)
     plt.tight_layout()
     # plt.title('Percent Is Completely Representative')
     plt.show()
-
-    # plt.figure(figsize=figsize)
-    # plt.xlim(xmax=1.0)
-    # # print p_rep, names
-    # plt.barh(ind, p_rep, width, color='#bfbfbf')
-    # plt.yticks(ind, names)
-    # plt.tight_layout()
-    # # plt.title('Percent of Set Represented')
-    # plt.show()
 
 
 if __name__ == '__main__':

@@ -43,14 +43,14 @@ def run_comparison():
 
   # inverter.clear_solver()
 
-  stime = time.time()
-  inverted_params = inverter.invert_cegis(constraints, rendered, "r_cegis")
-  print inverted_params, 'r_cegis'
-  r_cegis_time = time.time() - stime
-  squares,lines = mk_scene(inverted_params)
-  draw_orig(render(squares+lines), "hand_drawings/result_r_cegis.png")
+  # stime = time.time()
+  # inverted_params = inverter.invert_cegis(constraints, rendered, "r_cegis")
+  # print inverted_params, 'r_cegis'
+  # r_cegis_time = time.time() - stime
+  # squares,lines = mk_scene(inverted_params)
+  # draw_orig(render(squares+lines), "hand_drawings/result_r_cegis.png")
 
-  inverter.clear_solver()
+  # inverter.clear_solver()
 
   # stime = time.time()
   # inverted_params = inverter.invert_cegis(constraints, rendered, "cegis")
@@ -72,7 +72,7 @@ def run_comparison():
   # print "nn ", nn_time
   # print "rand ", rand_time
 
-  print "rcegis ", r_cegis_time
+  # print "rcegis ", r_cegis_time
   # print "cegis ",  cegis_time
   print "nn then cegis ", nn_cegis_time
   # print "rand then cegis ", rand_cegis_time

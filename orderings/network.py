@@ -53,19 +53,19 @@ def construct_graph(name, examples):
     num = 0
     for node in nodes:
         pos = "{},10!".format(num, num)
-        g.add_node(node, pos=pos, width='0.5')
-        num += 1.0
+        g.add_node(node, pos=pos, width='0.5', fontsize='18.0')
+        num += 0.7
 
     for example in examples:
         nums, is_less = example
         num1, num2 = nums
         if num1 == num2:
-            g.add_edge(num1, num2, arrowhead='inv')
+            g.add_edge(num1, num2, arrowhead='inv', arrowsize='0.7')
 
         if is_less:
-            g.add_edge(num1, num2)
+            g.add_edge(num1, num2, arrowsize='0.7')
         else:
-            g.add_edge(num1, num2, arrowhead='inv')
+            g.add_edge(num1, num2, arrowhead='inv', arrowsize='0.7')
     g.layout(prog='neato')
 
     g.draw('{}.png'.format(name))
